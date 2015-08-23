@@ -40,3 +40,4 @@ set numberwidth=5
 
 set ruler " show the cursor position at all times
 set laststatus=2 " Always display the status line
+set autowrite " Automatically :write before running commands
