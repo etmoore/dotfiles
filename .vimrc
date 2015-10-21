@@ -1,5 +1,34 @@
-set nocompatible
-filetype plugin on
+set nocompatible              " be iMproved, required
+filetype off                  " required by Vundle
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Test
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ervandew/supertab'
+Plugin 'Zenburn'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+syntax on
+set autoindent smartindent
+
+" Set Zenburn high-contrast as color scheme
+let g:zenburn_high_Contrast=1
+colors zenburn
 
 " Treat all numerals as decimal
 set nrformats=
@@ -35,9 +64,44 @@ set shiftround
 set expandtab
 
 " Line numbers
-set number
+set number relativenumber
 set numberwidth=5
 
-set ruler " show the cursor position at all times
-set laststatus=2 " Always display the status line
-set autowrite " Automatically :write before running commands
+set ruler           " show the cursor position at all times
+set laststatus=2    " Always display the status line
+set autowrite       " Automatically :write before running commands
+set showcmd         " display incomplete commands
+
+" Tab completion like zsh with menu of options
+set wildmenu
+set wildmode=full
+
+" Remember the last x commands
+set history=200
+
+" remap <C-n> and <C-p> to down and up in command line mode
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+" expand %% to the path of the active buffer in command mode
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" only enable Emmet for html and css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+let vim_markdown_preview_hotkey='<C-m>'
+
+" autosource vimrc on save
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+" remove trailing whitespace on save
+function! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
