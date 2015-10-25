@@ -30,6 +30,9 @@ filetype plugin indent on    " required
 syntax on
 set autoindent smartindent
 
+" ctrl + L to exit insert mode
+:imap <C-L> <Esc>
+
 " Set Zenburn high-contrast as color scheme
 let g:zenburn_high_Contrast=1
 colors zenburn
