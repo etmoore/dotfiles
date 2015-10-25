@@ -14,10 +14,14 @@ Plugin 'mattn/emmet-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'ervandew/supertab'
 Plugin 'Zenburn'
-Plugin 'tomtom/tcomment_vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'christoomey/vim-sort-motion'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
