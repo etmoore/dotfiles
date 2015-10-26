@@ -35,6 +35,7 @@ set autoindent smartindent
 
 " Set Zenburn high-contrast as color scheme
 let g:zenburn_high_Contrast=1
+let g:zenburn_old_Visual = 1
 colors zenburn
 
 " Treat all numerals as decimal
