@@ -22,6 +22,10 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'scrooloose/nerdtree'
 
+" Color Schemes
+Plugin 'Zenburn'
+Plugin 'nanotech/jellybeans.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -33,9 +37,10 @@ set autoindent smartindent
 :imap <C-L> <Esc>
 
 " Set Zenburn high-contrast as color scheme
-let g:zenburn_high_Contrast=1
-let g:zenburn_old_Visual = 1
-colors zenburn
+" let g:zenburn_high_Contrast=1
+" let g:zenburn_old_Visual = 1
+" colors zenburn
+colors jellybeans
 
 " Treat all numerals as decimal
 set nrformats=
