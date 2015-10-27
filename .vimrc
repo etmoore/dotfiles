@@ -89,7 +89,7 @@ set wildmenu
 set wildmode=full
 
 " Remember the last x commands
-set history=200
+set history=1000
 
 " remap <C-n> and <C-p> to down and up in command line mode
 cnoremap <C-p> <Up>
