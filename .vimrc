@@ -21,6 +21,7 @@ Plugin 'ervandew/supertab'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'scrooloose/nerdtree'
+Plugin 'rizzatti/dash.vim'
 
 " Color Schemes
 Plugin 'Zenburn'
