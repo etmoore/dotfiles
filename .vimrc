@@ -22,6 +22,8 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rizzatti/dash.vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'bling/vim-airline'
 
 " Color Schemes
 Plugin 'Zenburn'
