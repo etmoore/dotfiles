@@ -102,6 +102,9 @@ cnoremap <C-n> <Down>
 " expand %% to the path of the active buffer in command mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
+" set the default register to the system keyboard
+set clipboard=unnamed
+
 " only enable Emmet for html and css
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
