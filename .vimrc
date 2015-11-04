@@ -37,6 +37,9 @@ filetype plugin indent on    " required
 syntax on
 set autoindent smartindent
 
+" Turn on search highlighting and incremental search
+set hls is
+
 " ctrl + L to exit insert mode
 :imap <C-L> <Esc>
 
