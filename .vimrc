@@ -24,6 +24,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rizzatti/dash.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/syntastic'
 
 " Color Schemes
 Plugin 'Zenburn'
@@ -139,3 +140,12 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " resize windows with plus and minus keys
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+" Syntastic recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
