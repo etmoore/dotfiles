@@ -25,6 +25,9 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-rails'
+Plugin 'mxw/vim-jsx'
 
 " Color Schemes
 Plugin 'Zenburn'
@@ -155,3 +158,5 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:jsx_ext_required = 0
