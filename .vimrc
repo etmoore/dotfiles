@@ -174,3 +174,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:jsx_ext_required = 0
+
+" NERDTree Toggle
+nmap <leader>n :NERDTreeToggle<cr>
