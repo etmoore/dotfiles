@@ -43,8 +43,15 @@ set autoindent smartindent
 " Turn on search highlighting and incremental search
 set hls is
 
-" ctrl + L to exit insert mode
-:imap <C-L> <Esc>
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+:autocmd InsertEnter * set cul
+:autocmd InsertLeave * set nocul
 
 " Set Zenburn high-contrast as color scheme
 " let g:zenburn_high_Contrast=1
