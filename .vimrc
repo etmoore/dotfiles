@@ -74,6 +74,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
 " Open new split panes to the right and bottom
 set splitbelow
 set splitright
