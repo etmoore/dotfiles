@@ -28,6 +28,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Color Schemes
 Plugin 'Zenburn'
@@ -67,12 +68,6 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-
-" Quicker window movement
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
