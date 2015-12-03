@@ -42,7 +42,7 @@ syntax on
 set autoindent smartindent
 
 " Turn on search highlighting and incremental search
-set hls is
+set is
 
 " Remove esc key delay
 set timeoutlen=1000 ttimeoutlen=0
