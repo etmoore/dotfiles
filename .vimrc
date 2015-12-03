@@ -122,7 +122,7 @@ cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " set the default register to the system keyboard
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " only enable Emmet for html and css
 let g:user_emmet_install_global = 0
