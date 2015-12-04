@@ -41,8 +41,8 @@ filetype plugin indent on    " required
 syntax on
 set autoindent smartindent
 
-" Turn on search highlighting and incremental search
-set is
+" incremental search and ignore case
+set is ic
 
 " Remove esc key delay
 set timeoutlen=1000 ttimeoutlen=0
