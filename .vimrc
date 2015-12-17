@@ -29,6 +29,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'airblade/vim-gitgutter'
 
 " Color Schemes
 Plugin 'Zenburn'
@@ -122,7 +123,7 @@ cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " set the default register to the system keyboard
-" set clipboard=unnamed
+set clipboard=unnamed
 
 " only enable Emmet for html and css
 let g:user_emmet_install_global = 0
