@@ -13,7 +13,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-unimpaired'
