@@ -81,6 +81,3 @@ alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-export NVM_DIR="/Users/evanmoore/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
