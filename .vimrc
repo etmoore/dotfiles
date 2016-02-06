@@ -17,7 +17,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'ervandew/supertab'
-Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'shime/vim-livedown'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rizzatti/dash.vim'
@@ -29,6 +29,8 @@ Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
@@ -127,8 +129,6 @@ set clipboard=unnamed
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
-let vim_markdown_preview_hotkey='<C-m>'
-
 " autosource vimrc on save
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
@@ -175,3 +175,6 @@ let g:jsx_ext_required = 0
 
 " NERDTree Toggle
 nmap <leader>n :NERDTreeToggle<cr>
+
+" Livedown markdown preview
+nmap gm :LivedownToggle<CR>
