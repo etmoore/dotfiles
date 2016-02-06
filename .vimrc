@@ -31,6 +31,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'KabbAmine/vCoolor.vim'
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
