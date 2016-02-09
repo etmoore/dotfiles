@@ -179,3 +179,6 @@ nmap <leader>n :NERDTreeToggle<cr>
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
+
+" Turn off folding by default
+set nofoldenable
