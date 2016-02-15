@@ -40,6 +40,8 @@ Plugin 'flazz/vim-colorschemes'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+colors jellybeans
+
 syntax on
 set autoindent smartindent
 
@@ -59,12 +61,6 @@ else
 endif
 :autocmd InsertEnter * set cul
 :autocmd InsertLeave * set nocul
-
-" Set Zenburn high-contrast as color scheme
-" let g:zenburn_high_Contrast=1
-" let g:zenburn_old_Visual = 1
-" colors zenburn
-colors jellybeans
 
 " Treat all numerals as decimal
 set nrformats=
