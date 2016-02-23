@@ -42,6 +42,9 @@ filetype plugin indent on    " required
 
 let mapleader = "\<Space>"
 
+" use leader + w to save a file
+nnoremap <Leader>w :w<CR>
+
 colors jellybeans
 
 syntax on
