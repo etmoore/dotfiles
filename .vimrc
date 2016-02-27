@@ -42,8 +42,9 @@ filetype plugin indent on    " required
 
 let mapleader = "\<Space>"
 
-" use leader + w to save a file
+" use leader + w to save a file, leader + q to quit
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
 colors jellybeans
 
