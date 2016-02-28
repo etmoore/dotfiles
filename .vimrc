@@ -32,6 +32,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'KabbAmine/vCoolor.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+" Autocompletion
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ternjs/tern_for_vim'
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
