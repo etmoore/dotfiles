@@ -189,3 +189,7 @@ nmap gm :LivedownToggle<CR>
 
 " Turn off folding by default
 set nofoldenable
+
+" leader <CR> changes inside brackets, automatically setting new lines and
+" indenting
+nnoremap <leader><CR> F{ci{<CR><ESC>O
