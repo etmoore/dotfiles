@@ -193,3 +193,6 @@ set nofoldenable
 " leader <CR> changes inside brackets, automatically setting new lines and
 " indenting
 nnoremap <leader><CR> F{ci{<CR><ESC>O
+
+" YouCompleteMe Settings
+let g:ycm_autoclose_preview_window_after_insertion = 1
