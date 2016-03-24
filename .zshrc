@@ -79,5 +79,6 @@ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
+alias e="exit"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
