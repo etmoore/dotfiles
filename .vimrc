@@ -196,3 +196,10 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 
 " YouCompleteMe Settings
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" search in Dash
+:nmap <silent> <leader>d <Plug>DashSearch
+
+" Allow vim-tmux-navigator to jump out of nerdtree pane
+let g:NERDTreeMapJumpNextSibling = '<Nop>'
+let g:NERDTreeMapJumpPrevSibling = '<Nop>'
