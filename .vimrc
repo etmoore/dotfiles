@@ -33,6 +33,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'KabbAmine/vCoolor.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'lambdatoast/elm.vim'
 
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe'
