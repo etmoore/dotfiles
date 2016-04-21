@@ -1,0 +1,13 @@
+set noautofocus
+set typelinkhints
+let scrollstep = 70
+let barposition = "top"
+let typelinkhintsdelay = 0
+set scalehints
+set cncpcompletion
+set showtabindices
+
+let configpath = '/Users/evanmoore/dotfiles/.cvimrc'
+set localconfig
+
+let blacklists = ["https://mail.google.com/*","https://calendar.google.com/*","https://drive.google.com/*","https://docs.google.com/*","https://inbox.google.com/*"]
