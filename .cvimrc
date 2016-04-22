@@ -5,7 +5,6 @@ let barposition = "top"
 let typelinkhintsdelay = 0
 set scalehints
 set cncpcompletion
-set showtabindices
 
 let configpath = '/Users/evanmoore/dotfiles/.cvimrc'
 set localconfig
