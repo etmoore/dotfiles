@@ -5,8 +5,10 @@ let barposition = "top"
 let typelinkhintsdelay = 0
 set scalehints
 set cncpcompletion
+set sortlinkhints
 
 let configpath = '/Users/evanmoore/dotfiles/.cvimrc'
 set localconfig
 
-let blacklists = ["https://mail.google.com/*","https://calendar.google.com/*","https://drive.google.com/*","https://docs.google.com/*","https://inbox.google.com/*"]
+let blacklists =
+["https://mail.google.com/*","https://calendar.google.com/*","https://drive.google.com/*","https://docs.google.com/*","https://inbox.google.com/*","*player.vimeo.com/*"]
