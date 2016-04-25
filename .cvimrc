@@ -10,4 +10,4 @@ set sortlinkhints
 let configpath = '/Users/evanmoore/dotfiles/.cvimrc'
 set localconfig
 
-let blacklists = ["https://mail.google.com/*","https://calendar.google.com/*","https://drive.google.com/*","https://docs.google.com/*","https://inbox.google.com/*", "https://trello.com/*", "http://feedly.com/*", "https://play.google.com/music/listen*","*player.vimeo.com/*"]
+" let blacklists = ["https://mail.google.com/*","https://calendar.google.com/*","https://drive.google.com/*","https://docs.google.com/*","https://inbox.google.com/*", "https://trello.com/*", "http://feedly.com/*", "https://play.google.com/music/listen*","*player.vimeo.com/*"]
