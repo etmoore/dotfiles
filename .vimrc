@@ -166,9 +166,13 @@ endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" resize windows with plus and minus keys
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+" window resize
+map + 2<c-w>+
+map - 2<c-w>-
+
+" vertical resize
+map <c-n> 2<c-w><
+map <c-m> 2<c-w>>
 
 " Syntastic recommended settings
 set statusline+=%#warningmsg#
