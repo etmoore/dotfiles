@@ -185,8 +185,8 @@ let g:syntastic_check_on_wq = 0
 
 let g:jsx_ext_required = 0
 
-" NERDTree Toggle
-nmap <leader>n :NERDTreeToggle<cr>
+" NERDTree
+nmap <leader>n :NERDTree<cr>
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
