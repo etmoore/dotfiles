@@ -13,4 +13,5 @@ set localconfig
 unmap <Esc>
 unmap r x X
 
+let blacklists = ["https://app.asana.com/*", "https://trello.com/*"]
 " let blacklists = ["https://mail.google.com/*","https://calendar.google.com/*","https://drive.google.com/*","https://docs.google.com/*","https://inbox.google.com/*", "https://trello.com/*", "http://feedly.com/*", "https://play.google.com/music/listen*","*player.vimeo.com/*"]
