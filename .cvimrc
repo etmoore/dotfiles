@@ -10,7 +10,6 @@ set sortlinkhints
 let configpath = '/Users/evanmoore/dotfiles/.cvimrc'
 set localconfig
 
-unmap <Esc>
 unmap r x X
 
 let blacklists = ["https://app.asana.com/*", "https://trello.com/*"]
