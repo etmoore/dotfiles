@@ -103,7 +103,7 @@ set shiftround
 set expandtab
 
 " Make it obvious where 80 characters is
-set textwidth=80
+" set textwidth=80
 set colorcolumn=+1
 
 " Line numbers
@@ -183,6 +183,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:jsx_ext_required = 0
+let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
 
 " NERDTree
 nmap <leader>n :NERDTree<cr>
