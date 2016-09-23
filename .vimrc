@@ -31,6 +31,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'xero/blaquemagick.vim'
+Plugin 'pbrisbin/vim-colors-off'
 
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe'
@@ -49,7 +51,8 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
-colors jellybeans
+colors off
+set background=dark
 
 syntax on
 set autoindent smartindent
@@ -103,7 +106,7 @@ set expandtab
 
 " Make it obvious where 80 characters is
 " set textwidth=80
-set colorcolumn=+1
+" set colorcolumn=+1
 
 " Line numbers
 set number relativenumber
