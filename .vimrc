@@ -30,8 +30,6 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'xero/blaquemagick.vim'
 Plugin 'pbrisbin/vim-colors-off'
 
 " Autocompletion
