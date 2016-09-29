@@ -22,6 +22,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rizzatti/dash.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-rails'
@@ -208,3 +209,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " Allow vim-tmux-navigator to jump out of nerdtree pane
 let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
+
+" Airline configuration
+let g:airline_theme='lucius'
+let g:airline#extensions#tabline#enabled = 1
