@@ -84,4 +84,3 @@ alias update="brew update && brew upgrade && npm -g update && gem update"
 alias cleanup="brew cleanup && gem cleanup"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH=$PATH:/path/to/google_appengine/ # add Google App Engine to path
