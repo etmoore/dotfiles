@@ -33,6 +33,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'pbrisbin/vim-colors-off'
+Plugin 'lepture/vim-jinja'
 
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe'
@@ -51,8 +52,7 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
-colors off
-set background=dark
+colorscheme jellybeans
 
 syntax on
 set autoindent smartindent
