@@ -32,7 +32,6 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'pbrisbin/vim-colors-off'
 Plugin 'lepture/vim-jinja'
 
 " Autocompletion
@@ -41,6 +40,7 @@ Plugin 'ternjs/tern_for_vim'
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
+Plugin 'pbrisbin/vim-colors-off'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,7 +52,8 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
-colorscheme jellybeans
+set t_Co=256
+colorscheme zenburn
 
 syntax on
 set autoindent smartindent
@@ -186,6 +187,7 @@ let g:syntastic_check_on_wq = 0
 
 let g:jsx_ext_required = 0
 let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
+nmap <leader>s :SyntasticToggleMode<cr>
 
 " NERDTree
 nmap <leader>n :NERDTree<cr>
