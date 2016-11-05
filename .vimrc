@@ -53,7 +53,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
 set t_Co=256
-colorscheme zenburn
+colorscheme wombat256
 
 syntax on
 set autoindent smartindent
