@@ -52,9 +52,6 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
-set t_Co=256
-colorscheme wombat256
-
 syntax on
 set autoindent smartindent
 
@@ -215,3 +212,6 @@ let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 " Airline configuration
 let g:airline_theme='lucius'
 let g:airline#extensions#tabline#enabled = 1
+
+set t_Co=256
+colorscheme wombat256
