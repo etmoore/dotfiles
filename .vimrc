@@ -214,4 +214,4 @@ let g:airline_theme='lucius'
 let g:airline#extensions#tabline#enabled = 1
 
 set t_Co=256
-colorscheme wombat256
+colorscheme jellybeans
