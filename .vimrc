@@ -219,4 +219,8 @@ set complete+=kspell
 
 " Colorscheme
 set t_Co=256
-colorscheme jellybeans
+if strftime("%H") < 20
+  colorscheme zenburn
+else
+  colorscheme jellybeans
+endif
