@@ -213,5 +213,10 @@ let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 let g:airline_theme='lucius'
 let g:airline#extensions#tabline#enabled = 1
 
+" Spellchecking and autocomplete
+autocmd BufRead,BufNewFile *.md setlocal spell
+set complete+=kspell
+
+" Colorscheme
 set t_Co=256
 colorscheme jellybeans
