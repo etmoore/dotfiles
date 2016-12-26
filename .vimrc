@@ -34,10 +34,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'lepture/vim-jinja'
 
-" Autocompletion
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ternjs/tern_for_vim'
-
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
 Plugin 'pbrisbin/vim-colors-off'
