@@ -48,6 +48,9 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
+" use leader + b to close the current buffer
+nnoremap <Leader>b :bd<CR>
+
 syntax on
 set autoindent smartindent
 
