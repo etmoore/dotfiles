@@ -188,6 +188,9 @@ nmap <leader>s :SyntasticToggleMode<cr>
 " NERDTree
 nmap <leader>n :NERDTree<cr>
 
+" TagBar
+nmap <leader>t :TagbarToggle<cr>
+
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
 
