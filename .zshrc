@@ -80,7 +80,7 @@ alias zshconfig="vim ~/.zshrc"
 alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
 alias e="exit"
-alias update="brew update && brew upgrade && npm -g update && gem update"
+alias update="brew update && brew upgrade && npm update -g && gem update"
 alias cleanup="brew cleanup && gem cleanup"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
