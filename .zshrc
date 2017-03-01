@@ -51,6 +51,12 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export PATH="$PATH:/usr/local/bin:/usr/local/heroku/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3@global/bin:/Users/evanmoore/.rvm/rubies/ruby-2.1.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evanmoore/.rvm/bin"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# configure path for php
+export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
