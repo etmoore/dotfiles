@@ -17,7 +17,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tmhedberg/matchit'
-" Plugin 'ervandew/supertab' " Not necessary with YouCompleteMe
+Plugin 'ervandew/supertab'
 Plugin 'shime/vim-livedown'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rizzatti/dash.vim'
@@ -34,14 +34,10 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'FredKSchott/CoVim'
 Plugin 'posva/vim-vue'
 Plugin 'stanangeloff/php.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
-" snippets for ultisnips
-Plugin 'honza/vim-snippets'
-
+Plugin 'honza/vim-snippets' " snippets for ultisnips
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
@@ -212,9 +208,6 @@ set nofoldenable
 " indenting
 nnoremap <leader><CR> F{ci{<CR><ESC>O
 
-" YouCompleteMe Settings
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
 " search in Dash
 :nmap <silent> <leader>d <Plug>DashSearch
 
@@ -231,7 +224,7 @@ let g:airline#extensions#tabline#enabled = 1
 set complete+=kspell
 
 " Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
