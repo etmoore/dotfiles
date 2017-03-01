@@ -89,10 +89,12 @@ alias e="exit"
 alias update="brew update && brew upgrade && npm update -g && gem update"
 alias cleanup="brew cleanup && gem cleanup"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc'; fi
+
+# setting for colors - source: https://rhnh.net/2011/08/20/vim-and-tmux-on-osx/
+alias tmux="TERM=screen-256color-bce tmux"
