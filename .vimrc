@@ -125,9 +125,6 @@ set wildmode=full
 " Remember the last x commands
 set history=1000
 
-" Allow for continuous horizontal scrolling
-set sidescroll=1
-
 " remap <C-n> and <C-p> to down and up in command line mode
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
