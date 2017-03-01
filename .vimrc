@@ -143,8 +143,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 set clipboard=unnamed
 
 " only enable Emmet for html and css
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css EmmetInstall
 
 " autosource vimrc on save
 if has("autocmd")
