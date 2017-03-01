@@ -173,8 +173,8 @@ map + 2<c-w>+
 map - 2<c-w>-
 
 " vertical resize
-map <c-b> 2<c-w><
-map <c-n> 2<c-w>>
+map <Right> 2<c-w><
+map <Left> 2<c-w>>
 
 " Syntastic recommended settings
 set statusline+=%#warningmsg#
