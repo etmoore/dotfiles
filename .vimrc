@@ -36,6 +36,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'FredKSchott/CoVim'
 Plugin 'posva/vim-vue'
+Plugin 'stanangeloff/php.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 " snippets for ultisnips
