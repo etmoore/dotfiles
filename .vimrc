@@ -17,7 +17,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tmhedberg/matchit'
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab' " Not necessary with YouCompleteMe
 Plugin 'shime/vim-livedown'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rizzatti/dash.vim'
@@ -36,6 +36,11 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'lepture/vim-jinja'
 Plugin 'FredKSchott/CoVim'
 Plugin 'posva/vim-vue'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+" snippets for ultisnips
+Plugin 'honza/vim-snippets'
+
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
@@ -221,6 +226,11 @@ let g:airline#extensions#tabline#enabled = 1
 " Spellchecking and autocomplete
 autocmd BufRead,BufNewFile *.md setlocal spell
 set complete+=kspell
+
+" Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Colorscheme
 set t_Co=256
