@@ -44,7 +44,6 @@ Plugin 'honza/vim-snippets'
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
-Plugin 'pbrisbin/vim-colors-off'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -220,7 +219,7 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Airline configuration
-let g:airline_theme='lucius'
+let g:airline_theme = "lucius"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
@@ -234,4 +233,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Colorscheme
 set t_Co=256
-colorscheme jellybeans
+set background=dark
+colorscheme seoul256
