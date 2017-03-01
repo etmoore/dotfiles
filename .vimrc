@@ -227,7 +227,7 @@ let g:airline_theme = "lucius"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
-autocmd BufRead,BufNewFile *.md setlocal spell
+" autocmd BufRead,BufNewFile *.md setlocal spell
 set complete+=kspell
 
 " Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
