@@ -95,6 +95,3 @@ if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc'; fi
-
-# setting for colors - source: https://rhnh.net/2011/08/20/vim-and-tmux-on-osx/
-alias tmux="TERM=screen-256color-bce tmux"
