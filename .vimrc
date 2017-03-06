@@ -230,4 +230,5 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 " Colorscheme
 set t_Co=256
 set background=dark
+let g:seoul256_background = 234
 colorscheme seoul256
