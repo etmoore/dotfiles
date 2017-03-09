@@ -189,6 +189,9 @@ let g:jsx_ext_required = 0
 let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
 nmap <leader>s :SyntasticToggleMode<cr>
 
+" Syntastic filetype configurations
+let g:syntastic_javascript_checkers = ['eslint']
+
 " NERDTree
 nmap <leader>n :NERDTree<cr>
 
