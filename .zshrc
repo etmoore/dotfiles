@@ -7,6 +7,10 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="muse"
 
+# Configure colors for tmux
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -45,7 +49,7 @@ ZSH_THEME="muse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,8 +90,17 @@ alias zshconfig="vim ~/.zshrc"
 alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
 alias e="exit"
+alias v="vim"
 alias update="brew update && brew upgrade && npm update -g && gem update"
 alias cleanup="brew cleanup && gem cleanup"
+
+# tmux aliases
+alias ta='tmux attach -t'
+alias tad='tmux attach -d -t'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias tksv='tmux kill-server'
+alias tkss='tmux kill-session -t'
 
 
 # The next line updates PATH for the Google Cloud SDK.

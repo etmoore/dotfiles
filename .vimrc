@@ -216,7 +216,7 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Airline configuration
-let g:airline_theme = "lucius"
+let g:airline_theme = "raven"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
@@ -230,8 +230,11 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
-" Colorscheme
+" Color Configuration
 set t_Co=256
+set termguicolors
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-let g:seoul256_background = 234
-colorscheme seoul256
+colorscheme vydark
