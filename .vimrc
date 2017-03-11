@@ -41,6 +41,7 @@ Plugin 'honza/vim-snippets' " snippets for ultisnips
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
+Plugin 'pbrisbin/vim-colors-off'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -216,7 +217,7 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Airline configuration
-let g:airline_theme = "raven"
+let g:airline_theme = "badwolf"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
@@ -236,5 +237,7 @@ set termguicolors
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set background=dark
 colorscheme vydark
+highlight LineNr guifg=#777777
+highlight Comment guifg=#777777
+highlight MatchParen guibg=NONE guifg=#0BA6FF gui=bold
