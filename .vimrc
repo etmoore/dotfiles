@@ -10,7 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
@@ -25,17 +25,11 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-rails'
-Plugin 'mxw/vim-jsx'
-Plugin 'HerringtonDarkholme/yats'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
 Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'posva/vim-vue'
-Plugin 'stanangeloff/php.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets' " snippets for ultisnips
 
@@ -192,12 +186,13 @@ nmap <leader>s :SyntasticToggleMode<cr>
 
 " Syntastic filetype configurations
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 
 " NERDTree
 nmap <leader>n :NERDTree<cr>
 
 " TagBar
-nmap <leader>t :TagbarToggle<cr>
+" nmap <leader>t :TagbarToggle<cr>
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
