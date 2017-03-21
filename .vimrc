@@ -36,6 +36,7 @@ Plugin 'honza/vim-snippets' " snippets for ultisnips
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
 Plugin 'pbrisbin/vim-colors-off'
+Plugin 'rakr/vim-one'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -212,7 +213,7 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Airline configuration
-let g:airline_theme = "badwolf"
+let g:airline_theme = "one"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
@@ -226,13 +227,15 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
-" Color Configuration
+" COLOR Configuration
 set t_Co=256
 set termguicolors
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-colorscheme vydark
-highlight LineNr guifg=#777777
-highlight Comment guifg=#777777
-highlight MatchParen guibg=NONE guifg=#0BA6FF gui=bold
+set background=dark
+colorscheme one
+
+" Special rules for themes with dark number colors
+" highlight LineNr guifg=#777777
+" highlight MatchParen guibg=NONE guifg=magenta gui=bold
