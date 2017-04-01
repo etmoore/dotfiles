@@ -1,46 +1,34 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required by Vundle
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-" Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tmhedberg/matchit'
-Plugin 'ervandew/supertab'
-Plugin 'shime/vim-livedown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'rizzatti/dash.vim'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/syntastic'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'godlygeek/tabular'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets' " snippets for ultisnips
-
+call plug#begin('~/.vim/plugged')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
+Plug 'tmhedberg/matchit'
+Plug 'ervandew/supertab'
+Plug 'shime/vim-livedown'
+Plug 'scrooloose/nerdtree'
+Plug 'rizzatti/dash.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sheerun/vim-polyglot'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'airblade/vim-gitgutter'
+Plug 'godlygeek/tabular'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets' " snippets for ultisnips
 " Color Schemes
-Plugin 'flazz/vim-colorschemes'
-Plugin 'pbrisbin/vim-colors-off'
-Plugin 'rakr/vim-one'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plug 'flazz/vim-colorschemes'
+Plug 'pbrisbin/vim-colors-off'
+Plug 'rakr/vim-one'
+call plug#end()
 
 let mapleader = "\<Space>"
 
@@ -172,28 +160,8 @@ map - 2<c-w>-
 map <Right> 2<c-w><
 map <Left> 2<c-w>>
 
-" Syntastic recommended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:jsx_ext_required = 0
-let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
-nmap <leader>s :SyntasticToggleMode<cr>
-
-" Syntastic filetype configurations
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-
 " NERDTree
 nmap <leader>n :NERDTree<cr>
-
-" TagBar
-" nmap <leader>t :TagbarToggle<cr>
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
@@ -239,3 +207,6 @@ colorscheme one
 " Special rules for themes with dark number colors
 " highlight LineNr guifg=#777777
 " highlight MatchParen guibg=NONE guifg=magenta gui=bold
+
+" cursor shape in neovim
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1

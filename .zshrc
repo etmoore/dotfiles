@@ -85,12 +85,11 @@ export PATH="/usr/local/sbin:$PATH"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
 alias e="exit"
-alias v="vim"
+alias v="nvim"
+alias vim="nvim"
 alias update="brew update && brew upgrade && npm update -g && gem update"
 alias cleanup="brew cleanup && gem cleanup"
 
