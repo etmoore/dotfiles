@@ -102,6 +102,9 @@ set laststatus=2    " Always display the status line
 set autowrite       " Automatically :write before running commands
 set showcmd         " display incomplete commands
 
+set nohlsearch      " turn off search term highlighting
+map <leader>h :set hlsearch!<cr>
+
 " Tab completion like zsh with menu of options
 set wildmenu
 set wildmode=full
