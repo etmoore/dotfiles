@@ -14,7 +14,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tmhedberg/matchit'
 Plug 'ervandew/supertab'
 Plug 'shime/vim-livedown'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'rizzatti/dash.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes'
