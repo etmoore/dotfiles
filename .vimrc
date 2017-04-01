@@ -2,6 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required by Vundle
 
 call plug#begin('~/.vim/plugged')
+
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
@@ -12,22 +14,20 @@ Plug 'tpope/vim-eunuch'
 Plug 'tmhedberg/matchit'
 Plug 'ervandew/supertab'
 Plug 'shime/vim-livedown'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'rizzatti/dash.vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' " snippets for ultisnips
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
 Plug 'pbrisbin/vim-colors-off'
 Plug 'rakr/vim-one'
+
 call plug#end()
 
 let mapleader = "\<Space>"
