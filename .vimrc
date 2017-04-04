@@ -20,13 +20,11 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
-Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-"
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
-Plug 'pbrisbin/vim-colors-off'
 Plug 'rakr/vim-one'
+Plug 'robertmeta/nofrils'
 
 call plug#end()
 
@@ -47,17 +45,6 @@ set is ic
 
 " Remove esc key delay
 set timeoutlen=1000 ttimeoutlen=0
-
-" Cursor changes to bar in insert mode
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-:autocmd InsertEnter * set cul
-:autocmd InsertLeave * set nocul
 
 " Treat all numerals as decimal
 set nrformats=
@@ -89,10 +76,6 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
-" Make it obvious where 80 characters is
-" set textwidth=80
-" set colorcolumn=+1
-
 " Line numbers
 set number relativenumber
 set numberwidth=5
@@ -119,18 +102,6 @@ cnoremap <C-n> <Down>
 " expand %% to the path of the active buffer in command mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" set the default register to the system keyboard
-set clipboard=unnamed
-
-" only enable Emmet for html and css
-" let g:user_emmet_install_global = 0
-" autocmd FileType html,css EmmetInstall
-
-" autosource vimrc on save
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-
 " remove trailing whitespace on save
 function! <SID>StripTrailingWhitespaces()
   let l = line(".")
@@ -138,20 +109,18 @@ function! <SID>StripTrailingWhitespaces()
   %s/\s\+$//e
   call cursor(l, c)
 endfun
-autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb,*.vue,*.jsx :call <SID>StripTrailingWhitespaces()
 
 " The Silver Searcher
 if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
+  set grepprg=ag\ --nogroup\ --nocolor " Use ag over grep
   " Use ag in CtrlP for listing files. Lightning fast and respects
   " .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -164,7 +133,7 @@ map <Right> 2<c-w><
 map <Left> 2<c-w>>
 
 " NERDTree
-nmap <leader>n :NERDTree<cr>
+nmap <leader>n :NERDTreeToggle<cr>
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
@@ -172,8 +141,7 @@ nmap gm :LivedownToggle<CR>
 " Turn off folding by default
 set nofoldenable
 
-" leader <CR> changes inside brackets, automatically setting new lines and
-" indenting
+" leader <CR> changes inside brackets, automatically setting new lines and indenting
 nnoremap <leader><CR> F{ci{<CR><ESC>O
 
 " search in Dash
@@ -184,11 +152,12 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Airline configuration
-let g:airline_theme = "one"
+let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
-" autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd Filetype gitcommit setlocal spell textwidth=72 "https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
 set complete+=kspell
 
 " Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -204,12 +173,17 @@ set termguicolors
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set background=dark
-colorscheme one
-
-" Special rules for themes with dark number colors
-" highlight LineNr guifg=#777777
-" highlight MatchParen guibg=NONE guifg=magenta gui=bold
+let g:nofrils_strbackgrounds=1
+if strftime("%H") < 20
+  colorscheme nofrils-light
+else
+  colorscheme nofrils-dark
+endif
 
 " cursor shape in neovim
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+if has('nvim')
+  " Hack to get C-h working in NeoVim
+  nmap <BS> <C-W>h
+endif
