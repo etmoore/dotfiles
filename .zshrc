@@ -85,6 +85,7 @@ export PATH="/usr/local/sbin:$PATH"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias sudo='sudo '
 alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
 alias e="exit"
