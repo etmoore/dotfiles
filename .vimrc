@@ -41,8 +41,8 @@ nnoremap <Leader>q :q<CR>
 " use leader + b to close the current buffer
 nnoremap <Leader>b :bd<CR>
 
-syntax on
 set autoindent smartindent
+set ttyfast
 
 " incremental search and ignore case
 set is ic
@@ -183,6 +183,8 @@ if strftime("%H") < 20
 else
   colorscheme nofrils-dark
 endif
+hi MatchParen guibg=NONE guifg=#8AD68A gui=bold
+syntax off
 
 " cursor shape in neovim
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
