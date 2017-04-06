@@ -29,6 +29,9 @@ Plug 'robertmeta/nofrils'
 
 call plug#end()
 
+" save when focus is lost
+au FocusLost * :wa
+
 let mapleader = "\<Space>"
 
 " use leader + w to save a file, leader + q to quit
