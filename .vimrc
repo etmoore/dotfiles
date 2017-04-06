@@ -21,6 +21,7 @@ Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'neomake/neomake'
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
 Plug 'rakr/vim-one'
@@ -187,3 +188,26 @@ if has('nvim')
   " Hack to get C-h working in NeoVim
   nmap <BS> <C-W>h
 endif
+
+" Neomake configuration
+autocmd! BufWritePost,BufEnter * Neomake
+nmap <Leader>o :lopen<CR>
+nmap <Leader>c :lclose<CR>
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
+" if eslintrc file present use eslint, else use standard
+if findfile('.eslintrc', '.;') !=# ''
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  " load local eslint in the project root to avoid global plugin installations
+  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+  let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+else
+  let g:neomake_javascript_enabled_makers = ['standard']
+endif
+" load local eslint in the project root to avoid global plugin installations
