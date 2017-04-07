@@ -1,5 +1,4 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required by Vundle
 
 call plug#begin('~/.vim/plugged')
 
@@ -29,9 +28,12 @@ Plug 'robertmeta/nofrils'
 
 call plug#end()
 
+filetype plugin indent on
+
 " save when focus is lost
 au FocusLost * :wa
 
+" set the leader key to space
 let mapleader = "\<Space>"
 
 " use leader + w to save a file, leader + q to quit
@@ -103,9 +105,6 @@ set history=1000
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-" expand %% to the path of the active buffer in command mode
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
 " remove trailing whitespace on save
 function! <SID>StripTrailingWhitespaces()
   let l = line(".")
@@ -124,9 +123,6 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " window resize
 map + 2<c-w>+
@@ -156,12 +152,13 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Airline configuration
-let g:airline_theme = "onedark"
+let g:airline_theme = "one"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
 autocmd BufRead,BufNewFile *.md setlocal spell
-autocmd Filetype gitcommit setlocal spell textwidth=72 "https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
+"https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
+autocmd Filetype gitcommit setlocal spell textwidth=72 
 set complete+=kspell
 
 " Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -171,20 +168,14 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
+" Supertab use context to recommend completions
+let g:SuperTabDefaultCompletionType = "context"
+
 " COLOR Configuration
 set t_Co=256
 set termguicolors
-" set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-let g:nofrils_strbackgrounds=1
-if strftime("%H") < 20
-  colorscheme nofrils-light
-else
-  colorscheme nofrils-dark
-endif
-hi MatchParen guibg=NONE guifg=#8AD68A gui=bold
-syntax off
+set background=dark " has to come before the colorscheme
+colorscheme one
 
 " cursor shape in neovim
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -200,11 +191,9 @@ nmap <Leader>o :lopen<CR>
 nmap <Leader>c :lclose<CR>
 let g:neomake_warning_sign = {
   \ 'text': 'W',
-  \ 'texthl': 'WarningMsg',
   \ }
 let g:neomake_error_sign = {
   \ 'text': 'E',
-  \ 'texthl': 'ErrorMsg',
   \ }
 " if eslintrc file present use eslint, else use standard
 if findfile('.eslintrc', '.;') !=# ''
