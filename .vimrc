@@ -13,25 +13,23 @@ Plug 'tpope/vim-eunuch'
 Plug 'tmhedberg/matchit'
 Plug 'ervandew/supertab'
 Plug 'shime/vim-livedown'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rizzatti/dash.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
 Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'neomake/neomake'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'elmcast/elm-vim'
 " Color Schemes
-Plug 'flazz/vim-colorschemes'
 Plug 'rakr/vim-one'
-Plug 'robertmeta/nofrils'
 
 call plug#end()
 
 filetype plugin indent on
-
-" save when focus is lost
-au FocusLost * :wa
 
 " set the leader key to space
 let mapleader = "\<Space>"
@@ -43,23 +41,28 @@ nnoremap <Leader>q :q<CR>
 " use leader + b to close the current buffer
 nnoremap <Leader>b :bd<CR>
 
+" use leader + p to open previous buffer
+nnoremap <leader>p <C-^>
+
 set autoindent smartindent
 set ttyfast
+set autoread
 
 " incremental search and ignore case
 set is ic
+
+" turn off text wrapping by default
+set nowrap
+
+" move cursor up and down by visual lines
+nnoremap j gj
+nnoremap k gk
 
 " Remove esc key delay
 set timeoutlen=1000 ttimeoutlen=0
 
 " Treat all numerals as decimal
 set nrformats=
-
-" Get off my lawn - no arrow keys!
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
@@ -83,7 +86,7 @@ set shiftround
 set expandtab
 
 " Line numbers
-set number relativenumber
+set number
 set numberwidth=5
 
 set ruler           " show the cursor position at all times
@@ -124,22 +127,29 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" polyglot configuration
+let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
+
 " window resize
-map + 2<c-w>+
-map - 2<c-w>-
+map <Down> 2<c-w>+
+map <Up> 2<c-w>-
 
 " vertical resize
 map <Right> 2<c-w><
 map <Left> 2<c-w>>
 
-" NERDTree
+" NERDTree Configuration
 nmap <leader>n :NERDTreeToggle<cr>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+" autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
+let NERDTreeQuitOnOpen = 1
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
-
-" Turn off folding by default
-set nofoldenable
 
 " leader <CR> changes inside brackets, automatically setting new lines and indenting
 nnoremap <leader><CR> F{ci{<CR><ESC>O
@@ -157,8 +167,10 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
 "https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
-autocmd Filetype gitcommit setlocal spell textwidth=72 
+autocmd Filetype gitcommit setlocal spell textwidth=72
 set complete+=kspell
 
 " Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -168,9 +180,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
-" Supertab use context to recommend completions
-let g:SuperTabDefaultCompletionType = "context"
-
 " COLOR Configuration
 set t_Co=256
 set termguicolors
@@ -178,7 +187,7 @@ set background=dark " has to come before the colorscheme
 colorscheme one
 
 " cursor shape in neovim
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
 if has('nvim')
   " Hack to get C-h working in NeoVim
@@ -186,7 +195,8 @@ if has('nvim')
 endif
 
 " Neomake configuration
-autocmd! BufWritePost,BufEnter * Neomake
+call neomake#configure#automake('nrw', 100)
+" autocmd! BufWritePost,BufEnter * Neomake
 nmap <Leader>o :lopen<CR>
 nmap <Leader>c :lclose<CR>
 let g:neomake_warning_sign = {
@@ -195,6 +205,7 @@ let g:neomake_warning_sign = {
 let g:neomake_error_sign = {
   \ 'text': 'E',
   \ }
+
 " if eslintrc file present use eslint, else use standard
 if findfile('.eslintrc', '.;') !=# ''
   let g:neomake_javascript_enabled_makers = ['eslint']
@@ -203,5 +214,10 @@ if findfile('.eslintrc', '.;') !=# ''
   let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 else
   let g:neomake_javascript_enabled_makers = ['standard']
+  " autoformat on save with standard
+  autocmd bufwritepost *.js silent !standard --fix %
 endif
-" load local eslint in the project root to avoid global plugin installations
+
+let g:python_host_prog  = '/usr/local/bin/python'
+let g:python3_host_prog  = '/usr/local/bin/python3'
+
