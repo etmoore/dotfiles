@@ -93,6 +93,7 @@ alias v="nvim"
 alias vim="nvim"
 alias update="brew update && brew upgrade && npm update -g && gem update"
 alias cleanup="brew cleanup && gem cleanup"
+alias venv=". venv/bin/activate"
 
 # tmux aliases
 alias ta='tmux attach -t'
@@ -101,6 +102,12 @@ alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
+
+# vagrant aliases
+alias vus='vagrant up && vagrant ssh'
+alias vs='vagrant ssh'
+
+alias tree='tree -I "node_modules"'
 
 
 # The next line updates PATH for the Google Cloud SDK.
