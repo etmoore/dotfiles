@@ -13,15 +13,17 @@ Plug 'tpope/vim-eunuch'
 Plug 'tmhedberg/matchit'
 Plug 'ervandew/supertab'
 Plug 'shime/vim-livedown'
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rizzatti/dash.vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'posva/vim-vue'
 Plug 'airblade/vim-gitgutter'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'neomake/neomake'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 " Color Schemes
@@ -182,9 +184,13 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
 " COLOR Configuration
 set t_Co=256
-set termguicolors
+" set termguicolors
 set background=dark " has to come before the colorscheme
 colorscheme one
+
+" change cursor shape in insert mode
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
 " cursor shape in neovim
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -192,30 +198,6 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 if has('nvim')
   " Hack to get C-h working in NeoVim
   nmap <BS> <C-W>h
-endif
-
-" Neomake configuration
-call neomake#configure#automake('nrw', 100)
-" autocmd! BufWritePost,BufEnter * Neomake
-nmap <Leader>o :lopen<CR>
-nmap <Leader>c :lclose<CR>
-let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ }
-let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ }
-
-" if eslintrc file present use eslint, else use standard
-if findfile('.eslintrc', '.;') !=# ''
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  " load local eslint in the project root to avoid global plugin installations
-  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-  let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-else
-  let g:neomake_javascript_enabled_makers = ['standard']
-  " autoformat on save with standard
-  autocmd bufwritepost *.js silent !standard --fix %
 endif
 
 let g:python_host_prog  = '/usr/local/bin/python'
