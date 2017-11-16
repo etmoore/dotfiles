@@ -190,13 +190,16 @@ nnoremap <leader>t :CtrlPBufTag<cr>
 
 " COLOR Configuration
 set t_Co=256
-" set termguicolors
+if (has("termguicolors"))
+  set termguicolors
+endif
 set background=dark " has to come before the colorscheme
+let g:one_allow_italics = 1
 colorscheme one
 
-" change cursor shape in insert mode
-let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" https://github.com/rakr/vim-one#tmux-support
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
 
 " cursor shape in neovim
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
