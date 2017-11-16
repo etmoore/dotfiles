@@ -50,6 +50,7 @@ nnoremap <leader>p <C-^>
 
 set autoindent smartindent
 set ttyfast
+set lazyredraw
 set autoread
 
 " incremental search and ignore case
