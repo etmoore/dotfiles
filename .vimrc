@@ -28,6 +28,7 @@ Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 " Color Schemes
+Plug 'flazz/vim-colorschemes'
 Plug 'rakr/vim-one'
 
 call plug#end()
