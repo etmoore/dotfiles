@@ -11,6 +11,12 @@ ZSH_THEME="muse"
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
+# Configure SSH passthrough so that tmux maintains access to keys
+if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
