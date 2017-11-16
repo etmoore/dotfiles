@@ -89,13 +89,16 @@ alias sudo='sudo '
 alias glog="git log --oneline --decorate --color --graph --all"
 alias c="clear"
 alias e="exit"
+
 alias v="nvim"
 alias vim="nvim"
-alias update="brew update && brew upgrade && npm update -g && gem update"
-alias cleanup="brew cleanup && gem cleanup"
-alias venv=". venv/bin/activate"
+
+# alias update="brew update && brew upgrade && npm update -g && gem update"
+# alias cleanup="brew cleanup && gem cleanup"
+# alias venv=". venv/bin/activate"
 
 # tmux aliases
+alias tmux='/usr/local/bin/tmux -S ~/tmux-socket'
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias ts='tmux new-session -s'
