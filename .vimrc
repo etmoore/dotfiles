@@ -185,7 +185,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
-" CTRLP config
+" CTRLP go to tag
 nnoremap <leader>t :CtrlPBufTag<cr>
 
 " COLOR Configuration
