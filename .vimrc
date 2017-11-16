@@ -42,8 +42,8 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
-" use leader + b to close the current buffer
-nnoremap <Leader>b :bd<CR>
+" use leader + b to close the current buffer without closing the split
+nnoremap <Leader>b :bp\|bd #<CR>
 
 " use leader + p to open previous buffer
 nnoremap <leader>p <C-^>
