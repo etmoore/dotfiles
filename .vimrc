@@ -184,6 +184,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
+" CTRLP config
+nnoremap <leader>t :CtrlPBufTag<cr>
+
 " COLOR Configuration
 set t_Co=256
 " set termguicolors
