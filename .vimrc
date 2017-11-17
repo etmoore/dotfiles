@@ -214,25 +214,28 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-" clipboard configuration
-" should not run on local mac
-let os = substitute(system('uname'), "\n", "", "")
-if os != "Darwin"
-  if has('nvim')
-      let g:clipboard = {
-          \   'name': 'SSH_from_macOS',
-          \   'copy': {
-          \      '+': 'nc -c localhost 2235',
-          \      '*': 'nc -c localhost 2235',
-          \    },
-          \   'paste': {
-          \      '+': 'nc localhost 2236',
-          \      '*': 'nc localhost 2236',
-          \   },
-          \   'cache_enabled': 0,
-          \ }
-  endif
-endif
+
+" Clipboard Configuration
+" DISABLED because of edit to nvim source by DOM, but this is how
+" you would do it otherwise
+" should not run on local mac, want it to run on Linux devboxes
+" let os = substitute(system('uname'), "\n", "", "")
+" if os != "Darwin"
+"   if has('nvim')
+"       let g:clipboard = {
+"           \   'name': 'SSH_from_macOS',
+"           \   'copy': {
+"           \      '+': 'nc -c localhost 2235',
+"           \      '*': 'nc -c localhost 2235',
+"           \    },
+"           \   'paste': {
+"           \      '+': 'nc localhost 2236',
+"           \      '*': 'nc localhost 2236',
+"           \   },
+"           \   'cache_enabled': 0,
+"           \ }
+"   endif
+" endif
 
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
