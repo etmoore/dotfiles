@@ -127,3 +127,6 @@ cat | nc -q1 localhost 2224
 "   endif
 " endif
 
+
+## For TMUX (>2.4) and iTerm2 (>3.0)
+settings -> general -> "Applications in terminal may access keyboard"
