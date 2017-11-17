@@ -116,6 +116,9 @@ alias vs='vagrant ssh'
 
 alias tree='tree -I "node_modules"'
 
+alias vz="vim ~/.zshrc"
+alias sz="source ~/.zshrc"
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
