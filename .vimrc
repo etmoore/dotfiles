@@ -225,8 +225,8 @@ endif
 "       let g:clipboard = {
 "           \   'name': 'SSH_from_macOS',
 "           \   'copy': {
-"           \      '+': 'nc -c localhost 2235',
-"           \      '*': 'nc -c localhost 2235',
+"           \      '+': 'cat | nc -q1 localhost 2235',
+"           \      '*': 'cat | nc -q1 localhost 2235',
 "           \    },
 "           \   'paste': {
 "           \      '+': 'nc localhost 2236',
