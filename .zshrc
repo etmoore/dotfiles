@@ -63,9 +63,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:/usr/local/bin:/usr/local/heroku/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3@global/bin:/Users/evanmoore/.rvm/rubies/ruby-2.1.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evanmoore/.rvm/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-# configure path for php
-export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -104,7 +102,7 @@ alias vim="nvim"
 # alias venv=". venv/bin/activate"
 
 # tmux aliases
-alias tmux='/usr/local/bin/tmux -S ~/tmux-socket'
+alias tmux='~/bin/tmux -S ~/tmux-socket'
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias ts='tmux new-session -s'
