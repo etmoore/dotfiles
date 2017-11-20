@@ -236,6 +236,13 @@ endif
 "   endif
 " endif
 
+" Copy current file to clipboard
+nnoremap <leader>yf :let @*=expand("%")<cr>
+
+" Fast editing and sourcing of vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
