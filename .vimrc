@@ -89,6 +89,9 @@ set tabstop=2
 set shiftwidth=2
 set shiftround
 set expandtab
+set smarttab
+
+autocmd Filetype php setlocal tabstop=4 shiftwidth=4
 
 " Line numbers
 set number
