@@ -90,7 +90,7 @@ export PATH="$HOME/bin:$PATH"
 #
 # Example aliases
 alias sudo='sudo '
-alias glog="git log --oneline --decorate --color --graph --all"
+alias glog="git log --oneline --decorate --color --graph"
 alias c="clear"
 alias e="exit"
 
