@@ -3,7 +3,8 @@ set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
 
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -124,11 +125,6 @@ autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb,*.vue,*.jsx :call <SID>StripTrai
 " The Silver Searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor " Use ag over grep
-  " Use ag in CtrlP for listing files. Lightning fast and respects
-  " .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 " bind K to grep word under cursor
@@ -184,8 +180,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
-" CTRLP go to tag
-nnoremap <leader>t :CtrlPBufTag<cr>
+" fzf config
+nnoremap <C-p> :Files<CR>
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>o :Buffers<CR>
 
 " COLOR Configuration
 set t_Co=256
