@@ -196,6 +196,7 @@ endif
 set background=dark " has to come before the colorscheme
 let g:one_allow_italics = 1
 colorscheme one
+set cursorline
 
 " https://github.com/rakr/vim-one#tmux-support
 set t_8b=^[[48;2;%lu;%lu;%lum
