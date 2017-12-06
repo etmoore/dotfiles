@@ -102,7 +102,13 @@ alias vim="nvim"
 # alias venv=". venv/bin/activate"
 
 # tmux aliases
-alias tmux='~/bin/tmux -S ~/tmux-socket'
+# if tmux2 exists (which is the case in devbox), use that
+if command -v 'tmux2' > /dev/null; then
+  alias tmux='tmux2 -S ~/tmux-socket'
+else
+  # otherwise, just alias to normal tmux
+  alias tmux='tmux -S ~/tmux-socket'
+fi
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias ts='tmux new-session -s'
