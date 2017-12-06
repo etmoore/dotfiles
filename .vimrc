@@ -28,6 +28,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
+Plug 'neomake/neomake'
 " Color Schemes
 Plug 'rakr/vim-one'
 
@@ -215,6 +216,25 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
+" Neomake configuration
+" call neomake when writing a buffer, reading a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nrw', 750)
+
+let g:neomake_place_signs = 1
+let g:neomake_open_list = 2
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ }
+
+" Look for local eslint and if not use globally installed one
+let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_php_enabled_makers = ['php']
 
 " Clipboard Configuration
 " DISABLED because of edit to nvim source by DOM, but this is how
