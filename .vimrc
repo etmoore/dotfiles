@@ -85,14 +85,12 @@ set noswapfile
 " Make backspace work like it does in most other apps
 set backspace=2
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
+" Softtabs, 4 spaces
+set tabstop=4
+set shiftwidth=4
 set shiftround
 set expandtab
 set smarttab
-
-autocmd Filetype php setlocal tabstop=4 shiftwidth=4
 
 " Line numbers
 set number
