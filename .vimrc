@@ -143,6 +143,19 @@ map <Up> 2<c-w>-
 map <Right> 2<c-w><
 map <Left> 2<c-w>>
 
+" Toggle quickfix
+nnoremap <leader>q :call QuickfixToggle()<cr>
+let g:quickfix_is_open = 0
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+    else
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+
 " NERDTree Configuration
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeMinimalUI = 1
