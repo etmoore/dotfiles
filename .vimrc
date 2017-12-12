@@ -31,6 +31,7 @@ Plug 'elmcast/elm-vim'
 Plug 'neomake/neomake'
 " Color Schemes
 Plug 'rakr/vim-one'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
@@ -172,12 +173,8 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 " search in Dash
 :nmap <silent> <leader>d <Plug>DashSearch
 
-" Allow vim-tmux-navigator to jump out of nerdtree pane
-let g:NERDTreeMapJumpNextSibling = '<Nop>'
-let g:NERDTreeMapJumpPrevSibling = '<Nop>'
-
 " Airline configuration
-let g:airline_theme = "one"
+let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
@@ -207,7 +204,7 @@ if (has("termguicolors"))
 endif
 set background=dark " has to come before the colorscheme
 let g:one_allow_italics = 1
-colorscheme one
+colorscheme onedark
 set cursorline
 
 " https://github.com/rakr/vim-one#tmux-support
