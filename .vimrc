@@ -160,9 +160,11 @@ endfunction
 " NERDTree Configuration
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-" autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
 let NERDTreeQuitOnOpen = 1
+
+" Allow vim-tmux-navigator to jump out of nerdtree pane
+let g:NERDTreeMapJumpNextSibling = '<Nop>'
+let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Livedown markdown preview
 nmap gm :LivedownToggle<CR>
