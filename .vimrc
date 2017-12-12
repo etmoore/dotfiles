@@ -145,7 +145,7 @@ map <Right> 2<c-w><
 map <Left> 2<c-w>>
 
 " Toggle quickfix
-nnoremap <leader>q :call QuickfixToggle()<cr>
+nnoremap <leader>c :call QuickfixToggle()<cr>
 let g:quickfix_is_open = 0
 function! QuickfixToggle()
     if g:quickfix_is_open
