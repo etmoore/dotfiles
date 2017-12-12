@@ -230,14 +230,14 @@ endif
 " call neomake when writing a buffer, reading a buffer, and on normal mode changes (after 750ms).
 call neomake#configure#automake('nrw', 750)
 
-let g:neomake_place_signs = 1
-let g:neomake_open_list = 2
-let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ }
-let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ }
+" Automatically open the lint list when there's an error
+" let g:neomake_open_list = 2
+
+" Set custom neomake signs
+let g:neomake_error_sign = {'text': 'E', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text': 'W', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text': '>', 'texthl': 'NeomakeMessageSign'}
+let g:neomake_info_sign = {'text': 'i', 'texthl': 'NeomakeInfoSign'}
 
 " Look for local eslint and if not use globally installed one
 let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
