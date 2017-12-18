@@ -113,8 +113,9 @@ map <leader>h :set hlsearch!<cr>
 set wildmenu
 set wildmode=full
 
-" Remember the last x commands
+" Remember the last x commands and undos
 set history=1000
+set undolevels=1000
 
 " remap <C-n> and <C-p> to down and up in command line mode
 cnoremap <C-p> <Up>
