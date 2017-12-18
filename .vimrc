@@ -163,7 +163,7 @@ function! QuickfixToggle()
 endfunction
 
 " NERDTree Configuration
-nmap <leader>n :NERDTreeToggle<cr>
+nmap <leader>n :e .<cr>
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 
