@@ -58,6 +58,10 @@ set autoread
 " incremental search and ignore case
 set is ic
 
+" hide buffers instead of closing them
+" see http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
+set hidden
+
 " turn off text wrapping by default
 set nowrap
 
