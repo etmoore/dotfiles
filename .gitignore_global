@@ -46,3 +46,8 @@ bower_components/*
 *.egg-info
 venv/
 __pycache__/
+
+
+# Vim #
+##########
+tags
