@@ -30,7 +30,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 Plug 'w0rp/ale'
 " Color Schemes
-Plug 'rakr/vim-one'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
