@@ -203,7 +203,10 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 " fzf config
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :BTags<CR>
+nnoremap <leader>T :Tags<CR>
 nnoremap <leader>o :Buffers<CR>
+" search for current word under cursor with :Tags fzf command
+nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
 
 " COLOR Configuration
 set t_Co=256
