@@ -102,11 +102,12 @@ set numberwidth=5
 
 set ruler           " show the cursor position at all times
 set laststatus=2    " Always display the status line
-set autowrite       " Automatically :write before running commands
+set autowriteall    " Automatically :write
 set showcmd         " display incomplete commands
 
 set nohlsearch      " turn off search term highlighting
-map <leader>h :set hlsearch!<cr>
+" toggle search term highlighting
+nnoremap <leader>h :set hlsearch!<cr>
 
 " Tab completion like zsh with menu of options
 set wildmenu
@@ -165,6 +166,7 @@ endfunction
 nmap <leader>n :e .<cr>
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1 "Automatically delete the buffer of the file you just deleted with NerdTree
 
 " Allow vim-tmux-navigator to jump out of nerdtree pane
 let g:NERDTreeMapJumpNextSibling = '<Nop>'
@@ -181,7 +183,7 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 
 " Airline configuration
 let g:airline_theme = "onedark"
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
 autocmd BufRead,BufNewFile *.md setlocal spell
