@@ -29,6 +29,7 @@ Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 Plug 'w0rp/ale'
+" Plug 'neomake/neomake'
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
 
@@ -238,7 +239,7 @@ endif
 " ALE Configuration
 " fix files automatically on save.
 let g:ale_fixers = {
-\  'javascript': ['eslint', 'prettier'],
+\  'javascript': ['eslint'],
 \  'python': ['autopep8'],
 \}
 let g:ale_fix_on_save = 1
