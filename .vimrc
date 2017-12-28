@@ -71,6 +71,9 @@ set nowrap
 nnoremap j gj
 nnoremap k gk
 
+" join commmnt lines without duplicate comment symbols
+set formatoptions+=j
+
 " Remove esc key delay
 set timeoutlen=1000 ttimeoutlen=0
 
