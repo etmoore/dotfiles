@@ -54,6 +54,8 @@ set autoindent smartindent
 set ttyfast
 set lazyredraw
 set autoread
+" reload all files from disk (useful after checking out a different branch)
+nnoremap <Leader>e :checktime<CR>
 
 " incremental search and ignore case
 set is ic
