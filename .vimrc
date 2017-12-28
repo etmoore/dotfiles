@@ -169,7 +169,7 @@ function! QuickfixToggle()
 endfunction
 
 " NERDTree Configuration
-nmap <leader>n :e .<cr>
+nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeAutoDeleteBuffer = 1 "Automatically delete the buffer of the file you just deleted with NerdTree
