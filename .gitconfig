@@ -3,3 +3,4 @@
 	email = etmoore@gmail.com
 [core]
 	editor = nvim
+	excludesfile = /nail/home/evanm/.gitignore_global
