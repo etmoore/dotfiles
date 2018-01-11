@@ -29,7 +29,6 @@ Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 Plug 'w0rp/ale'
-" Plug 'neomake/neomake'
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
 
@@ -171,7 +170,7 @@ endfunction
 " NERDTree Configuration
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeMinimalUI = 1
-let NERDTreeQuitOnOpen = 1
+" let NERDTreeQuitOnOpen = 1 " Close nerdtree when it opens a file
 let NERDTreeAutoDeleteBuffer = 1 "Automatically delete the buffer of the file you just deleted with NerdTree
 
 " Allow vim-tmux-navigator to jump out of nerdtree pane
@@ -247,52 +246,10 @@ let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \  'python': ['autopep8'],
 \}
+
+" lint fix when saving a file
 let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
-
-" TODO: Remove neomake configuration if ALE sticks
-" " Neomake configuration
-" " call neomake when writing a buffer, reading a buffer, and on normal mode changes (after 750ms).
-" call neomake#configure#automake('nrw', 750)
-
-" " Automatically open the lint list when there's an error
-" " let g:neomake_open_list = 2
-
-" " Set custom neomake signs
-" let g:neomake_error_sign = {'text': 'E', 'texthl': 'NeomakeErrorSign'}
-" let g:neomake_warning_sign = {'text': 'W', 'texthl': 'NeomakeWarningSign'}
-" let g:neomake_message_sign = {'text': '>', 'texthl': 'NeomakeMessageSign'}
-" let g:neomake_info_sign = {'text': 'i', 'texthl': 'NeomakeInfoSign'}
-
-" " Look for local eslint and if not use globally installed one
-" let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-" let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-
-" let g:neomake_javascript_enabled_makers = ['eslint']
-" let g:neomake_php_enabled_makers = ['php']
-" let g:neomake_python_enabled_makers = ['pylint']
-
-" Clipboard Configuration
-" DISABLED because of edit to nvim source by DOM, but this is how
-" you would do it otherwise
-" should not run on local mac, want it to run on Linux devboxes
-" let os = substitute(system('uname'), "\n", "", "")
-" if os != "Darwin"
-"   if has('nvim')
-"       let g:clipboard = {
-"           \   'name': 'SSH_from_macOS',
-"           \   'copy': {
-"           \      '+': 'cat | nc -q1 localhost 2235',
-"           \      '*': 'cat | nc -q1 localhost 2235',
-"           \    },
-"           \   'paste': {
-"           \      '+': 'nc localhost 2236',
-"           \      '*': 'nc localhost 2236',
-"           \   },
-"           \   'cache_enabled': 0,
-"           \ }
-"   endif
-" endif
 
 " Copy current file to clipboard
 nnoremap <leader>yf :let @*=expand("%")<cr>
