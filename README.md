@@ -107,28 +107,21 @@ cat | nc -q1 localhost 2224
 #### `~/.vimrc`
 ```
 " Clipboard Configuration
-" DISABLED because of edit to nvim source by DOM, but this is how
-" you would do it otherwise
-" should not run on local mac, want it to run on Linux devboxes
-" let os = substitute(system('uname'), "\n", "", "")
-" if os != "Darwin"
-"   if has('nvim')
-"       let g:clipboard = {
-"           \   'name': 'SSH_from_macOS',
-"           \   'copy': {
-"           \      '+': 'cat | nc -q1 localhost 2235',
-"           \      '*': 'cat | nc -q1 localhost 2235',
-"           \    },
-"           \   'paste': {
-"           \      '+': 'nc localhost 2236',
-"           \      '*': 'nc localhost 2236',
-"           \   },
-"           \   'cache_enabled': 0,
-"           \ }
-"   endif
-" endif
+if has('nvim')
+    let g:clipboard = {
+        \   'name': 'SSH_from_macOS',
+        \   'copy': {
+        \      '+': 'pbcopy',
+        \      '*': 'pbcopy',
+        \    },
+        \   'paste': {
+        \      '+': 'pbpaste',
+        \      '*': 'pbpaste',
+        \   },
+        \   'cache_enabled': 0,
+        \ }
+endif
 ```
-
 
 ## For TMUX (>2.4) and iTerm2 (>3.0)
 settings -> general -> "Applications in terminal may access keyboard"
