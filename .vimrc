@@ -40,6 +40,8 @@ filetype plugin indent on
 " set the leader key to space
 let mapleader = "\<Space>"
 
+nnoremap <Leader>sp :echo @%<CR>
+
 " use leader + w to save a file, leader + q to quit
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
