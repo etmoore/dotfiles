@@ -263,6 +263,22 @@ let g:airline#extensions#ale#enabled = 1
 " Copy current file to clipboard
 nnoremap <leader>yf :let @*=expand("%")<cr>
 
+" Clipboard Configuration
+if has('nvim')
+    let g:clipboard = {
+        \   'name': 'SSH_from_macOS',
+        \   'copy': {
+        \      '+': 'pbcopy',
+        \      '*': 'pbcopy',
+        \    },
+        \   'paste': {
+        \      '+': 'pbpaste',
+        \      '*': 'pbpaste',
+        \   },
+        \   'cache_enabled': 0,
+        \ }
+endif
+
 " Fast editing and sourcing of vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
