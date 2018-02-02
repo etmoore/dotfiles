@@ -105,6 +105,7 @@ cat | nc -q1 localhost 2224
 ```
 
 #### `~/.vimrc`
+```
 " Clipboard Configuration
 " DISABLED because of edit to nvim source by DOM, but this is how
 " you would do it otherwise
@@ -126,6 +127,7 @@ cat | nc -q1 localhost 2224
 "           \ }
 "   endif
 " endif
+```
 
 
 ## For TMUX (>2.4) and iTerm2 (>3.0)
