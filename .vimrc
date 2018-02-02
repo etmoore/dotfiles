@@ -255,11 +255,9 @@ let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \  'python': ['autopep8'],
 \}
-
-
 " lint fix when saving a file
 " let g:ale_fix_on_save = 1 " was not working consistently…
-nnoremap <leader>f :ALEFix<cr>
+nnoremap <leader>af :ALEFix<cr>
 let g:airline#extensions#ale#enabled = 1
 
 " Copy current file to clipboard
