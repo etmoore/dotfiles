@@ -244,6 +244,11 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
+" set foldmethod to indent by default, then turn off. enable with zi
+set foldmethod=indent
+set foldlevel=1 " expand first level of indentation
+set nofoldenable
+
 " ALE Configuration
 " fix files automatically on save.
 let g:ale_fixers = {
