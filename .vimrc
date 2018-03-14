@@ -30,6 +30,7 @@ Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 Plug 'w0rp/ale'
+Plug 'flowtype/vim-flow'
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
 
