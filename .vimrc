@@ -264,6 +264,8 @@ let g:airline#extensions#ale#enabled = 1
 
 " Copy current file to clipboard
 nnoremap <leader>yf :let @*=expand("%")<cr>
+" Set clipboard as default register
+set clipboard=unnamedplus
 
 " Clipboard Configuration
 if has('nvim')
