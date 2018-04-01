@@ -141,7 +141,7 @@ autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb,*.vue,*.jsx :call <SID>StripTrai
 
 " The Silver Searcher
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags\ " Use ag over grep
 endif
 
 " bind K to grep word under cursor
