@@ -31,6 +31,14 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'elmcast/elm-vim'
 Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'romainl/Apprentice'
+
+" Autocomplete
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'steelsojka/deoplete-flow'
+
 " Color Schemes
 Plug 'flazz/vim-colorschemes'
 
@@ -171,6 +179,19 @@ function! QuickfixToggle()
     endif
 endfunction
 
+" Toggle loclist
+nnoremap <leader>l :call LoclistToggle()<cr>
+let g:loclist_is_open = 0
+function! LoclistToggle()
+    if g:loclist_is_open
+        lclose
+        let g:loclist_is_open = 0
+    else
+        lopen
+        let g:loclist_is_open = 1
+    endif
+endfunction
+
 " NERDTree Configuration
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeMinimalUI = 1
@@ -226,7 +247,8 @@ if (has("termguicolors"))
 endif
 set background=dark " has to come before the colorscheme
 let g:one_allow_italics = 1
-colorscheme onedark
+" colorscheme onedark
+colorscheme apprentice
 set cursorline
 
 " https://github.com/rakr/vim-one#tmux-support
@@ -255,10 +277,10 @@ set nofoldenable
 " fix files automatically on save.
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
-\  'python': ['autopep8'],
+\  'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'],
 \}
 " lint fix when saving a file
-" let g:ale_fix_on_save = 1 " was not working consistently…
+let g:ale_fix_on_save = 1 " was not working consistently…
 nnoremap <leader>af :ALEFix<cr>
 let g:airline#extensions#ale#enabled = 1
 
@@ -290,3 +312,15 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
+" Deoplete configuration
+" let g:deoplete#enable_at_startup = 1
+" Deoplete flow plugin configuration
+" function! StrTrim(txt)
+"   return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+" endfunction
+
+" let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
+
+" if g:flow_path != 'flow not found'
+"   let g:deoplete#sources#flow#flow_bin = g:flow_path
+" endif
