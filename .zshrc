@@ -60,7 +60,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="$PATH:/usr/local/bin:/usr/local/heroku/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3@global/bin:/Users/evanmoore/.rvm/rubies/ruby-2.1.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evanmoore/.rvm/bin"
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3@global/bin:/Users/evanmoore/.rvm/rubies/ruby-2.1.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evanmoore/.rvm/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="$HOME/bin:$PATH"
