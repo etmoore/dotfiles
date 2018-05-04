@@ -212,7 +212,7 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 :nmap <silent> <leader>d <Plug>DashSearch
 
 " Airline configuration
-let g:airline_theme = "onedark"
+let g:airline_theme = "angr"
 " let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete
@@ -277,10 +277,9 @@ set nofoldenable
 " fix files automatically on save.
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
-\  'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'],
 \}
 " lint fix when saving a file
-let g:ale_fix_on_save = 1 " was not working consistently…
+" let g:ale_fix_on_save = 1 " was not working consistently…
 nnoremap <leader>af :ALEFix<cr>
 let g:airline#extensions#ale#enabled = 1
 
