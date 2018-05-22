@@ -32,6 +32,7 @@ Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
+Plug 'Yggdroot/indentLine'
 
 " Autocomplete
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -53,6 +54,9 @@ nnoremap <Leader>sp :echo @%<CR>
 " use leader + w to save a file, leader + q to quit
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+
+" use leader + i to toggle indentation lines
+nnoremap <Leader>i :IndentLinesToggle<CR>
 
 " use leader + b to close the current buffer without closing the split
 nnoremap <Leader>b :bp\|bd #<CR>
