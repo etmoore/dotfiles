@@ -31,6 +31,7 @@ Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " Autocomplete
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
