@@ -1,4 +1,4 @@
-# Configuring Remote Copy and Paste Over SSH
+# How To Configure Remote Copy and Paste Over SSH
 
 source for most of these instructions: https://gist.github.com/burke/5960455
 
