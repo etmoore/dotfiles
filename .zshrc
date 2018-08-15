@@ -89,13 +89,14 @@ export PATH="$HOME/bin:$PATH"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias sudo='sudo '
-alias glog="git log --oneline --decorate --color --graph"
 alias c="clear"
 alias e="exit"
 
-alias v="nvim"
-alias vim="nvim"
+alias glog='git log --oneline --decorate --color --graph'
+alias gdm='git diff `git merge-base master HEAD`'
+
+alias v='nvim'
+alias vim='nvim'
 
 # alias update="brew update && brew upgrade && npm update -g && gem update"
 # alias cleanup="brew cleanup && gem cleanup"
@@ -122,8 +123,8 @@ alias vs='vagrant ssh'
 
 alias tree='tree -I "node_modules"'
 
-alias vz="vim ~/.zshrc"
-alias sz="source ~/.zshrc"
+alias vz='vim ~/.zshrc'
+alias sz='source ~/.zshrc'
 
 
 # The next line updates PATH for the Google Cloud SDK.
