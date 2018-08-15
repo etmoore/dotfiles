@@ -90,7 +90,6 @@ export PATH="$HOME/bin:$PATH"
 #
 # Example aliases
 alias c="clear"
-alias e="exit"
 
 alias glog='git log --oneline --decorate --color --graph'
 alias gdm='git diff `git merge-base master HEAD`'
