@@ -149,13 +149,16 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb,*.vue,*.jsx :call <SID>StripTrailingWhitespaces()
 
-" The Silver Searcher
+" The Silver Searcher - use ag over grep
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags*\ " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags*\ " must have trailing space here
 endif
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
+" nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
+
+" bind K to search for word under cursor using fzf Ag command
+nnoremap K :Ag <c-r><c-w><CR>
 
 " polyglot configuration
 let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
@@ -241,6 +244,27 @@ nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
 " search for current word under cursor with :Tags fzf command
 nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+" start in a tmux split pane
+let g:fzf_prefer_tmux = 1
 
 " COLOR Configuration
 set t_Co=256
