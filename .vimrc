@@ -306,6 +306,9 @@ let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
 " fzf config
+" start in a tmux split pane
+" let g:fzf_prefer_tmux = 1 " buggy
+
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
