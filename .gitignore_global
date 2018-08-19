@@ -50,7 +50,6 @@ __pycache__/
 
 # Vim #
 ##########
-tags
 tags*
 *session.vim
 
