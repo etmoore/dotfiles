@@ -33,14 +33,6 @@ Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'Vimjas/vim-python-pep8-indent'
 
-" Autocomplete
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" Plug 'steelsojka/deoplete-flow'
-
-" Color Schemes
-Plug 'flazz/vim-colorschemes'
-
 call plug#end()
 
 filetype plugin indent on
@@ -65,7 +57,7 @@ nnoremap <leader>p <C-^>
 
 set autoindent smartindent
 set ttyfast
-set lazyredraw
+" set lazyredraw
 set autoread
 " reload all files from disk (useful after checking out a different branch)
 nnoremap <Leader>e :checktime<CR>
@@ -151,14 +143,17 @@ autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb,*.vue,*.jsx :call <SID>StripTrai
 
 " The Silver Searcher - use ag over grep
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags*\ " must have trailing space here
+  set grepprg=ag\ --nogroup\ --nocolor\ " must have trailing space here
 endif
 
-" bind K to grep word under cursor
-" nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
-
 " bind K to search for word under cursor using fzf Ag command
-nnoremap K :Ag <c-r><c-w><CR>
+" nnoremap K :Ag <c-r><c-w><CR>
+
+" bind K to grep word under cursor using grepprg
+nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
+
+" bind leader a to start an Ag search with fzf
+nnoremap <Leader>a :Ag 
 
 " polyglot configuration
 let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
@@ -199,6 +194,8 @@ endfunction
 
 " NERDTree Configuration
 nmap <leader>n :NERDTreeToggle<cr>
+nmap <leader>f :NERDTreeFind<cr>
+
 let NERDTreeMinimalUI = 1
 " let NERDTreeQuitOnOpen = 1 " Close nerdtree when it opens a file
 let NERDTreeAutoDeleteBuffer = 1 "Automatically delete the buffer of the file you just deleted with NerdTree
@@ -236,35 +233,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="context"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
-" fzf config
-nnoremap <C-p> :Files<CR>
-nnoremap <leader>t :BTags<CR>
-nnoremap <leader>T :Tags<CR>
-nnoremap <leader>o :Buffers<CR>
-nnoremap <leader>/ :BLines<CR>
-" search for current word under cursor with :Tags fzf command
-nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-" start in a tmux split pane
-let g:fzf_prefer_tmux = 1
 
 " COLOR Configuration
 set t_Co=256
@@ -337,15 +305,36 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
-" Deoplete configuration
-" let g:deoplete#enable_at_startup = 1
-" Deoplete flow plugin configuration
-" function! StrTrim(txt)
-"   return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-" endfunction
+" fzf config
+nnoremap <C-p> :Files<CR>
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>T :Tags<CR>
+nnoremap <leader>o :Buffers<CR>
+nnoremap <leader>/ :BLines<CR>
+" search for current word under cursor with :Tags fzf command
+nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
-" let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
-
-" if g:flow_path != 'flow not found'
-"   let g:deoplete#sources#flow#flow_bin = g:flow_path
-" endif
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': '20split enew' }
+" let g:fzf_layout = { 'down': '~50%' }
+" start in a tmux split pane
+let g:fzf_prefer_tmux = 1 " buggy
