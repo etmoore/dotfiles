@@ -153,18 +153,18 @@ endif
 nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
 
 " bind leader a to start an Ag search with fzf
-nnoremap <Leader>a :Ag 
+nnoremap <Leader>a :Ag <c-r><c-w><CR>
 
 " polyglot configuration
 let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
 
 " window resize
-map <Down> 2<c-w>+
-map <Up> 2<c-w>-
+noremap <Down> 2<c-w>+
+noremap <Up> 2<c-w>-
 
 " vertical resize
-map <Right> 2<c-w><
-map <Left> 2<c-w>>
+noremap <Right> 2<c-w><
+noremap <Left> 2<c-w>>
 
 " Toggle quickfix
 nnoremap <leader>c :call QuickfixToggle()<cr>
@@ -193,8 +193,8 @@ function! LoclistToggle()
 endfunction
 
 " NERDTree Configuration
-nmap <leader>n :NERDTreeToggle<cr>
-nmap <leader>f :NERDTreeFind<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>f :NERDTreeFind<cr>
 
 let NERDTreeMinimalUI = 1
 " let NERDTreeQuitOnOpen = 1 " Close nerdtree when it opens a file
@@ -205,13 +205,11 @@ let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Livedown markdown preview
-nmap gm :LivedownToggle<CR>
+nnoremap gm :LivedownToggle<CR>
 
 " leader <CR> changes inside brackets, automatically setting new lines and indenting
 nnoremap <leader><CR> F{ci{<CR><ESC>O
 
-" search in Dash
-:nmap <silent> <leader>d <Plug>DashSearch
 
 " Airline configuration
 let g:airline_theme = "angr"
@@ -259,7 +257,7 @@ endif
 
 if has('nvim')
   " Hack to get C-h working in NeoVim
-  nmap <BS> <C-W>h
+  nnoremap <BS> <C-W>h
 endif
 
 " set foldmethod to indent by default, then turn off. enable with zi
