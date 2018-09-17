@@ -143,7 +143,7 @@ autocmd BufWritePre *.js,*.py,*.html,*.css,*.rb,*.vue,*.jsx :call <SID>StripTrai
 
 " The Silver Searcher - use ag over grep
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ " must have trailing space here
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags\ " must have trailing space here
 endif
 
 " bind K to search for word under cursor using fzf Ag command
