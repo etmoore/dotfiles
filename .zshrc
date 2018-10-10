@@ -97,6 +97,9 @@ alias gdm='git diff `git merge-base master HEAD`'
 alias v='nvim'
 alias vim='nvim'
 
+# open all files in a branch that were modified
+alias vmod = 'v `git diff --name-only HEAD $(git merge-base HEAD master)`'
+
 # alias update="brew update && brew upgrade && npm update -g && gem update"
 # alias cleanup="brew cleanup && gem cleanup"
 # alias venv=". venv/bin/activate"
