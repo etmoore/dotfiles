@@ -55,6 +55,7 @@ nnoremap <Leader>b :bp\|bd #<CR>
 " use leader + p to open previous buffer
 nnoremap <leader>p <C-^>
 
+set smartcase
 set autoindent smartindent
 set ttyfast
 " set lazyredraw
