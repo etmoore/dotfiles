@@ -311,6 +311,7 @@ let g:python3_host_prog  = '/usr/local/bin/python3'
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
+nnoremap <leader>L :Lines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
 " search for current word under cursor with :Tags fzf command
@@ -359,13 +360,18 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+" normal mode
+nnoremap <leader><tab> <plug>(fzf-maps-n)
+" visual mode
+xnoremap <leader><tab> <plug>(fzf-maps-x)
+" operator pending mode
+onoremap <leader><tab> <plug>(fzf-maps-o)
+" insert mode
+inoremap <leader><tab> <plug>(fzf-maps-i)
 
 " Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+inoremap <c-x><c-k> <plug>(fzf-complete-word)
+inoremap <c-x><c-f> <plug>(fzf-complete-path)
+inoremap <c-x><c-j> <plug>(fzf-complete-file-ag)
+inoremap <c-x><c-l> <plug>(fzf-complete-line)
 
