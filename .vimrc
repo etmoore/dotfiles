@@ -155,6 +155,8 @@ nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
 
 " bind leader a to start an Ag search with fzf
 nnoremap <Leader>a :Ag <c-r><c-w><CR>
+" bind leader r to start an Rg search with fzf
+nnoremap <Leader>r :Rg <c-r><c-w><CR>?
 
 " polyglot configuration
 let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
@@ -354,7 +356,7 @@ command! -bang -nargs=* Ag
 " Do the same with Rg
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --colors "match:fg:0,128,255" --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -375,3 +377,4 @@ inoremap <c-x><c-f> <plug>(fzf-complete-path)
 inoremap <c-x><c-j> <plug>(fzf-complete-file-ag)
 inoremap <c-x><c-l> <plug>(fzf-complete-line)
 
+nnoremap <leader>gd :Gdiff master<CR>
