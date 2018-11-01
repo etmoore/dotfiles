@@ -99,6 +99,8 @@ alias vim='nvim'
 
 # open all files in a branch that were modified and committed
 alias vmod='vim `git diff --name-only HEAD $(git merge-base HEAD master)`'
+# open files that are dirty
+alias vdirt="vim $(git status --porcelain | awk '{print $2}')"
 
 # alias update="brew update && brew upgrade && npm update -g && gem update"
 # alias cleanup="brew cleanup && gem cleanup"
