@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
@@ -14,17 +13,13 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/matchit'
 Plug 'ervandew/supertab'
-Plug 'shime/vim-livedown'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'rizzatti/dash.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow'
@@ -45,9 +40,6 @@ nnoremap <Leader>sp :echo @%<CR>
 " use leader + w to save a file, leader + q to quit
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
-
-" use leader + i to toggle indentation lines
-nnoremap <Leader>i :IndentLinesToggle<CR>
 
 " use leader + b to close the current buffer without closing the split
 nnoremap <Leader>b :bp\|bd #<CR>
@@ -306,10 +298,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
-" fzf config
-" start in a tmux split pane
-" let g:fzf_prefer_tmux = 1 " buggy
-
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
@@ -360,16 +348,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-
-" Mapping selecting mappings
-" normal mode
-nnoremap <leader><tab> <plug>(fzf-maps-n)
-" visual mode
-xnoremap <leader><tab> <plug>(fzf-maps-x)
-" operator pending mode
-onoremap <leader><tab> <plug>(fzf-maps-o)
-" insert mode
-inoremap <leader><tab> <plug>(fzf-maps-i)
 
 " Insert mode completion
 inoremap <c-x><c-k> <plug>(fzf-complete-word)
