@@ -264,9 +264,10 @@ set nofoldenable
 " fix files automatically on save.
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
+\  'php': ['php_cs_fixer']
 \}
 " lint fix when saving a file
-" let g:ale_fix_on_save = 1 " was not working consistently…
+let g:ale_fix_on_save = 1 " was not working consistently…
 nnoremap <leader>af :ALEFix<cr>
 let g:airline#extensions#ale#enabled = 1
 
