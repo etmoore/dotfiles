@@ -255,6 +255,11 @@ if has('nvim')
   nnoremap <BS> <C-W>h
 endif
 
+if has('nvim')
+    " preview effects of substitute commmands
+    set inccommand=split
+endif
+
 " set foldmethod to indent by default, then turn off. enable with zi
 set foldmethod=indent
 set foldlevel=1 " expand first level of indentation
