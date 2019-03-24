@@ -210,10 +210,11 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 let g:airline_theme = "angr"
 " let g:airline#extensions#tabline#enabled = 1
 
-" Spellchecking and autocomplete
+" Spellchecking and autocomplete, and show all characters
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 autocmd BufRead,BufNewFile *.md setlocal wrap
+autocmd BufRead,BufNewFile *.md setlocal conceallevel=0
 
 "https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
 autocmd Filetype gitcommit setlocal spell textwidth=72
