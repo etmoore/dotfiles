@@ -209,7 +209,7 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 let g:airline_theme = "angr"
 " let g:airline#extensions#tabline#enabled = 1
 
-" Spellchecking and autocomplete
+" Spellchecking and autocomplete, and show all characters
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 autocmd BufRead,BufNewFile *.md setlocal wrap
