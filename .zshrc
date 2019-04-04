@@ -131,6 +131,15 @@ alias vz='vim ~/.zshrc'
 alias sz='source ~/.zshrc'
 
 
+# convenience functions for running nws tests
+function ntest() {
+    docker-compose exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' web bin/phpunit --debug $1
+}
+function ntestf() {
+    docker-compose exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' web bin/phpunit --debug $1 --filter $2
+}
+
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
 
