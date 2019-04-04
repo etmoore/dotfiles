@@ -12,7 +12,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/matchit'
-Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bronson/vim-trailing-whitespace'
@@ -27,6 +26,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 call plug#end()
 
@@ -362,3 +362,18 @@ inoremap <c-x><c-j> <plug>(fzf-complete-file-ag)
 inoremap <c-x><c-l> <plug>(fzf-complete-line)
 
 nnoremap <leader>gd :Gdiff master<CR>
+" Coq vim configuration
+" use <tab> for trigger completion and navigate to next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+" Use <Tab> and <S-Tab> for navigate completion list:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
