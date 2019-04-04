@@ -109,9 +109,8 @@ set laststatus=2    " Always display the status line
 set autowrite       " Automatically :write
 set showcmd         " display incomplete commands
 
-set nohlsearch      " turn off search term highlighting
-" toggle search term highlighting
-nnoremap <leader>h :set hlsearch!<cr>
+" disable search highlighting until the next search or N is performed
+nnoremap <leader>h :nohlsearch<cr>
 
 " Tab completion like zsh with menu of options
 set wildmenu
