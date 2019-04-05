@@ -133,10 +133,10 @@ alias sz='source ~/.zshrc'
 
 # convenience functions for running nws tests
 function ntest() {
-    docker-compose exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' web bin/phpunit --debug $1
+    docker exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' evanm-nowait-server bin/phpunit --debug $1
 }
 function ntestf() {
-    docker-compose exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' web bin/phpunit --debug $1 --filter $2
+    docker exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' evanm-nowait-server bin/phpunit --debug $1 --filter $2
 }
 
 
