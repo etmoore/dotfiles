@@ -147,3 +147,7 @@ if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/
 if [ -f '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+eval "$(rbenv init -)"
