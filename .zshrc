@@ -130,16 +130,6 @@ alias tree='tree -I "node_modules"'
 alias vz='vim ~/.zshrc'
 alias sz='source ~/.zshrc'
 
-
-# convenience functions for running nws tests
-function ntest() {
-    docker-compose exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' web bin/phpunit --debug $1
-}
-function ntestf() {
-    docker-compose exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' web bin/phpunit --debug $1 --filter $2
-}
-
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -151,3 +141,20 @@ if [ -f '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc' ]; then source '/
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 eval "$(rbenv init -)"
+
+# ###########################################
+# convenience functions for running nws tests
+# ###########################################
+
+# run tests against file
+function ntest() {
+    docker exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' evanm-nowait-server bin/phpunit --debug $1
+}
+# filter specific test in file
+function ntestf() {
+    docker exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' evanm-nowait-server bin/phpunit --debug $1 --filter $2
+}
+# run tests with migration
+function ntestm() {
+    docker exec -it -e 'VERBOSE=true' evanm-nowait-server bin/phpunit --debug $1
+}
