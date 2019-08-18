@@ -1,7 +1,6 @@
 set nocompatible              " be iMproved, required
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -11,10 +10,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tmhedberg/matchit'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
@@ -25,9 +22,7 @@ Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-
 call plug#end()
 
 filetype plugin indent on
