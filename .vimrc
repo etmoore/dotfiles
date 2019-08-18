@@ -247,12 +247,11 @@ endif
 if has('nvim')
   " Hack to get C-h working in NeoVim
   nnoremap <BS> <C-W>h
+
+  " preview effects of substitute commmands
+  set inccommand=split
 endif
 
-if has('nvim')
-    " preview effects of substitute commmands
-    set inccommand=split
-endif
 
 " set foldmethod to indent by default, then turn off. enable with zi
 set foldmethod=indent
@@ -377,7 +376,7 @@ autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
 autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
 
 
-" Coq vim configuration
+" COC vim configuration
 " use <tab> for trigger completion and navigate to next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
