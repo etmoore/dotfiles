@@ -23,6 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 filetype plugin indent on
@@ -395,4 +396,3 @@ let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_
 " Use <Tab> and <S-Tab> for navigate completion list:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
