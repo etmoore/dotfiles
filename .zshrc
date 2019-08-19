@@ -142,19 +142,20 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 eval "$(rbenv init -)"
 
-# ###########################################
-# convenience functions for running nws tests
-# ###########################################
+# if local helpers file is present, load
+[ -f zsh-helpers ] && source zsh-helpers
 
-# run tests against file
-function ntest() {
-    docker exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' evanm-nowait-server bin/phpunit --debug $1
-}
-# filter specific test in file
-function ntestf() {
-    docker exec -it -e 'VERBOSE=true' -e 'TEARDOWN=false' evanm-nowait-server bin/phpunit --debug $1 --filter $2
-}
-# run tests with migration
-function ntestm() {
-    docker exec -it -e 'VERBOSE=true' evanm-nowait-server bin/phpunit --debug $1
+# set neovim as default editor
+export EDITOR="nvim"
+
+###############
+# FZF functions
+###############
+# fb - checkout git branch (including remote branches), sorted by most recent commit, limit 50 last branches
+fb() {
+  local branches branch
+  branches=$(git for-each-ref --count=50 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
