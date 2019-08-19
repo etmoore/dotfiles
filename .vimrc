@@ -301,14 +301,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
-nnoremap <C-p> :Files<CR>
-nnoremap <leader>t :BTags<CR>
-nnoremap <leader>T :Tags<CR>
-nnoremap <leader>L :Lines<CR>
-nnoremap <leader>o :Buffers<CR>
-nnoremap <leader>/ :BLines<CR>
-" search for current word under cursor with :Tags fzf command
-nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -352,13 +344,18 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" Insert mode completion
-inoremap <c-x><c-k> <plug>(fzf-complete-word)
-inoremap <c-x><c-f> <plug>(fzf-complete-path)
-inoremap <c-x><c-j> <plug>(fzf-complete-file-ag)
-inoremap <c-x><c-l> <plug>(fzf-complete-line)
+"fzf search hotkeys
+nnoremap <C-p> :Files<CR>
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>T :Tags<CR>
+nnoremap <leader>L :Lines<CR>
+nnoremap <leader>o :History<CR>
+nnoremap <leader>/ :BLines<CR>
+nnoremap <leader>* :Rg <C-r><C-w><CR>
 
 nnoremap <leader>gd :Gdiff master<CR>
+" search for current word under cursor with :Tags fzf command
+nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
 
 
 " QUICKFIX splits
@@ -410,7 +407,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
 
 " Echodoc Config
 " set cmdheight=2
