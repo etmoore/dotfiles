@@ -186,6 +186,7 @@ endfunction
 " NERDTree Configuration
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>f :NERDTreeFind<cr>
+let NERDTreeShowHidden=1 "show hidden files by default
 
 let NERDTreeMinimalUI = 1
 " let NERDTreeQuitOnOpen = 1 " Close nerdtree when it opens a file
