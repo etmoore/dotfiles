@@ -264,12 +264,13 @@ set nofoldenable
 " ALE Configuration
 " fix files automatically on save.
 let g:ale_fixers = {
+\  '*': ['remove_trailing_lines', 'trim_whitespace'],
 \  'javascript': ['eslint'],
 \  'php': ['php_cs_fixer']
 \}
 " lint fix when saving a file
-let g:ale_fix_on_save = 1 " was not working consistently…
 nnoremap <leader>af :ALEFix<cr>
+nnoremap <leader>at :ALEToggle<cr>
 let g:airline#extensions#ale#enabled = 1
 
 " Copy current file to clipboard
