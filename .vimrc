@@ -24,6 +24,7 @@ Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mattn/emmet-vim'
+Plug 'Shougo/echodoc'
 call plug#end()
 
 filetype plugin indent on
@@ -407,3 +408,9 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+
+" Echodoc Config
+" set cmdheight=2
+set noshowmode
+let g:echodoc_enable_at_startup = 1
