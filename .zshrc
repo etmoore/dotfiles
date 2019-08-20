@@ -151,10 +151,11 @@ export EDITOR="nvim"
 ###############
 # FZF functions
 ###############
-# fb - checkout git branch (including remote branches), sorted by most recent commit, limit 50 last branches
+# source: https://github.com/junegunn/fzf/wiki/examples
+# fb - checkout git branch (including remote branches), sorted by committerdate
 fb() {
   local branches branch
-  branches=$(git for-each-ref --count=50 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branches=$(git branch --all --sort=-committerdate | grep -v HEAD) &&
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
