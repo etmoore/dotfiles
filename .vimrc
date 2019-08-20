@@ -349,7 +349,7 @@ nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
 nnoremap <leader>L :Lines<CR>
-nnoremap <leader>o :History<CR>
+nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
 nnoremap <leader>* :Rg <C-r><C-w><CR>
 
