@@ -145,7 +145,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(rbenv init -)"
 
 # if local helpers file is present, load
-[ -f zsh-helpers ] && source zsh-helpers
+[ -f ~/zsh-helpers ] && source ~/zsh-helpers
 
 # set neovim as default editor
 export EDITOR="nvim"
