@@ -129,6 +129,8 @@ alias tree='tree -I "node_modules"'
 
 alias vz='vim ~/.zshrc'
 alias sz='source ~/.zshrc'
+alias vt='vim ~/.tmux.conf'
+alias vv='vim ~/.vimrc'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
