@@ -17,14 +17,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mattn/emmet-vim'
-Plug 'Shougo/echodoc'
 call plug#end()
 
 filetype plugin indent on
@@ -261,18 +259,6 @@ set foldmethod=indent
 set foldlevel=1 " expand first level of indentation
 set nofoldenable
 
-" ALE Configuration
-" fix files automatically on save.
-let g:ale_fixers = {
-\  '*': ['remove_trailing_lines', 'trim_whitespace'],
-\  'javascript': ['eslint'],
-\  'php': ['php_cs_fixer']
-\}
-" lint fix when saving a file
-nnoremap <leader>af :ALEFix<cr>
-nnoremap <leader>at :ALEToggle<cr>
-let g:airline#extensions#ale#enabled = 1
-
 " Copy current file to clipboard
 nnoremap <leader>yf :let @*=expand("%")<cr>
 " Set clipboard as default register
@@ -407,8 +393,3 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Echodoc Config
-" set cmdheight=2
-set noshowmode
-let g:echodoc_enable_at_startup = 1
