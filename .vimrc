@@ -248,8 +248,9 @@ else
 endif
 
 if has('nvim')
-  " Hack to get C-h working in NeoVim
-  nnoremap <BS> <C-W>h
+  " Hack to get C-h working in NeoVim NOTE: (evanm) disable September 20, 2019
+  " delete?
+  " nnoremap <BS> <C-W>h
 
   " preview effects of substitute commmands
   set inccommand=split
@@ -385,7 +386,7 @@ let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" COC Use K to show documentation in preview window
+" COC Use leader + d to show documentation in preview window
 nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
