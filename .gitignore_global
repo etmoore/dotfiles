@@ -52,6 +52,7 @@ __pycache__/
 tags
 tags*
 *session.vim
+.vim/
 
 
 # Personal Files #
