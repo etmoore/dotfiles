@@ -203,6 +203,8 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 
 " Airline configuration
 let g:airline_theme = "angr"
+let g:airline#extensions#branch#enabled = 0
+
 " let g:airline#extensions#tabline#enabled = 1
 
 " Spellchecking and autocomplete, and show all characters
