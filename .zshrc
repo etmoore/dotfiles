@@ -62,8 +62,9 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3@global/bin:/Users/evanmoore/.rvm/rubies/ruby-2.1.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evanmoore/.rvm/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$PATH:$HOME/.npm-prefix/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -140,7 +141,6 @@ if [ -f '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc' ]; then source '/
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 eval "$(rbenv init -)"
 
