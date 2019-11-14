@@ -24,6 +24,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mattn/emmet-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 filetype plugin indent on
