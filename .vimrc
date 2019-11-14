@@ -289,8 +289,9 @@ endif
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-let g:python_host_prog  = '/usr/local/bin/python'
-let g:python3_host_prog  = '/usr/local/bin/python3'
+" set python executable paths (for Coc)
+let g:python_host_prog  = '/nail/home/evanm/virtualenvs/py2neovim/bin/python'
+let g:python3_host_prog  = '/nail/home/evanm/virtualenvs/py3neovim/bin/python'
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
