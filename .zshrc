@@ -133,6 +133,8 @@ alias sz='source ~/.zshrc'
 alias vt='vim ~/.tmux.conf'
 alias vv='vim ~/.vimrc'
 
+alias ss='src search'
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
 
