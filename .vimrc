@@ -12,8 +12,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'bling/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
@@ -21,7 +21,7 @@ Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'jiangmiao/auto-pairs'
@@ -135,17 +135,6 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags\ " must have trailing space here
 endif
 
-" bind K to search for word under cursor using fzf Ag command
-" nnoremap K :Ag <c-r><c-w><CR>
-
-" bind K to grep word under cursor using grepprg
-nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
-
-" bind leader a to start an Ag search with fzf
-nnoremap <Leader>a :Ag <c-r><c-w><CR>
-" bind leader r to start an Rg search with fzf
-nnoremap <Leader>r :Rg <c-r><c-w><CR>?
-
 " polyglot configuration
 let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
 
@@ -195,17 +184,24 @@ let NERDTreeAutoDeleteBuffer = 1 "Automatically delete the buffer of the file yo
 " Allow vim-tmux-navigator to jump out of nerdtree pane
 let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
-
-" Livedown markdown preview
-nnoremap gm :LivedownToggle<CR>
+" don't show in nerdtree
+let NERDTreeIgnore = ['\.pyc$']
 
 " leader <CR> changes inside brackets, automatically setting new lines and indenting
 nnoremap <leader><CR> F{ci{<CR><ESC>O
 
 
 " Airline configuration
-let g:airline_theme = "angr"
-let g:airline#extensions#branch#enabled = 0
+" let g:airline_theme = "angr"
+" let g:airline#extensions#branch#enabled = 0
+" let g:airline#extensions#coc#enabled = 1
+
+" Statusline Configuration
+set statusline=%f         " Path to the file
+set statusline+=%=        " Switch to the right side
+set statusline+=%l        " Current line 
+set statusline+=/         " Separator
+set statusline+=%L        " Total lines
 
 " let g:airline#extensions#tabline#enabled = 1
 
@@ -217,13 +213,6 @@ autocmd BufRead,BufNewFile *.md setlocal wrap
 "https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
 autocmd Filetype gitcommit setlocal spell textwidth=72
 set complete+=kspell
-
-" Ultisnips trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-b>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="context"
-let g:UltiSnipsSnippetsDir="~/.vim/snippets/"
 
 
 " COLOR Configuration
@@ -237,9 +226,16 @@ let g:one_allow_italics = 1
 colorscheme apprentice
 set cursorline
 
+
 " https://github.com/rakr/vim-one#tmux-support
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
+
+
+" gitgutter config
+" set gitgutter base to master, making it easy to see what has changed in the current branch
+" TODO: turn this into a function that uses merge-base with master, instead of master
+nnoremap <leader>gm :let g:gitgutter_diff_base = 'master'<cr> :e<cr>
 
 " change cursor shape in insert mode
 if has('nvim')
@@ -292,6 +288,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " set python executable paths (for Coc)
 let g:python_host_prog  = '/nail/home/evanm/virtualenvs/py2neovim/bin/python'
 let g:python3_host_prog  = '/nail/home/evanm/virtualenvs/py3neovim/bin/python'
+" set node.js host path
+let g:node_host_prog='/nail/home/evanm/.npm-prefix/lib/node_modules/neovim/bin/cli.js'
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -340,7 +338,7 @@ command! -bang -nargs=* Rg
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
-nnoremap <leader>L :Lines<CR>
+nnoremap <leader>L :BLines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :Rg 
 nnoremap <leader>* :Rg <C-r><C-w><CR>

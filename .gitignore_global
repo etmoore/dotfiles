@@ -23,7 +23,7 @@
 # Logs and databases #
 ######################
 *.log
-*.sqlite
+*.sqlite*
 
 # OS generated files #
 ######################
@@ -45,6 +45,7 @@ bower_components/*
 *.egg-info
 venv/
 __pycache__/
+*.pyc
 
 
 # Vim #

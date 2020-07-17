@@ -8,3 +8,5 @@
 	default = current
 [diff]
 	tool = vimdiff
+[url "git@github.com:"]
+	insteadOf = https://github.com/

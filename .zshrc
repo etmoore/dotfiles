@@ -151,6 +151,14 @@ eval "$(rbenv init -)"
 
 # set neovim as default editor
 export EDITOR="nvim"
+# edit current command in vim
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# n (node version manager) config
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
 
 ###############
 # FZF functions
