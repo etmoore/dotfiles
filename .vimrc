@@ -196,12 +196,6 @@ nnoremap <leader><CR> F{ci{<CR><ESC>O
 " let g:airline#extensions#branch#enabled = 0
 " let g:airline#extensions#coc#enabled = 1
 
-" Statusline Configuration
-set statusline=%f         " Path to the file
-set statusline+=%=        " Switch to the right side
-set statusline+=%l        " Current line 
-set statusline+=/         " Separator
-set statusline+=%L        " Total lines
 
 " let g:airline#extensions#tabline#enabled = 1
 
@@ -345,7 +339,7 @@ nnoremap <leader>* :Rg <C-r><C-w><CR>
 
 nnoremap <leader>gd :Gdiff master<CR>
 " search for current word under cursor with :Tags fzf command
-nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
+" nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
 
 
 " QUICKFIX splits
@@ -405,7 +399,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " COC Use leader + d to show documentation in preview window
 nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -413,3 +406,33 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" show function signature help if available when entering insert mode
+autocmd InsertEnter * call CocActionAsync('showSignatureHelp')
+
+" open CocList diagnostics
+nnoremap <leader>k :CocList --normal diagnostics<CR>
+
+" generate coc status for statusline
+function! StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    let msgs = []
+    if get(info, 'error', 0)
+        call add(msgs, 'E' . info['error'])
+    endif
+    if get(info, 'warning', 0)
+        call add(msgs, 'W' . info['warning'])
+    endif
+    return join(msgs, ' ')
+endfunction
+
+
+" Statusline Configuration
+set statusline=%f         " Path to the file
+set statusline+=%=        " Switch to the right side
+set statusline+=%{StatusDiagnostic()}
+" set statusline+=%=        " Switch to the right side
+" set statusline+=%l        " Current line 
+" set statusline+=/         " Separator
+" set statusline+=%L        " Total lines
