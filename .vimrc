@@ -2,7 +2,7 @@ set nocompatible              " be iMproved, required
 
 call plug#begin('~/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -314,29 +314,17 @@ let g:fzf_action = {
 "
 "   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-
-" Do the same with Rg
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --colors "match:fg:0,128,255" --smart-case '.(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+let g:fzf_preview_window = 'right:30%'
 
 "fzf search hotkeys
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-[> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
 nnoremap <leader>L :BLines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :Rg 
 nnoremap <leader>* :Rg <C-r><C-w><CR>
-
 nnoremap <leader>gd :Gdiff master<CR>
 " search for current word under cursor with :Tags fzf command
 " nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
