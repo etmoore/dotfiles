@@ -299,7 +299,7 @@ let g:fzf_preview_window = 'right:30%'
 
 "fzf search hotkeys
 nnoremap <C-p> :GFiles<CR>
-nnoremap <C-[> :Files<CR>
+nnoremap <C-f> :Files<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
 nnoremap <leader>L :BLines<CR>
