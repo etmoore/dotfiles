@@ -12,8 +12,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'bling/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
@@ -47,9 +45,8 @@ nnoremap <leader>p <C-^>
 set smartcase
 set autoindent smartindent
 set ttyfast
-" set lazyredraw
-set autoread
 " reload all files from disk (useful after checking out a different branch)
+set autoread
 nnoremap <Leader>e :checktime<CR>
 
 " incremental search and ignore case
@@ -135,9 +132,6 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tags\ " must have trailing space here
 endif
 
-" polyglot configuration
-let g:polyglot_disabled = ['elm'] " let the vim-elm plugin handle this
-
 " window resize
 noremap <Down> 2<c-w>+
 noremap <Up> 2<c-w>-
@@ -191,14 +185,6 @@ let NERDTreeIgnore = ['\.pyc$']
 nnoremap <leader><CR> F{ci{<CR><ESC>O
 
 
-" Airline configuration
-" let g:airline_theme = "angr"
-" let g:airline#extensions#branch#enabled = 0
-" let g:airline#extensions#coc#enabled = 1
-
-
-" let g:airline#extensions#tabline#enabled = 1
-
 " Spellchecking and autocomplete, and show all characters
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
@@ -215,13 +201,12 @@ if (has("termguicolors"))
   set termguicolors
 endif
 set background=dark " has to come before the colorscheme
-let g:one_allow_italics = 1
-" colorscheme onedark
 colorscheme apprentice
 set cursorline
 
 
 " https://github.com/rakr/vim-one#tmux-support
+" TODO confirm if this is needed anymore
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
 
@@ -240,10 +225,6 @@ else
 endif
 
 if has('nvim')
-  " Hack to get C-h working in NeoVim NOTE: (evanm) disable September 20, 2019
-  " delete?
-  " nnoremap <BS> <C-W>h
-
   " preview effects of substitute commmands
   set inccommand=split
 endif
@@ -377,10 +358,6 @@ set updatetime=300
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-" COC airline integration
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-
 " COC Use <Tab> and <S-Tab> for navigate completion list:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -420,7 +397,7 @@ endfunction
 set statusline=%f         " Path to the file
 set statusline+=%=        " Switch to the right side
 set statusline+=%{StatusDiagnostic()}
-" set statusline+=%=        " Switch to the right side
-" set statusline+=%l        " Current line 
-" set statusline+=/         " Separator
-" set statusline+=%L        " Total lines
+set statusline+=%=        " Switch to the right side
+set statusline+=%l        " Current line
+set statusline+=/         " Separator
+set statusline+=%L        " Total lines
