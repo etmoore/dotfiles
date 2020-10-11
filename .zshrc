@@ -150,6 +150,7 @@ eval "$(rbenv init -)"
 [ -f ~/zsh-helpers ] && source ~/zsh-helpers
 
 # set neovim as default editor
+export VISUAL="nvim"
 export EDITOR="nvim"
 
 # edit command in EDITOR
