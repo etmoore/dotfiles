@@ -286,15 +286,23 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" Augmenting Ag command using fzf#vim#with_preview function
+" Augmenting Rg command using fzf#vim#with_preview function
 "   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
 "     * For syntax-highlighting, Ruby and any of the following tools are required:
 "       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
 "       - CodeRay: http://coderay.rubychan.de/
 "       - Rouge: https://github.com/jneen/rouge
 "
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
+"   :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Rg! - Start fzf in fullscreen and display the preview window above
+"   (<q-args>) position prevents escaping of input
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --colors "match:fg:0,128,255" --smart-case '.(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:30%')
+  \           : fzf#vim#with_preview('right:30%:hidden', '?'),
+  \   <bang>0)
+
 let g:fzf_preview_window = 'right:30%'
 
 "fzf search hotkeys
