@@ -18,6 +18,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'romainl/Apprentice'
+Plug 'arcticicestudio/nord-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
@@ -200,9 +201,13 @@ set t_Co=256
 if (has("termguicolors"))
   set termguicolors
 endif
-set background=dark " has to come before the colorscheme
-colorscheme apprentice
-set cursorline
+
+" all colorscheme configurations must be applied before colorscheme command
+set background=dark
+let g:nord_underline = 1
+let g:nord_uniform_diff_background = 1 " quieter difff colors
+colorscheme nord
+" set cursorline
 
 
 " https://github.com/rakr/vim-one#tmux-support
