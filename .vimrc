@@ -416,6 +416,6 @@ set statusline+=/         " Separator
 set statusline+=%L        " Total lines
 
 " Gutentags configuration
-" Don't generate tags for gitignored files 
+" Don't generate tags for gitignored files
 " https://github.com/universal-ctags/ctags/issues/218#issuecomment-377731658
 let g:gutentags_file_list_command = 'rg --files'
