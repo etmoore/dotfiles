@@ -385,6 +385,8 @@ autocmd InsertEnter * call CocActionAsync('showSignatureHelp')
 
 " open CocList diagnostics
 nnoremap <leader>k :CocList --normal diagnostics<CR>
+" open CocList
+nnoremap <leader>C :CocList<CR>
 
 " generate coc status for statusline
 function! StatusDiagnostic() abort
