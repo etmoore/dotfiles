@@ -204,7 +204,7 @@ set background=dark
 let g:nord_underline = 1
 let g:nord_uniform_diff_background = 1 " quieter difff colors
 colorscheme nord
-" set cursorline
+set cursorline
 
 
 " https://github.com/rakr/vim-one#tmux-support
