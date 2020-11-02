@@ -214,9 +214,9 @@ set t_8f=^[[38;2;%lu;%lu;%lum
 
 
 " gitgutter config
-" set gitgutter base to master, making it easy to see what has changed in the current branch
-" TODO: turn this into a function that uses merge-base with master, instead of master
-nnoremap <leader>gm :let g:gitgutter_diff_base = 'master'<cr> :e<cr>
+" set gitgutter base to merge-base w/ master, making it easy to see what has changed in the current branch
+let mergebase=trim(system('git merge-base @ master'))
+nnoremap <leader>gm :let g:gitgutter_diff_base=mergebase<cr> :e<cr>
 
 " change cursor shape in insert mode
 if has('nvim')
@@ -316,9 +316,7 @@ nnoremap <leader>L :BLines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :Rg 
 nnoremap <leader>* :Rg <C-r><C-w><CR>
-nnoremap <leader>gd :Gdiff master<CR>
-" search for current word under cursor with :Tags fzf command
-" nnoremap <leader>k :call fzf#vim#tags(expand('<cword>'))<CR>
+nnoremap <leader>gd :Gvdiffsplit @...master<CR>
 
 
 " QUICKFIX splits
