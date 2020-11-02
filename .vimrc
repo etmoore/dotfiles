@@ -14,16 +14,13 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'romainl/Apprentice'
 Plug 'arcticicestudio/nord-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 filetype plugin indent on
