@@ -21,6 +21,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'AndrewRadev/dsf.vim'
 call plug#end()
 
 filetype plugin indent on
