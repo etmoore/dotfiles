@@ -316,6 +316,9 @@ nnoremap <leader>L :BLines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :Rg 
 nnoremap <leader>* :Rg <C-r><C-w><CR>
+
+
+" Fugitive config
 nnoremap <leader>gd :Gvdiffsplit @...master<CR>
 
 
