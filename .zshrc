@@ -155,7 +155,7 @@ export EDITOR="nvim"
 
 # edit command in EDITOR
 autoload edit-command-line; zle -N edit-command-line
-bindkey "^E" edit-command-line
+bindkey "^V" edit-command-line
 
 # n (node version manager) config
 export N_PREFIX=$HOME/.n
