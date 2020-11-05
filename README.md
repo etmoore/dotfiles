@@ -6,7 +6,7 @@ Assumptions:
 * Mac local, Linux remote
 
 Note:  
-* On dev35, I'm using ports 2235 (copy) and 2236 (paste) to avoid potential conflicts on
+* I'm using ports 2235 (copy) and 2236 (paste) to avoid potential conflicts on
   shared dev boxes.
 
 ## Local (OS X) Side
