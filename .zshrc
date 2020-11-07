@@ -59,12 +59,18 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3/bin:/Users/evanmoore/.rvm/gems/ruby-2.1.3@global/bin:/Users/evanmoore/.rvm/rubies/ruby-2.1.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evanmoore/.rvm/bin"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="$HOME/bin:$PATH"
+################## User configuration ##########################
+# Add ruby to path
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+# Add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$PATH:$HOME/.npm-prefix/bin"
+
+# Let compilers find ruby. Brew install ruby told me to do this
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+# Let pkg-config find ruby. Brew install ruby told me to do this
+export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -122,10 +128,6 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 
-# vagrant aliases
-alias vus='vagrant up && vagrant ssh'
-alias vs='vagrant ssh'
-
 alias tree='tree -I "node_modules"'
 
 alias vz='vim ~/.zshrc'
@@ -135,16 +137,9 @@ alias vv='vim ~/.vimrc'
 
 alias ss='src search'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/evanmoore/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanmoore/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-eval "$(rbenv init -)"
 
 # if local helpers file is present, load
 [ -f ~/zsh-helpers ] && source ~/zsh-helpers
@@ -156,10 +151,6 @@ export EDITOR="nvim"
 # edit command in EDITOR
 autoload edit-command-line; zle -N edit-command-line
 bindkey "^V" edit-command-line
-
-# n (node version manager) config
-export N_PREFIX=$HOME/.n
-export PATH=$N_PREFIX/bin:$PATH
 
 ###############
 # FZF functions
