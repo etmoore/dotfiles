@@ -1,0 +1,33 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": [
+        "json",
+        "yaml",
+        "markdown"
+    ],
+    "python.pythonPath": "~/virtualenvs/py3neovim/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.formatting.blackPath": "~/virtualenvs/py3neovim/bin/black",
+    "python.formatting.autopep8Path": "~/virtualenvs/py3neovim/bin/autopep8",
+    "python.linting.flake8Path": "~/virtualenvs/py3neovim/bin/flake8",
+    "python.linting.pylintPath": "~/virtualenvs/py3neovim/bin/pylint",
+    "python.linting.mypyPath": "~/virtualenvs/py3neovim/bin/mypy",
+    "python.workspaceSymbols.enabled": false,
+    "python.jediPath": "~/virtualenvs/py3neovim/bin/jedi",
+    "python.analysis.disabled": [
+        "inherit-non-class"
+    ],
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Args": [
+        "--aggressive"
+    ],
+    "python.linting.pylintArgs": [
+        "--disable=E0401,C0301,C0330,W0511"
+    ],
+    "suggest.enablePreselect": true,
+    "suggest.enablePreview": true,
+    "javascript.validate.enable": false,
+    "tsserver.enableJavascript": false,
+    "eslint.autoFixOnSave": true
+}
