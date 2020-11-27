@@ -60,8 +60,15 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 ################## User configuration ##########################
+# if local helpers file is present, load
+[ -f ~/zsh-helpers ] && source ~/zsh-helpers
+
+
 # Add ruby to path
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+# Add n node package manager to path
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
 # Add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -143,9 +150,6 @@ alias pyt='pytest --capture=no --exitfirst --verbose'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# if local helpers file is present, load
-[ -f ~/zsh-helpers ] && source ~/zsh-helpers
 
 # set neovim as default editor
 export VISUAL="nvim"
