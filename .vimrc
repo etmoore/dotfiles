@@ -235,7 +235,7 @@ endif
 
 
 " set foldmethod to indent by default, then turn off. enable with zi
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=1 " expand first level of indentation
 set nofoldenable
 
