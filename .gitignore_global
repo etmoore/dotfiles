@@ -46,6 +46,7 @@ bower_components/*
 venv/
 __pycache__/
 *.pyc
+pyrightconfig.json
 
 
 # Vim #
