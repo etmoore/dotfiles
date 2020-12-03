@@ -317,7 +317,7 @@ nnoremap <leader>T :Tags<CR>
 nnoremap <leader>L :BLines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :Rg 
-nnoremap <leader>* :Rg <C-r><C-w><CR>
+nnoremap <leader>* :Rg -F "<C-r><C-w>"<CR>
 
 
 " Fugitive config
