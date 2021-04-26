@@ -71,6 +71,8 @@ export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
 # Add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# Add home /bin to path
+export PATH=$HOME/bin:$PATH
 
 # Let compilers find ruby. Brew install ruby told me to do this
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
