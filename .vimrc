@@ -267,10 +267,10 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " set python executable paths (for Coc)
-let g:python_host_prog  = '/nail/home/evanm/virtualenvs/py2neovim/bin/python'
-let g:python3_host_prog  = '/nail/home/evanm/virtualenvs/py3neovim/bin/python'
+let g:python_host_prog  = '~/virtualenvs/py2neovim/bin/python'
+let g:python3_host_prog  = '~/virtualenvs/py3neovim/bin/python'
 " set node.js host path
-let g:node_host_prog='/nail/home/evanm/.npm-prefix/lib/node_modules/neovim/bin/cli.js'
+let g:node_host_prog='~/.npm-prefix/lib/node_modules/neovim/bin/cli.js'
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
