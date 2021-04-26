@@ -166,12 +166,20 @@ bindkey "^V" edit-command-line
 ###############
 # source: https://github.com/junegunn/fzf/wiki/examples
 # fb - checkout git branch (including remote branches), sorted by committerdate
-fb() {
+fbr() {
   local branches branch
   branches=$(git branch --all --sort=-committerdate | grep -v HEAD) &&
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# checkout git branch
+fb() {
+  local branches branch
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
 # fco_preview - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
