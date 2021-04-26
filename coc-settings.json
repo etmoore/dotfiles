@@ -18,5 +18,6 @@
     "suggest.enablePreview": true,
     "javascript.validate.enable": false,
     "tsserver.enableJavascript": false,
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "flow.lazyMode": "ide"
 }
