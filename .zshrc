@@ -147,7 +147,7 @@ alias vv='vim ~/.vimrc'
 alias ss='src search'
 
 # exit on first failure and allow (i)pbd interaction
-alias pyt='pytest --capture=no --exitfirst --verbose'
+alias pyt='pytest --capture=no --exitfirst -vv'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
