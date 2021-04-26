@@ -239,8 +239,10 @@ set foldmethod=indent
 set foldlevel=1 " expand first level of indentation
 set nofoldenable
 
+" Copy current path to clipboard
+nnoremap <leader>yp :let @*=expand("%")<cr>
 " Copy current file to clipboard
-nnoremap <leader>yf :let @*=expand("%")<cr>
+nnoremap <leader>yf :let @*=expand("%:t")<cr>
 " Set clipboard as default register
 set clipboard=unnamedplus
 
