@@ -428,3 +428,27 @@ set statusline+=%L        " Total lines
 " Don't generate tags for gitignored files
 " https://github.com/universal-ctags/ctags/issues/218#issuecomment-377731658
 let g:gutentags_file_list_command = 'rg --files'
+
+" Copy Sourcegraph link to file + line number to clipboard
+nnoremap <leader>sl :call SourcegraphLink()<cr>
+function! SourcegraphLink()
+    " build the sourcegraph search string
+    let repo=trim(system('basename `git rev-parse --show-toplevel`')) " trim() removes newline char
+    let fileName=expand("%") " current file name (relative to cwd)
+    let searchString="repo:" . repo . " file:" . fileName
+
+    " build the jq 'filter' string that builds the url
+    " https://stedolan.github.io/jq/manual/#Stringinterpolation-\(foo)
+    let lineNumber=string(line("."))
+    let jqFilter='"\(.SourcegraphEndpoint)\(.Results[0].file.url)#L' . lineNumber . '"' " using string interpolation to build url
+
+    " get the sourcegraph url
+    " --raw-output prevents wrapping output in quotes
+    let url=system("src search -json '" . searchString . "' | jq --raw-output '" . jqFilter . "'")
+
+    " print url for visual confirmation, as msg to avoid 'Hit enter' prompt
+    echomsg url
+
+    " copy url to the clipboard
+    let @*=url
+endfunction
