@@ -1,19 +1,10 @@
 {
-    "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.mypyEnabled": true,
-    "python.formatting.blackPath": "~/virtualenvs/py3neovim/bin/black",
-    "python.formatting.autopep8Path": "~/virtualenvs/py3neovim/bin/autopep8",
-    "python.linting.flake8Path": "~/virtualenvs/py3neovim/bin/flake8",
-    "python.linting.pylintPath": "~/virtualenvs/py3neovim/bin/pylint",
-    "python.linting.mypyPath": "~/virtualenvs/py3neovim/bin/mypy",
     "python.formatting.provider": "black",
-    "python.formatting.autopep8Args": [
-        "--aggressive"
-    ],
-    "python.linting.pylintArgs": [
-        "--disable=E0401,C0301,C0330,W0511,C0114,C0115,C0116"
-    ],
+    "python.formatting.blackArgs": ["--fast"],
+    "coc.preferences.formatOnSaveFiletypes": [],
+    "coc.preferences.willSaveHandlerTimeout": 1000,
     "suggest.enablePreselect": true,
     "suggest.enablePreview": true,
     "javascript.validate.enable": false,

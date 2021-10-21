@@ -8,8 +8,8 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="muse"
 
 # Configure colors for tmux
-export TERM=xterm-256color
-[ -n "$TMUX" ] && export TERM=screen-256color
+# export TERM=xterm-256color
+# [ -n "$TMUX" ] && export TERM=screen-256color
 
 # Configure SSH passthrough so that tmux maintains access to keys
 if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
@@ -62,6 +62,9 @@ source $ZSH/oh-my-zsh.sh
 ################## User configuration ##########################
 # if local helpers file is present, load
 [ -f ~/zsh-helpers ] && source ~/zsh-helpers
+
+# prevent auto-cd from breaking commands like `make` when there's a directory w/ the same name
+unsetopt autocd
 
 
 # Add ruby to path

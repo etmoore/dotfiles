@@ -17,12 +17,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'flowtype/vim-flow'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'arcticicestudio/nord-vim'
+Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mattn/emmet-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'AndrewRadev/dsf.vim'
-Plug 'wting/cheetah.vim'
+Plug 'AndrewRadev/dsf.vim'  " delete surrounding function
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'vim-vdebug/vdebug'
 call plug#end()
 
 filetype plugin indent on
@@ -190,6 +192,10 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 autocmd BufRead,BufNewFile *.md setlocal wrap
 
+" Autoformat python on save
+" Using this over coc.preferences.formatOnSaveFiletypes to avoid timeout
+autocmd BufWrite *.py call CocAction('format')
+
 "https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
 autocmd Filetype gitcommit setlocal spell textwidth=72
 set complete+=kspell
@@ -202,17 +208,10 @@ if (has("termguicolors"))
 endif
 
 " all colorscheme configurations must be applied before colorscheme command
-set background=dark
 let g:nord_underline = 1
 let g:nord_uniform_diff_background = 1 " quieter difff colors
 colorscheme nord
 set cursorline
-
-
-" https://github.com/rakr/vim-one#tmux-support
-" TODO confirm if this is needed anymore
-set t_8b=^[[48;2;%lu;%lu;%lum
-set t_8f=^[[38;2;%lu;%lu;%lum
 
 
 " gitgutter config
@@ -306,7 +305,7 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --colors "match:fg:0,128,255" --smart-case '.(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:30%')
-  \           : fzf#vim#with_preview('right:30%:hidden', '?'),
+  \           : fzf#vim#with_preview('right:30%', '?'),
   \   <bang>0)
 
 let g:fzf_preview_window = 'right:30%'
@@ -319,7 +318,8 @@ nnoremap <leader>T :Tags<CR>
 nnoremap <leader>L :BLines<CR>
 nnoremap <leader>o :Buffers<CR>
 nnoremap <leader>/ :Rg 
-nnoremap <leader>* :Rg -F "<C-r><C-w>"<CR>
+noremap <leader>* :Rg -F "<C-r><C-w>"<CR>!tests/ 
+nnoremap <leader>sn :Snippets<CR>
 
 
 " Fugitive config
@@ -394,7 +394,6 @@ function! StatusDiagnostic() abort
     return join(msgs, ' ')
 endfunction
 
-
 " Statusline Configuration
 set statusline=%f         " Path to the file
 set statusline+=%=        " Switch to the right side
@@ -432,3 +431,13 @@ function! SourcegraphLink()
     " copy url to the clipboard
     let @*=url
 endfunction
+
+" completion alias (for some reason C-X makes my screen go blank)
+" whole line completion
+inoremap <leader><C-L> <C-X><C-L>
+
+""" UltiSnips config
+" let g:UltiSnipsListSnippets="<c-q>" " doesn't work (ﾟｰﾟゞ
+
+" Highlight on Yank
+au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
