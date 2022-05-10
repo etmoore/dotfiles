@@ -37,6 +37,7 @@ nnoremap <Leader>sp :echo @%<CR>
 " use leader + w to save a file, leader + q to quit
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader><Leader>q :qa!<CR>
 
 " use leader + b to close the current buffer without closing the split
 nnoremap <Leader>b :bp\|bd #<CR>
