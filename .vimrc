@@ -114,7 +114,7 @@ set wildmenu
 set wildmode=full
 
 " Remember the last x commands and undos
-set history=1000
+set history=10000
 set undolevels=1000
 
 " remap <C-n> and <C-p> to down and up in command line mode
