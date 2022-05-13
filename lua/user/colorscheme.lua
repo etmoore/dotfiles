@@ -1,1 +1,1 @@
-local colorscheme = "tokyonight"
+vim.cmd "colorscheme tokyonight"
