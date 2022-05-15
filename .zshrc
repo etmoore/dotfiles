@@ -70,8 +70,9 @@ unsetopt autocd
 # Add ruby to path
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 # Add n node package manager to path
-export N_PREFIX=$HOME/.n
-export PATH=$N_PREFIX/bin:$PATH
+# export N_PREFIX=$HOME/.n
+# export PATH=$N_PREFIX/bin:$PATH
+export PATH="$HOME/nenv/bin/:$PATH"
 # Add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Add home /bin to path
