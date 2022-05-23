@@ -27,9 +27,10 @@ local packer = require("packer")
 
 return packer.startup(function()
     -- plugins here
-    use "wbthomason/packer.nvim" -- Have packer manage itself
+    use 'wbthomason/packer.nvim' -- Have packer manage itself
     use 'folke/tokyonight.nvim' -- colorscheme
-    use "christoomey/vim-tmux-navigator"
+    use 'christoomey/vim-tmux-navigator'
+    use 'numToStr/Comment.nvim'
 
     -- telescope
     use {
