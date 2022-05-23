@@ -38,10 +38,16 @@ return packer.startup(function()
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+    -- treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
     }
+
+    -- completion
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-buffer'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

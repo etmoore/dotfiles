@@ -32,5 +32,6 @@ o.foldlevel = 1 -- expand first level of indentation
 o.foldenable = false
 o.inccommand = 'split' -- preview substitute command changes
 o.mouse = "a" -- allow mouse usage
+o.completeopt="menu,menuone,noselect"
 
 g.node_host_prog = "~/nenv/bin/node"
