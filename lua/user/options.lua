@@ -1,5 +1,5 @@
-local o = vim.o
-local g = vim.g
+local o = vim.o -- editor options
+local g = vim.g -- global variables
 
 -- :help options
 o.backup = false -- don't create backup files
@@ -25,7 +25,9 @@ o.scrolloff = 8 -- keep X lines visible around cursor at all times
 o.sidescrolloff = 8
 o.autoread = true -- reload detected changes from disk
 o.hidden = true -- hide buffers instead of closing them http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
-o.foldmethod = 'indent' -- fold on indentation
+o.foldmethod= 'indent'
+-- o.foldmethod = 'expr' -- fold using expression -- TODO get this conditionally working if language supports folding by expression
+-- o.foldexpr = 'nvim_treesitter#foldexpr()' -- fold with treesitter
 o.foldlevel = 1 -- expand first level of indentation
 o.foldenable = false
 o.inccommand = 'split' -- preview substitute command changes

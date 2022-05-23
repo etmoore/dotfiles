@@ -65,3 +65,10 @@ keymap("n", "<Leader>yf", ':let @*=expand("%:t")<CR>', opts)
 -- edit and source $MYVIMRC
 keymap("n", "<Leader>ev", ":vsplit $MYVIMRC<CR>", opts)
 keymap("n", "<Leader>sv", ":source $MYVIMRC<CR>", opts)
+
+-- telescope
+keymap("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+keymap("n", "<Leader>fl", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts) -- ANY string
+keymap("n", "<Leader>*", "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts) -- grep for word under cursor
+keymap("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts) -- open buffers
+keymap("n", "<Leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)

@@ -1,10 +1,3 @@
-local telescope = require("telescope")
+require('telescope').setup {}
 
-
-local actions = require "telescope.actions"
-
-telescope.setup {
-  defaults = {
-    path_display = { "smart" },
-  },
-}
+require('telescope').load_extension('fzf')
