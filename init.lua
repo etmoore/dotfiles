@@ -161,10 +161,16 @@ require("packer").startup(function()
         run = ":TSUpdate",
     }
 
+    --snippets
+    use 'L3MON4D3/LuaSnip'
+    use "rafamadriz/friendly-snippets"
+
     -- completion
     use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-cmdline'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -214,9 +220,11 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'pyright', 'sumneko_lua', 'intelephense', 'yamlls' }
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach
+    on_attach = on_attach,
+    capabilities = capabilities,
   }
 end
 
@@ -255,77 +263,77 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -----------------------------------
+---- SNIPPETS
+-----------------------------------
+require("luasnip.loaders.from_vscode").lazy_load()
+
+-----------------------------------
 ---- COMPLETION
 -----------------------------------
 local cmp = require('cmp')
+local luasnip = require("luasnip")
+
+local has_words_before = function()
+  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
     sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
     }),
-    mapping = {
-        ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
-        ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
-        ['<C-n>'] = cmp.mapping({
-            c = function()
-                if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                else
-                    vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
-                end
-            end,
-            i = function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                else
-                    fallback()
-                end
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
             end
-        }),
-        ['<C-p>'] = cmp.mapping({
-            c = function()
-                if cmp.visible() then
-                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                else
-                    vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
-                end
-            end,
-            i = function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                else
-                    fallback()
-                end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
             end
-        }),
-        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
-        ['<CR>'] = cmp.mapping({
-            i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-            c = function(fallback)
-                if cmp.visible() then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-                else
-                    fallback()
-                end
-            end
-        }),
-    },
+        end, { "i", "s" }),
+    }),
 }
 
 -- command mode completions
--- cmp.setup.cmdline(':', {
---   sources = {
---     { name = 'cmdline' }
---   }
--- })
+cmp.setup.cmdline(':', {
+    sources = {
+        { name = 'cmdline' }
+    },
+    mapping = cmp.mapping.preset.cmdline({})
+})
 
 -- / search completions based on buffer
--- cmp.setup.cmdline('/', {
---     sources = {
---         { name = 'buffer' }
---     }
--- })
+cmp.setup.cmdline('/', {
+    sources = {
+        { name = 'buffer' }
+    },
+    mapping = cmp.mapping.preset.cmdline({})
+})
 
 -----------------------------------
 ---- COMMENT
