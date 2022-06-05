@@ -263,11 +263,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -----------------------------------
----- SNIPPETS
------------------------------------
-require("luasnip.loaders.from_vscode").lazy_load()
-
------------------------------------
 ---- COMPLETION
 -----------------------------------
 local cmp = require('cmp')
@@ -334,6 +329,11 @@ cmp.setup.cmdline('/', {
     },
     mapping = cmp.mapping.preset.cmdline({})
 })
+
+-----------------------------------
+---- SNIPPETS
+-----------------------------------
+require("luasnip.loaders.from_vscode").lazy_load()
 
 -----------------------------------
 ---- COMMENT
