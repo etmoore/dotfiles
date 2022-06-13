@@ -162,10 +162,6 @@ require("packer").startup(function()
         'lewis6991/gitsigns.nvim',
         config = function() require('gitsigns').setup() end
     }
-    use {
-        'folke/which-key.nvim',
-        config = function() require('which-key').setup() end
-    }
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'tpope/vim-fugitive'
