@@ -118,6 +118,15 @@ keymap("n", "<Leader>yf", ':let @*=expand("%:t")<CR>', opts)
 keymap("n", "<Leader>ev", ":vsplit $MYVIMRC<CR>", opts)
 keymap("n", "<Leader>sv", ":source $MYVIMRC<CR>", opts)
 
+-- fugitive diff split
+keymap("n", "<Leader>gd", ":Gvdiffsplit @...master<CR>", opts)
+
+-- Gitsigns
+keymap("n", "]c", ":Gitsigns next_hunk<CR>", opts)
+keymap("n", "[c", ":Gitsigns prev_hunk<CR>", opts)
+keymap("n", "<Leader>hp", ":Gitsigns preview_hunk<CR>", opts)
+keymap("n", "<Leader>gm", ":Gitsigns change_base master true<CR>", opts)
+
 -----------------------------------
 ---- PLUGINS
 -----------------------------------
