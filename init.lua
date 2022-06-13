@@ -317,6 +317,7 @@ keymap("n", "<Leader>fc", "<cmd>lua require('telescope.builtin').command_history
 keymap("n", "<Leader>fs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 keymap("n", "<Leader>fS", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
 keymap("n", "<Leader>ft", "<cmd>lua require('telescope.builtin').tags()<cr>", opts)
+keymap("n", "<Leader>fr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
 -----------------------------------
 ---- TREESITTER
