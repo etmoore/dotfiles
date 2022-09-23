@@ -117,6 +117,8 @@ alias c="clear"
 
 alias glog='git log --oneline --decorate --color --graph'
 alias gdm='git diff `git merge-base master HEAD`'
+# git 'pull upstream' - ie, fetch, then set the local branch to the remote sha
+alias glu='git fetch && git reset --hard @{u}'
 
 alias v='nvim'
 alias vim='nvim'
