@@ -309,7 +309,7 @@ require('lspconfig').jsonls.setup {
 }
 
 -- don't show diagnostic messages inline
-vim.diagnostic.config({virtual_text = false})
+vim.diagnostic.config({virtual_text = true})
 
 -----------------------------------
 ---- TELESCOPE
