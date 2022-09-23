@@ -322,22 +322,29 @@ require('telescope').setup {
             i = {
                 ["<C-u>"] = false, -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#mapping-c-u-to-clear-prompt
                 ["<esc>"] = actions.close, -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#mapping-esc-to-quit-in-insert-mode
-                ["<C-r>"] = action_layout.toggle_preview -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#add-mapping-to-toggle-the-preview
+                ["<C-r>"] = action_layout.toggle_preview, -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#add-mapping-to-toggle-the-preview
             },
         },
+    },
+    pickers = {
+        buffers = {
+            sort_mru = true, -- sort by most recently used
+        },
     }
-
 }
 require('telescope').load_extension('fzf')
 
+
 keymap("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
-keymap("n", "<Leader>fl", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts) -- ANY string
+keymap("n", "<Leader>FF", "<cmd>lua require('telescope.builtin').find_files({no_ignore = true, hidden = true})<cr>", opts)
+keymap("n", "<Leader>fl", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts) -- ANY string
+keymap("n", "<Leader>FL", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts) -- ANY string
 keymap("n", "<Leader>*", "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts) -- grep for word under cursor
 keymap("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts) -- open buffers
 keymap("n", "<Leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
 keymap("n", "<Leader>fc", "<cmd>lua require('telescope.builtin').command_history()<cr>", opts)
 keymap("n", "<Leader>fs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-keymap("n", "<Leader>fS", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
+keymap("n", "<Leader>FS", "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", opts)
 keymap("n", "<Leader>ft", "<cmd>lua require('telescope.builtin').tags()<cr>", opts)
 keymap("n", "<Leader>fr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
