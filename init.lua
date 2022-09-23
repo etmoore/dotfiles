@@ -257,7 +257,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- list of servers that share a basic config
-local servers = {'pyright', 'intelephense', 'yamlls', 'tsserver'}
+local servers = {'pyright', 'yamlls', 'intelephense'}
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -277,6 +277,24 @@ require('lspconfig')['sumneko_lua'].setup({
             }
         }
     }
+})
+
+require('lspconfig')['tsserver'].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        diagnostics = {
+            ignoredCodes = { -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+                8002, -- "'import ... =' can only be used in TypeScript files."
+                8003, -- "'export =' can only be used in TypeScript files."
+                8004, -- "Type parameter declarations can only be used in TypeScript files."
+                8005, -- "'implements' clauses can only be used in TypeScript files."
+                8008, -- "Type aliases can only be used in TypeScript files."
+                8010, -- "Type annotations can only be used in TypeScript files."
+                8011, -- "Type arguments can only be used in TypeScript files."
+        }
+    }
+}
 })
 
 require('lspconfig').jsonls.setup {
