@@ -29,7 +29,6 @@ vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 1 -- expand first level of indentation
 vim.opt.foldenable = false
 vim.opt.inccommand = 'split' -- preview substitute command changes
-vim.opt.mouse = "a" -- allow mouse usage
 vim.opt.completeopt = { "menu", "menuone", "preview" }
 
 vim.opt.clipboard = 'unnamedplus' -- use '+' register
