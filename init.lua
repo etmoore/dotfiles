@@ -126,6 +126,10 @@ keymap("n", "]c", ":Gitsigns next_hunk<CR>", opts)
 keymap("n", "[c", ":Gitsigns prev_hunk<CR>", opts)
 keymap("n", "<Leader>hp", ":Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<Leader>gm", ":Gitsigns change_base master true<CR>", opts)
+keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', opts)
+keymap('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>', opts)
+
+
 
 -----------------------------------
 ---- PLUGINS
