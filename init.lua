@@ -284,6 +284,7 @@ require('lspconfig')['tsserver'].setup({
     settings = {
         diagnostics = {
             ignoredCodes = { -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+                7016, -- "Could not find a declaration file for module"
                 8002, -- "'import ... =' can only be used in TypeScript files."
                 8003, -- "'export =' can only be used in TypeScript files."
                 8004, -- "Type parameter declarations can only be used in TypeScript files."
