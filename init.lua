@@ -23,9 +23,8 @@ vim.opt.wrap = false -- don't wrap text
 vim.opt.autoread = true -- reload detected changes from disk
 vim.opt.hidden = true -- hide buffers instead of closing them http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
 vim.opt.foldmethod = 'indent'
--- disabling treesitter foldmethod because it's experimental and didn't work in python
--- vim.opt.foldmethod = 'expr' -- fold using expression -- TODO get this conditionally working if language supports folding by expression
--- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()' -- fold with treesitter
+vim.opt.foldmethod = 'expr' -- fold using expression -- TODO get this conditionally working if language supports folding by expression
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()' -- fold with treesitter
 vim.opt.foldlevel = 1 -- expand first level of indentation
 vim.opt.foldenable = false
 vim.opt.inccommand = 'split' -- preview substitute command changes
