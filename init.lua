@@ -176,10 +176,8 @@ require("packer").startup(function()
     use 'ludovicchabant/vim-gutentags'
 
     -- LSP
-    use {
-        "williamboman/nvim-lsp-installer",
-        "neovim/nvim-lspconfig",
-    }
+    use "williamboman/mason.nvim"
+    use "neovim/nvim-lspconfig"
 
     use 'tpope/vim-unimpaired'
 
@@ -223,9 +221,7 @@ end)
 -----------------------------------
 ---- LSP
 -----------------------------------
-require("nvim-lsp-installer").setup {
-    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-}
+require("mason").setup()
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
