@@ -81,6 +81,8 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Add home /bin to path
 export PATH=$HOME/bin:$PATH
+# Add homebrew to path
+[ -d "/opt/homebrew" ] && export PATH="/opt/homebrew/bin:$PATH"
 
 # Let compilers find ruby. Brew install ruby told me to do this
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
