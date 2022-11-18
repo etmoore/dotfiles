@@ -1,4 +1,92 @@
 -----------------------------------
+---- PLUGINS
+-----------------------------------
+-- Automatically install packer
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = vim.fn.system {
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    }
+    print "Installing packer close and reopen Neovim..."
+    vim.cmd [[packadd packer.nvim]]
+end
+
+require("packer").startup(function()
+    -- plugins here
+    use 'wbthomason/packer.nvim' -- Have packer manage itself
+    use 'folke/tokyonight.nvim' -- colorscheme
+    use 'christoomey/vim-tmux-navigator'
+    use {
+        'numToStr/Comment.nvim',
+        config = function() require('Comment').setup() end
+    }
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function() require('gitsigns').setup() end
+    }
+    use 'tpope/vim-surround'
+    use 'tpope/vim-repeat'
+    use 'tpope/vim-fugitive'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icon
+        config = function() require('nvim-tree').setup() end
+    }
+    use 'ludovicchabant/vim-gutentags'
+
+    -- LSP
+    use "williamboman/mason.nvim"
+    use "neovim/nvim-lspconfig"
+
+    use 'tpope/vim-unimpaired'
+
+    -- telescope
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    -- treesitter
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+    }
+
+    --snippets
+    use 'L3MON4D3/LuaSnip'
+    use "rafamadriz/friendly-snippets"
+
+    -- completion
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-cmdline'
+    use 'saadparwaiz1/cmp_luasnip' -- snippet completions
+    use 'b0o/schemastore.nvim'
+    use {
+        "ray-x/lsp_signature.nvim",
+        config = function() require('lsp_signature').setup() end
+    }
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if PACKER_BOOTSTRAP then
+        require("packer").sync()
+    end
+end)
+
+-----------------------------------
 ---- OPTIONS
 -----------------------------------
 vim.opt.backup = false -- don't create backup files
@@ -129,94 +217,6 @@ keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', opts)
 keymap('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>', opts)
 
 
-
------------------------------------
----- PLUGINS
------------------------------------
--- Automatically install packer
-local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system {
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    }
-    print "Installing packer close and reopen Neovim..."
-    vim.cmd [[packadd packer.nvim]]
-end
-
-require("packer").startup(function()
-    -- plugins here
-    use 'wbthomason/packer.nvim' -- Have packer manage itself
-    use 'folke/tokyonight.nvim' -- colorscheme
-    use 'christoomey/vim-tmux-navigator'
-    use {
-        'numToStr/Comment.nvim',
-        config = function() require('Comment').setup() end
-    }
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function() require('gitsigns').setup() end
-    }
-    use 'tpope/vim-surround'
-    use 'tpope/vim-repeat'
-    use 'tpope/vim-fugitive'
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icon
-        config = function() require('nvim-tree').setup() end
-    }
-    use 'ludovicchabant/vim-gutentags'
-
-    -- LSP
-    use "williamboman/mason.nvim"
-    use "neovim/nvim-lspconfig"
-
-    use 'tpope/vim-unimpaired'
-
-    -- telescope
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = { { 'nvim-lua/plenary.nvim' } }
-    }
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
-    -- treesitter
-    use {
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-    }
-
-    --snippets
-    use 'L3MON4D3/LuaSnip'
-    use "rafamadriz/friendly-snippets"
-
-    -- completion
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-cmdline'
-    use 'saadparwaiz1/cmp_luasnip' -- snippet completions
-    use 'b0o/schemastore.nvim'
-    use {
-        "ray-x/lsp_signature.nvim",
-        config = function() require('lsp_signature').setup() end
-    }
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
-end)
 
 -----------------------------------
 ---- LSP
