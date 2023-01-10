@@ -344,7 +344,7 @@ keymap("n", "<Leader>fr", "<cmd>lua require('telescope.builtin').lsp_references(
 -----------------------------------
 require 'nvim-treesitter.configs'.setup {
     -- Modules and its options go here
-    ensure_installed = { 'python', 'typescript', 'yaml', 'vim', 'scss', 'ruby', 'regex', 'php', 'make', 'json', 'javascript', 'http', 'html', 'help', 'graphql', 'dockerfile', 'css' },
+    ensure_installed = { 'python', 'typescript', 'yaml', 'vim', 'scss', 'ruby', 'regex', 'php', 'make', 'json', 'javascript', 'http', 'html', 'help', 'graphql', 'dockerfile', 'css', 'tsx'},
     highlight = { enable = true },
     incremental_selection = { enable = true },
     textobjects = { enable = true },
