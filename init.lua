@@ -220,8 +220,6 @@ keymap("n", "<Leader>gm", ":Gitsigns change_base master true<CR>", opts)
 keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', opts)
 keymap('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>', opts)
 
-
-
 -----------------------------------
 ---- LSP
 -----------------------------------
@@ -256,7 +254,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- list of servers that share a basic config
-local servers = {'pyright', 'flow', 'yamlls', 'intelephense'}
+local servers = {'pyright', 'yamlls', 'intelephense'}
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -282,6 +280,12 @@ require('lspconfig')['tsserver'].setup({
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+})
+
+require('lspconfig')['flow'].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "npx", "--no-install", "flow", "lsp", "--lazy-mode=ide" },
 })
 
 require('lspconfig').jsonls.setup {
