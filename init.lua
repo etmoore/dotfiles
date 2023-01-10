@@ -196,6 +196,10 @@ keymap("n", "<Up>", "2<c-w>-", opts)
 keymap("n", "<Right>", "2<c-w><", opts)
 keymap("n", "<Left>", "2<c-w>>", opts)
 
+-- faster scroll
+keymap("n", "<C-e>", "4<C-e>", opts)
+keymap("n", "<C-y>", "4<C-y>", opts)
+
 -- Copy current path to clipboard
 keymap("n", "<Leader>yp", ':let @*=expand("%")<CR>', opts)
 -- Copy current file to clipboard
