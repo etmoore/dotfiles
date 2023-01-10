@@ -64,7 +64,7 @@ require("packer").startup(function()
 
     --snippets
     use 'L3MON4D3/LuaSnip'
-    use "rafamadriz/friendly-snippets"
+    -- use "rafamadriz/friendly-snippets"
 
     -- completion
     use 'hrsh7th/nvim-cmp'
