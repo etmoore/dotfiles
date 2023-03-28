@@ -319,6 +319,10 @@ require('telescope').setup {
                 ["<C-r>"] = action_layout.toggle_preview, -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#add-mapping-to-toggle-the-preview
             },
         },
+        path_display = function(opts, path)
+            local tail = require("telescope.utils").path_tail(path)
+            return string.format("%s (%s)", tail, path)
+        end,
     },
     pickers = {
         buffers = {
@@ -339,7 +343,7 @@ keymap("n", "<Leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>
 keymap("n", "<Leader>fc", "<cmd>lua require('telescope.builtin').command_history()<cr>", opts)
 keymap("n", "<Leader>fs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 keymap("n", "<Leader>FS", "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", opts)
-keymap("n", "<Leader>ft", "<cmd>lua require('telescope.builtin').tags()<cr>", opts)
+keymap("n", "<Leader>ft", "<cmd>lua require('telescope.builtin').tags({show_line = false})<cr>", opts)
 keymap("n", "<Leader>fr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
 -----------------------------------
