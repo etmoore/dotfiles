@@ -44,8 +44,11 @@ require("packer").startup(function()
     use 'ludovicchabant/vim-gutentags'
 
     -- LSP
-    use "williamboman/mason.nvim"
-    use "neovim/nvim-lspconfig"
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    }
 
     use 'tpope/vim-unimpaired'
 
@@ -223,6 +226,7 @@ keymap('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>', opts)
 ---- LSP
 -----------------------------------
 require("mason").setup()
+require("mason-lspconfig").setup()
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
