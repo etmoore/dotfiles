@@ -160,7 +160,6 @@ vim.g.maplocalleader = " "
     term_mode = "t",
     command_mode = "c",
 --]]
-
 -- save and quit shortcuts
 keymap("n", "<Leader>w", ":w<CR>", opts)
 keymap("n", "<Leader>q", ":q<CR>", opts)
@@ -250,11 +249,11 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<Leader>cf', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<Leader>cf', vim.lsp.buf.format, bufopts)
 end
 
 -- list of servers that share a basic config
-local servers = {'pyright', 'yamlls', 'intelephense'}
+local servers = { 'pyright', 'yamlls', 'intelephense' }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -264,7 +263,7 @@ for _, lsp in pairs(servers) do
 end
 
 -- servers that have additional config
-require('lspconfig')['sumneko_lua'].setup({
+require('lspconfig')['lua_ls'].setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -300,7 +299,7 @@ require('lspconfig').jsonls.setup {
 }
 
 -- don't show diagnostic messages inline
-vim.diagnostic.config({virtual_text = true})
+vim.diagnostic.config({ virtual_text = true })
 
 -----------------------------------
 ---- TELESCOPE
@@ -344,7 +343,7 @@ keymap("n", "<Leader>fr", "<cmd>lua require('telescope.builtin').lsp_references(
 -----------------------------------
 require 'nvim-treesitter.configs'.setup {
     -- Modules and its options go here
-    ensure_installed = { 'python', 'typescript', 'yaml', 'vim', 'scss', 'ruby', 'regex', 'php', 'make', 'json', 'javascript', 'http', 'html', 'help', 'graphql', 'dockerfile', 'css', 'tsx'},
+    ensure_installed = { 'python', 'typescript', 'yaml', 'vim', 'scss', 'ruby', 'regex', 'php', 'make', 'json', 'javascript', 'http', 'html', 'help', 'graphql', 'dockerfile', 'css', 'tsx' },
     highlight = { enable = true },
     incremental_selection = { enable = true },
     textobjects = { enable = true },
@@ -359,11 +358,11 @@ local luasnip = require("luasnip")
 
 require("luasnip.loaders.from_vscode").lazy_load()
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 cmp.setup({
@@ -379,7 +378,7 @@ cmp.setup({
         { name = 'path' },
     }),
     mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-b>'] = cmp.mapping.scroll_docs( -4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
@@ -398,8 +397,8 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            elseif luasnip.jumpable( -1) then
+                luasnip.jump( -1)
             else
                 fallback()
             end
