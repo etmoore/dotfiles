@@ -336,7 +336,7 @@ require('telescope').load_extension('fzf')
 keymap("n", "<Leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
 keymap("n", "<Leader>FF", "<cmd>lua require('telescope.builtin').find_files({no_ignore = true, hidden = true})<cr>", opts)
 keymap("n", "<Leader>fl", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts) -- ANY string
-keymap("n", "<Leader>FL", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts) -- ANY string
+keymap("n", "<Leader>FL", "<cmd>lua require('telescope.builtin').live_grep({additional_args = {'--fixed-strings'}})<cr>", opts) -- ANY string
 keymap("n", "<Leader>fo", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files = true})<cr>", opts) -- ANY string in open files
 keymap("n", "<Leader>*", "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts) -- grep for word under cursor
 keymap("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts) -- open buffers
