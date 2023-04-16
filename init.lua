@@ -257,7 +257,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- list of servers that share a basic config
-local servers = { 'pyright', 'yamlls', 'intelephense' }
+local servers = { 'pyright', 'yamlls', 'intelephense', 'flow' }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -267,7 +267,7 @@ for _, lsp in pairs(servers) do
 end
 
 -- servers that have additional config
-require('lspconfig')['lua_ls'].setup({
+require('lspconfig').lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -279,16 +279,10 @@ require('lspconfig')['lua_ls'].setup({
     }
 })
 
-require('lspconfig')['tsserver'].setup({
+require('lspconfig').tsserver.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-})
-
-require('lspconfig')['flow'].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "npx", "--no-install", "flow", "lsp", "--lazy-mode=ide" },
 })
 
 require('lspconfig').jsonls.setup {
