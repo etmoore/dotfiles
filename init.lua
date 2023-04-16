@@ -38,15 +38,26 @@ require('lazy').setup({
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
 
+  'christoomey/vim-tmux-navigator',
+
+
   -- allow repeating plugin commands with '.'
   'tpope/vim-repeat',
 
   -- automatically generate tags
   'ludovicchabant/vim-gutentags',
 
+  {
+    'kyazdani42/nvim-tree.lua',
+    dependencies = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icon
+    config = function() require('nvim-tree').setup() end
+  },
+
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
-  { -- LSP Configuration & Plugins
+  {
+    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -55,21 +66,23 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
   },
 
-  { -- Autocompletion
+  {
+    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  { 'folke/which-key.nvim',          opts = {} },
+  {
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -83,7 +96,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Theme inspired by Atom
+  {
+    -- Theme inspired by Atom
     'folke/tokyonight.nvim',
     priority = 1000,
     config = function()
@@ -91,20 +105,22 @@ require('lazy').setup({
     end,
   },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'palenight',
         component_separators = '|',
         section_separators = '',
       },
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -115,7 +131,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -133,7 +149,8 @@ require('lazy').setup({
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -145,19 +162,35 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = false
-
 -- Make line numbers default
 vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+vim.o.cmdheight = 2          -- more space in the neovim command line for displaying messages
+vim.o.hidden = true          -- hide buffers instead of closing them http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
+vim.o.foldmethod = 'indent'
+vim.o.foldlevel = 1          -- expand first level of indentation
+vim.o.foldenable = false
+vim.opt.inccommand = 'split' -- preview substitute command changes
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
+vim.g.clipboard = {
+  name = 'SSH_from_macOS',
+  copy = {
+    ["+"] = 'pbcopy',
+    ["*"] = 'pbcopy'
+  },
+  paste = {
+    ["+"] = 'pbpaste',
+    ["*"] = 'pbpaste'
+  },
+  cache_enabled = 0
+}
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -189,9 +222,62 @@ vim.o.termguicolors = true
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- save and quit shortcuts
+vim.keymap.set("n", "<leader>w", ":w<CR>")
+vim.keymap.set("n", "<leader>q", ":q<CR>")
+vim.keymap.set("n", "<leader><leader>q", ":qa!<CR>")
+
+-- close current buffer without closing split
+vim.keymap.set("n", "<Leader>b", ":bp|bd #<CR>")
+
+-- open previous buffer
+vim.keymap.set("n", "<Leader>p", "<C-^>")
+
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- disable search highlighting (until next search is performed)
+vim.keymap.set("n", "<Leader>h", ":nohlsearch<CR>")
+
+-- remap <C-n> and <C-p> to down and up in command line mode
+vim.keymap.set("c", "<C-p>", "<Up>")
+vim.keymap.set("c", "<C-n>", "<Down>")
+
+-- pane resize
+vim.keymap.set("n", "<Down>", "2<c-w>+")
+vim.keymap.set("n", "<Up>", "2<c-w>-")
+vim.keymap.set("n", "<Right>", "2<c-w><")
+vim.keymap.set("n", "<Left>", "2<c-w>>")
+
+-- faster scroll
+vim.keymap.set("n", "<C-e>", "4<C-e>")
+vim.keymap.set("n", "<C-y>", "4<C-y>")
+
+-- Copy current path to clipboard
+vim.keymap.set("n", "<Leader>yp", ':let @*=expand("%")<CR>')
+-- Copy current file to clipboard
+vim.keymap.set("n", "<Leader>yf", ':let @*=expand("%:t")<CR>')
+
+-- edit and source $MYVIMRC
+vim.keymap.set("n", "<Leader>ev", ":vsplit $MYVIMRC<CR>")
+vim.keymap.set("n", "<Leader>sv", ":source $MYVIMRC<CR>")
+
+-- fugitive diff split
+vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...master<CR>")
+
+-- Gitsigns
+vim.keymap.set("n", "]c", ":Gitsigns next_hunk<CR>")
+vim.keymap.set("n", "[c", ":Gitsigns prev_hunk<CR>")
+vim.keymap.set("n", "<Leader>hp", ":Gitsigns preview_hunk<CR>")
+vim.keymap.set("n", "<Leader>gm", ":Gitsigns change_base master true<CR>")
+vim.keymap.set('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
+vim.keymap.set('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
+
+-- nvim-tree
+vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<Leader>f", ":NvimTreeFindFile<CR>")
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -206,15 +292,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local actions = require("telescope.actions")
+local action_layout = require("telescope.actions.layout")
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ["<esc>"] = actions.close,
+        ["<C-r>"] = action_layout.toggle_preview,
       },
     },
+    path_display = function(opts, path)
+      local tail = require("telescope.utils").path_tail(path)
+      return string.format("%s (%s)", tail, path)
+    end,
   },
+  pickers = {
+    buffers = {
+      sort_mru = true, -- sort by most recently used
+    },
+  }
 }
 
 -- Enable telescope fzf native, if installed
@@ -230,18 +329,27 @@ vim.keymap.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
-
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sF',
+  "<cmd>lua require('telescope.builtin').find_files({no_ignore = true, hidden = true})<cr>",
+  { desc = '[S]earch ALL [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set("n", "<Leader>sc", require('telescope.builtin').command_history, { desc = '[S]earch [C]ommand History' })
+vim.keymap.set("n", "<Leader>ss", require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch Doc [S]ymbols' })
+vim.keymap.set("n", "<Leader>sS", require('telescope.builtin').lsp_dynamic_workspace_symbols,
+  { desc = '[S]earch Workspace [S]ymbols' })
+vim.keymap.set("n", "<Leader>st", require('telescope.builtin').tags, { desc = '[S]earch [T]ags' })
+vim.keymap.set("n", "<Leader>sr", require('telescope.builtin').lsp_references, { desc = '[S]earch [R]eferenes' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'python', 'typescript', 'yaml', 'vim', 'scss', 'ruby', 'regex', 'php', 'make', 'json',
+    'javascript', 'http', 'html', 'graphql', 'dockerfile', 'css', 'tsx' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -307,7 +415,7 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -360,12 +468,9 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-
+  pyright = {},
+  intelephense = {},
+  yamlls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -398,6 +503,17 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+require('lspconfig')['tsserver'].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }, -- prevent from running on flow js files
+})
+
+require('lspconfig')['flow'].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
@@ -411,7 +527,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
@@ -442,6 +558,54 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+-----------------------------------
+---- CUSTOM FUNCTIONS
+-----------------------------------
+-- TODO convert this to a lua function
+vim.cmd [[
+" Copy Sourcegraph link to file + line number to clipboard
+nnoremap <leader>sl :call SourcegraphLink()<cr>
+function! SourcegraphLink()
+    " build the sourcegraph search string
+    let repo=trim(system('basename `git rev-parse --show-toplevel`')) " trim() removes newline char
+    let fileName=expand("%") " current file name (relative to cwd)
+    let searchString="repo:" . repo . " file:" . fileName
+
+    " build the jq 'filter' string that builds the url
+    " https://stedolan.github.io/jq/manual/#Stringinterpolation-\(foo)
+    let lineNumber=string(line("."))
+    let jqFilter='"\(.SourcegraphEndpoint)\(.Results[0].file.url)#L' . lineNumber . '"' " using string interpolation to build url
+
+    " get the sourcegraph url
+    " --raw-output prevents wrapping output in quotes
+    let url=trim(system("src search -json '" . searchString . "' | jq --raw-output '" . jqFilter . "'"))
+
+    " print url for visual confirmation, as msg to avoid 'Hit enter' prompt
+    echomsg url
+
+    " copy url to the clipboard
+    let @*=url
+endfunction
+]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
