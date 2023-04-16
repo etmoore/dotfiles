@@ -448,7 +448,7 @@ function! SourcegraphLink()
 
     " get the sourcegraph url
     " --raw-output prevents wrapping output in quotes
-    let url=system("src search -json '" . searchString . "' | jq --raw-output '" . jqFilter . "'")
+    let url=trim(system("src search -json '" . searchString . "' | jq --raw-output '" . jqFilter . "'"))
 
     " print url for visual confirmation, as msg to avoid 'Hit enter' prompt
     echomsg url
