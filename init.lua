@@ -4,6 +4,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-----------------------------------
+---- PLUGINS
+-----------------------------------
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -48,9 +51,19 @@ require('lazy').setup({
   'ludovicchabant/vim-gutentags',
 
   {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  },
+
+  {
     'kyazdani42/nvim-tree.lua',
     dependencies = { 'kyazdani42/nvim-web-devicons' }, -- optional, for file icon
     config = function() require('nvim-tree').setup() end
+  },
+
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function() require('lsp_signature').setup() end
   },
 
 
@@ -76,7 +89,8 @@ require('lazy').setup({
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer', 'hrsh7th/cmp-cmdline' },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -103,20 +117,6 @@ require('lazy').setup({
     config = function()
       vim.cmd.colorscheme 'tokyonight'
     end,
-  },
-
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'palenight',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
   },
 
   {
@@ -159,7 +159,9 @@ require('lazy').setup({
   },
 }, {})
 
--- [[ Setting options ]]
+-----------------------------------
+---- Settings
+-----------------------------------
 -- See `:help vim.o`
 
 -- Make line numbers default
@@ -168,12 +170,18 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
-vim.o.cmdheight = 2          -- more space in the neovim command line for displaying messages
-vim.o.hidden = true          -- hide buffers instead of closing them http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
+vim.o.swapfile = false     -- don't create swapfiles
+
+vim.o.cursorline = true    -- highlight the current line
+vim.o.cmdheight = 2        -- more space in the neovim command line for displaying messages
+vim.o.hidden = true        -- hide buffers instead of closing them http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
 vim.o.foldmethod = 'indent'
-vim.o.foldlevel = 1          -- expand first level of indentation
+vim.o.foldlevel = 1        -- expand first level of indentation
 vim.o.foldenable = false
-vim.opt.inccommand = 'split' -- preview substitute command changes
+vim.o.inccommand = 'split' -- preview substitute command changes
+vim.o.smartindent = true   -- make indenting smarter again
+vim.o.splitbelow = true    -- force all horizontal splits to go below current window
+vim.o.splitright = true    -- force all vertical splits to go to the right of current window
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -216,7 +224,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Basic Keymaps ]]
+-----------------------------------
+---- GENERAL KEYMAPS
+-----------------------------------
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -275,11 +285,12 @@ vim.keymap.set('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
 vim.keymap.set('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
 
 -- nvim-tree
-vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>")
-vim.keymap.set("n", "<Leader>f", ":NvimTreeFindFile<CR>")
+vim.keymap.set("n", "<Leader>nn", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<Leader>nf", ":NvimTreeFindFile<CR>")
 
-
--- [[ Highlight on yank ]]
+-----------------------------------
+---- HIGHLIGHT ON YANK
+-----------------------------------
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -290,7 +301,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
+-----------------------------------
+---- TELESCOPE
+-----------------------------------
 -- See `:help telescope` and `:help telescope.setup()`
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
@@ -330,21 +343,26 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sF',
-  "<cmd>lua require('telescope.builtin').find_files({no_ignore = true, hidden = true})<cr>",
-  { desc = '[S]earch ALL [F]iles' })
+vim.keymap.set('n', '<leader>sF', function()
+  require('telescope.builtin').find_files({ no_ignore = true, hidden = true })
+end, { desc = '[S]earch ALL [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set("n", "<leader>so", function()
+   require('telescope.builtin').live_grep({grep_open_files = true})
+end, { desc = '[S]earch [O]pen files by grep'})
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set("n", "<Leader>sc", require('telescope.builtin').command_history, { desc = '[S]earch [C]ommand History' })
-vim.keymap.set("n", "<Leader>ss", require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch Doc [S]ymbols' })
-vim.keymap.set("n", "<Leader>sS", require('telescope.builtin').lsp_dynamic_workspace_symbols,
+vim.keymap.set("n", "<leader>sc", require('telescope.builtin').command_history, { desc = '[S]earch [C]ommand History' })
+vim.keymap.set("n", "<leader>ss", require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch Doc [S]ymbols' })
+vim.keymap.set("n", "<leader>sS", require('telescope.builtin').lsp_dynamic_workspace_symbols,
   { desc = '[S]earch Workspace [S]ymbols' })
-vim.keymap.set("n", "<Leader>st", require('telescope.builtin').tags, { desc = '[S]earch [T]ags' })
-vim.keymap.set("n", "<Leader>sr", require('telescope.builtin').lsp_references, { desc = '[S]earch [R]eferenes' })
+vim.keymap.set("n", "<leader>st", require('telescope.builtin').tags, { desc = '[S]earch [T]ags' })
+vim.keymap.set("n", "<leader>sr", require('telescope.builtin').lsp_references, { desc = '[S]earch [R]eferenes' })
 
--- [[ Configure Treesitter ]]
+-----------------------------------
+---- TREESITTER
+-----------------------------------
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
@@ -417,6 +435,12 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
+-- prevent errors appearing in-line
+vim.diagnostic.config({ virtual_text = false })
+
+-----------------------------------
+---- LANGUAGE SERVER PROTOCOL (LSP)
+-----------------------------------
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -446,7 +470,6 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -475,6 +498,9 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = {
+        globals = { 'vim', 'use', 'require' }
+      }
     },
   },
 }
@@ -503,22 +529,32 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
-require('lspconfig')['tsserver'].setup({
+require('lspconfig').tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" }, -- prevent from running on flow js files
 })
 
-require('lspconfig')['flow'].setup({
+require('lspconfig').flow.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
--- nvim-cmp setup
+-----------------------------------
+---- COMPLETION
+-----------------------------------
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
+
+require("luasnip.loaders.from_vscode").lazy_load()
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 cmp.setup {
   snippet = {
@@ -529,7 +565,8 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -556,6 +593,8 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
   },
 }
 
@@ -571,8 +610,6 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
     { name = 'cmdline' }
   })
 })
@@ -606,6 +643,3 @@ function! SourcegraphLink()
     let @*=url
 endfunction
 ]]
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
