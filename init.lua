@@ -248,7 +248,7 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- save and quit shortcuts
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
-vim.keymap.set("n", "<leader><leader>q", ":qa!<CR>")
+vim.keymap.set("n", "<leader>Q", ":qa!<CR>")
 
 -- close current buffer without closing split
 vim.keymap.set("n", "<Leader>b", ":bp|bd #<CR>")
