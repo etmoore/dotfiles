@@ -9,7 +9,7 @@ ZSH_THEME="muse"
 
 # Configure colors for tmux
 # export TERM=xterm-256color
-# [ -n "$TMUX" ] && export TERM=screen-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
 
 # Configure SSH passthrough so that tmux maintains access to keys
 if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
