@@ -72,13 +72,10 @@ unsetopt autocd
 
 # Add ruby to path
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-# Add n node package manager to path
-# export N_PREFIX=$HOME/.n
-# export PATH=$N_PREFIX/bin:$PATH
-# Add node environment to path if exists
-[ -d "$HOME/nenv" ] && export PATH=$HOME/nenv/bin:$PATH
 # Add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# Add npm bin to path
+[ -d "$HOME/.npm-prefix" ] && export PATH="$HOME/.npm-prefix/bin:$PATH"
 # Add home /bin to path
 export PATH=$HOME/bin:$PATH
 # Add homebrew to path
