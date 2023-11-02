@@ -558,6 +558,7 @@ local servers = {
   pyright = {},
   intelephense = {},
   yamlls = {},
+  eslint = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -567,6 +568,7 @@ local servers = {
       },
     },
   },
+  tsserver = {}
 }
 
 -- Setup neovim lua configuration
@@ -593,17 +595,11 @@ mason_lspconfig.setup_handlers({
   end,
 })
 
-require("lspconfig").tsserver.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }, -- prevent from running on flow js files
-})
-
-require("lspconfig").flow.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
+-- require("lspconfig").flow.setup({
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- })
+--
 -----------------------------------
 ---- COMPLETION
 -----------------------------------
