@@ -151,7 +151,7 @@ alias tree='tree -I "node_modules"'
 alias vz='vim ~/.zshrc'
 alias sz='source ~/.zshrc'
 alias vt='vim ~/.tmux.conf'
-alias vv='vim ~/.vimrc'
+alias vv='vim ~/.config/nvim/init.lua'
 
 alias ss='src search'
 
