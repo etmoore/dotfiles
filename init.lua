@@ -43,7 +43,41 @@ require("lazy").setup({
 
 	"christoomey/vim-tmux-navigator",
 
+	-- Copilot stuff
 	"github/copilot.vim",
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		branch = "canary",
+		dependencies = {
+			{ "github/copilot.vim" }, -- or github/copilot.vim
+			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+		},
+		opts = {
+			debug = true, -- Enable debugging
+			-- See Configuration section for rest
+		},
+		-- See Commands section for default commands if you want to lazy load on them
+	},
+
+	{
+		"stevearc/oil.nvim", -- file explorer
+		opts = {
+			git = {
+				-- Return true to automatically git add/mv/rm files
+				add = function(path)
+					return true
+				end,
+				mv = function(src_path, dest_path)
+					return true
+				end,
+				rm = function(path)
+					return true
+				end,
+			},
+		},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 
 	-- allow repeating plugin commands with '.'
 	"tpope/vim-repeat",
@@ -109,21 +143,8 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- Autoformat
-		"stevearc/conform.nvim",
-		opts = {
-			notify_on_error = false,
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				javascript = { { "prettierd", "prettier" } },
-			},
-		},
-	},
+	-- Autoformat
+	"stevearc/conform.nvim",
 
 	-- Useful plugin to show you pending keybinds.
 	{ "folke/which-key.nvim", opts = {} },
@@ -146,9 +167,9 @@ require("lazy").setup({
 		-- Theme inspired by Atom
 		"folke/tokyonight.nvim",
 		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("tokyonight")
-		end,
+		opts = {
+			style = "moon",
+		},
 	},
 
 	-- "gc" to comment visual regions/lines
@@ -250,6 +271,7 @@ vim.o.completeopt = "menuone,noselect"
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+vim.cmd.colorscheme("tokyonight")
 
 -----------------------------------
 ---- GENERAL KEYMAPS
@@ -307,13 +329,16 @@ vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...master<CR>")
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<CR>")
 vim.keymap.set("n", "[c", ":Gitsigns prev_hunk<CR>")
 vim.keymap.set("n", "<Leader>hp", ":Gitsigns preview_hunk<CR>")
-vim.keymap.set("n", "<Leader>gm", ":Gitsigns change_base master true<CR>")
+vim.keymap.set("n", "<Leader>gm", ":Gitsigns change_base main true<CR>")
 vim.keymap.set("n", "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
 
 -- nvim-tree
 vim.keymap.set("n", "<Leader>nn", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<Leader>nf", ":NvimTreeFindFile<CR>")
+
+-- oil file explorer
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -----------------------------------
 ---- HIGHLIGHT ON YANK
@@ -334,6 +359,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- See `:help telescope` and `:help telescope.setup()`
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
+
+-- Function to copy the highlighted line content in the file preview
+local function copy_highlighted_line_content(prompt_bufnr)
+	local entry = require("telescope.actions.state").get_selected_entry()
+	local filename = entry.filename or entry[1]
+	local lnum = entry.lnum
+
+	if filename and lnum then
+		local bufnr = vim.fn.bufnr(filename)
+		local content = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1]
+		vim.fn.setreg("+", content)
+		print("Copied: " .. content)
+	else
+		print("No line selected")
+	end
+end
+
 require("telescope").setup({
 	defaults = {
 		mappings = {
@@ -342,6 +384,10 @@ require("telescope").setup({
 				["<C-d>"] = false,
 				["<esc>"] = actions.close,
 				["<C-r>"] = action_layout.toggle_preview,
+				["<C-y>"] = function(prompt_bufnr)
+					copy_highlighted_line_content()
+					require("telescope.actions").close(prompt_bufnr)
+				end,
 			},
 		},
 		path_display = function(opts, path)
@@ -398,7 +444,6 @@ vim.keymap.set(
 	{ desc = "[S]earch Workspace [S]ymbols" }
 )
 vim.keymap.set("n", "<leader>st", require("telescope.builtin").tags, { desc = "[S]earch [T]ags" })
-vim.keymap.set("n", "<leader>sr", require("telescope.builtin").lsp_references, { desc = "[S]earch [R]eferenes" })
 
 -----------------------------------
 ---- TREESITTER
@@ -424,6 +469,7 @@ require("nvim-treesitter.configs").setup({
 		"dockerfile",
 		"css",
 		"tsx",
+		"graphql",
 	},
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = false,
@@ -522,7 +568,6 @@ local on_attach = function(_, bufnr)
 	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 
 	-- See `:help K` for why this keymap
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -647,6 +692,45 @@ cmp.setup.cmdline(":", {
 	sources = cmp.config.sources({
 		{ name = "cmdline" },
 	}),
+})
+
+-----------------------------------
+---- AUTO FORMAT
+-----------------------------------
+vim.b.disable_autoformat = true
+vim.g.disable_autoformat = true
+require("conform").setup({
+	notify_on_error = false,
+	formatters_by_ft = {
+		lua = { "stylua" },
+		python = { "isort", "black" },
+		javascript = { { "prettierd", "prettier" } },
+	},
+	format_on_save = function(bufnr)
+		-- Disable with a global or buffer-local variable
+		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			return
+		end
+		return { timeout_ms = 500, lsp_fallback = true }
+	end,
+})
+
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+	if args.bang then
+		-- FormatDisable! will disable formatting just for this buffer
+		vim.b.disable_autoformat = true
+	else
+		vim.g.disable_autoformat = true
+	end
+end, {
+	desc = "Disable autoformat-on-save",
+	bang = true,
+})
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.b.disable_autoformat = false
+	vim.g.disable_autoformat = false
+end, {
+	desc = "Re-enable autoformat-on-save",
 })
 
 -----------------------------------
