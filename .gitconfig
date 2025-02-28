@@ -12,3 +12,5 @@
 	insteadOf = https://github.com/
 [pull]
 	rebase = false
+[checkout]
+	defaultRemote = origin

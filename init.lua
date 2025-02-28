@@ -41,24 +41,6 @@ require("lazy").setup({
 	"tpope/vim-surround",
 	"tpope/vim-unimpaired",
 
-	"christoomey/vim-tmux-navigator",
-
-	-- Copilot stuff
-	"github/copilot.vim",
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
-		dependencies = {
-			{ "github/copilot.vim" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-		},
-		opts = {
-			debug = true, -- Enable debugging
-			-- See Configuration section for rest
-		},
-		-- See Commands section for default commands if you want to lazy load on them
-	},
-
 	{
 		"stevearc/oil.nvim", -- file explorer
 		opts = {
@@ -74,6 +56,33 @@ require("lazy").setup({
 					return true
 				end,
 			},
+      use_default_keymaps = false,
+			keymaps = {
+				["g?"] = "actions.show_help",
+				["<CR>"] = "actions.select",
+				["<C-s>"] = {
+					"actions.select",
+					opts = { vertical = true },
+					desc = "Open the entry in a vertical split",
+				},
+				-- ["<C-h>"] = {
+				-- 	"actions.select",
+				-- 	opts = { horizontal = true },
+				-- 	desc = "Open the entry in a horizontal split",
+				-- },
+				["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+				["<C-p>"] = "actions.preview",
+				["<C-c>"] = "actions.close",
+				-- ["<C-l>"] = "actions.refresh",
+				["-"] = "actions.parent",
+				["_"] = "actions.open_cwd",
+				["`"] = "actions.cd",
+				["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+				["gs"] = "actions.change_sort",
+				["gx"] = "actions.open_external",
+				["g."] = "actions.toggle_hidden",
+				["g\\"] = "actions.toggle_trash",
+			},
 		},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -81,6 +90,8 @@ require("lazy").setup({
 
 	-- allow repeating plugin commands with '.'
 	"tpope/vim-repeat",
+
+	"christoomey/vim-tmux-navigator",
 
 	-- automatically generate tags
 	"ludovicchabant/vim-gutentags",
@@ -167,9 +178,6 @@ require("lazy").setup({
 		-- Theme inspired by Atom
 		"folke/tokyonight.nvim",
 		priority = 1000,
-		opts = {
-			style = "moon",
-		},
 	},
 
 	-- "gc" to comment visual regions/lines
@@ -600,7 +608,6 @@ local servers = {
 			},
 		},
 	},
-	tsserver = {},
 }
 
 -- Setup neovim lua configuration
@@ -678,6 +685,13 @@ cmp.setup({
 	},
 })
 
+-- fix issue with C-y not confirming completion in command mode
+vim.api.nvim_set_keymap('c', '<C-y>', '', {
+  callback = function()
+    require('cmp').confirm({ select = true })
+  end,
+})
+
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
@@ -693,6 +707,7 @@ cmp.setup.cmdline(":", {
 		{ name = "cmdline" },
 	}),
 })
+
 
 -----------------------------------
 ---- AUTO FORMAT

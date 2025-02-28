@@ -58,6 +58,7 @@ ZSH_CUSTOM=~/dotfiles/oh-my-zsh/custom
 plugins=(
     git
     zsh-autosuggestions
+    z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -118,9 +119,12 @@ alias glog='git log --oneline --decorate --color --graph'
 alias gdm='git diff `git merge-base master HEAD`'
 # git 'pull upstream' - ie, fetch, then set the local branch to the remote sha
 alias glu='git fetch && git reset --hard @{u}'
+# git show default remote branch (eg master or main)
+alias gbd="git remote show origin | awk '/HEAD branch/ {print $NF}'"
 
 alias v='nvim'
 alias vim='nvim'
+alias ynvim='NVIM_APPNAME="ynvim" nvim'
 
 # open all files in a branch that were modified and committed
 alias vmod='vim `git diff --name-only HEAD $(git merge-base HEAD master)`'
