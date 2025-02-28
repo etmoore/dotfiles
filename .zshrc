@@ -162,8 +162,8 @@ alias ss='src search'
 # exit on first failure and allow (i)pbd interaction
 alias pyt='pytest --capture=no --exitfirst -vv'
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # set neovim as default editor
