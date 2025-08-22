@@ -130,7 +130,7 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
-			{ "williamboman/mason.nvim", config = true },
+			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Useful status updates for LSP
@@ -141,6 +141,12 @@ require("lazy").setup({
 			"folke/neodev.nvim",
 		},
 		config = function()
+			-- Setup neovim lua configuration first
+			require("neodev").setup()
+			
+			-- Setup mason
+			require("mason").setup()
+			
 			-- LSP settings.
 			--  This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(_, bufnr)
@@ -199,9 +205,6 @@ require("lazy").setup({
 					},
 				},
 			}
-
-			-- Setup neovim lua configuration
-			require("neodev").setup()
 
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
