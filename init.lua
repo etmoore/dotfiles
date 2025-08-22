@@ -582,7 +582,8 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
 	pyright = {},
-	intelephense = {},
+	phpactor = {},  -- Modern PHP language server (replaced intelephense)
+	tsserver = {},  -- TypeScript/JavaScript language server
 	yamlls = {},
 	eslint = {},
 	lua_ls = {
