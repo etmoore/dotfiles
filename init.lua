@@ -130,8 +130,13 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			{
+				"williamboman/mason.nvim",
+				build = ":MasonUpdate",
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+			},
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -216,18 +221,31 @@ require("lazy").setup({
 			-- Ensure the servers above are installed
 			mason_lspconfig.setup({
 				ensure_installed = vim.tbl_keys(servers),
+				automatic_installation = true,
 			})
 
-			-- Setup handlers after mason-lspconfig is initialized
-			mason_lspconfig.setup_handlers({
-				function(server_name)
+			-- Setup each server
+			-- Check if setup_handlers exists (newer versions) or use fallback
+			if mason_lspconfig.setup_handlers then
+				mason_lspconfig.setup_handlers({
+					function(server_name)
+						require("lspconfig")[server_name].setup({
+							capabilities = capabilities,
+							on_attach = on_attach,
+							settings = servers[server_name],
+						})
+					end,
+				})
+			else
+				-- Fallback for older versions
+				for server_name, server_config in pairs(servers) do
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
 						on_attach = on_attach,
-						settings = servers[server_name],
+						settings = server_config,
 					})
-				end,
-			})
+				end
+			end
 		end,
 	},
 
