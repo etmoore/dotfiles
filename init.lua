@@ -192,7 +192,7 @@ require("lazy").setup({
 			local servers = {
 				pyright = {},
 				phpactor = {},
-				tsserver = {},
+				ts_ls = {},  -- TypeScript/JavaScript language server (formerly tsserver)
 				yamlls = {},
 				eslint = {},
 				lua_ls = {
