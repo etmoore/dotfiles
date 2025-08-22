@@ -103,17 +103,6 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"kyazdani42/nvim-tree.lua",
-		dependencies = { "kyazdani42/nvim-web-devicons" }, -- optional, for file icon
-		config = function()
-			require("nvim-tree").setup({
-				view = {
-					width = 45,
-				},
-			})
-		end,
-	},
 
 	{
 		"ray-x/lsp_signature.nvim",
@@ -341,9 +330,6 @@ vim.keymap.set("n", "<Leader>gm", ":Gitsigns change_base main true<CR>")
 vim.keymap.set("n", "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
 
--- nvim-tree
-vim.keymap.set("n", "<Leader>nn", ":NvimTreeToggle<CR>")
-vim.keymap.set("n", "<Leader>nf", ":NvimTreeFindFile<CR>")
 
 -- oil file explorer
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
