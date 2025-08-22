@@ -144,8 +144,11 @@ require("lazy").setup({
 			-- Setup neovim lua configuration first
 			require("neodev").setup()
 			
-			-- Setup mason
+			-- Setup mason first
 			require("mason").setup()
+			
+			-- Then setup mason-lspconfig
+			local mason_lspconfig = require("mason-lspconfig")
 			
 			-- LSP settings.
 			--  This function gets run when an LSP connects to a particular buffer.
@@ -211,12 +214,11 @@ require("lazy").setup({
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			-- Ensure the servers above are installed
-			local mason_lspconfig = require("mason-lspconfig")
-
 			mason_lspconfig.setup({
 				ensure_installed = vim.tbl_keys(servers),
 			})
 
+			-- Setup handlers after mason-lspconfig is initialized
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					require("lspconfig")[server_name].setup({
