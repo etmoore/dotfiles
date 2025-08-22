@@ -32,14 +32,23 @@ require("lazy").setup({
 	-- NOTE: First, some plugins that don't require any configuration
 
 	-- Git related plugins
-	"tpope/vim-fugitive",
+	{
+		"tpope/vim-fugitive",
+		cmd = { "G", "Git", "Gvdiffsplit" },
+	},
 	"tpope/vim-rhubarb",
 
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 
-	"tpope/vim-surround",
-	"tpope/vim-unimpaired",
+	{
+		"tpope/vim-surround",
+		event = { "BufReadPost", "BufNewFile" },
+	},
+	{
+		"tpope/vim-unimpaired",
+		event = { "BufReadPost", "BufNewFile" },
+	},
 
 	{
 		"stevearc/oil.nvim", -- file explorer
@@ -98,6 +107,7 @@ require("lazy").setup({
 
 	{
 		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
@@ -106,6 +116,7 @@ require("lazy").setup({
 
 	{
 		"ray-x/lsp_signature.nvim",
+		event = "LspAttach",
 		config = function()
 			require("lsp_signature").setup()
 		end,
@@ -144,13 +155,18 @@ require("lazy").setup({
 	},
 
 	-- Autoformat
-	"stevearc/conform.nvim",
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+	},
 
 	-- Useful plugin to show you pending keybinds.
 	{ "folke/which-key.nvim", opts = {} },
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			-- See `:help gitsigns.txt`
 			signs = {
@@ -170,11 +186,32 @@ require("lazy").setup({
 	},
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+	{
+		"numToStr/Comment.nvim",
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {},
+	},
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{
 		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
+		keys = {
+			{ "<leader>?", desc = "Find recently opened files" },
+			{ "<leader>o", desc = "Find open buffers" },
+			{ "<leader>/", desc = "Search in current buffer" },
+			{ "<leader>*", desc = "Search current word" },
+			{ "<leader>sf", desc = "Search files" },
+			{ "<leader>sF", desc = "Search ALL files" },
+			{ "<leader>sh", desc = "Search help" },
+			{ "<leader>sg", desc = "Search open files by grep" },
+			{ "<leader>sG", desc = "Search by grep" },
+			{ "<leader>sd", desc = "Search diagnostics" },
+			{ "<leader>sc", desc = "Search command history" },
+			{ "<leader>ss", desc = "Search document symbols" },
+			{ "<leader>sS", desc = "Search workspace symbols" },
+			{ "<leader>st", desc = "Search tags" },
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
@@ -196,6 +233,8 @@ require("lazy").setup({
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
+		cmd = { "TSUpdate", "TSInstall" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
