@@ -167,8 +167,8 @@ alias cu='claude update'
 alias cc='claude --continue'
 alias ccf='claude --continue --fork-session'
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # set neovim as default editor
