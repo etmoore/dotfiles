@@ -162,6 +162,11 @@ alias ss='src search'
 # exit on first failure and allow (i)pbd interaction
 alias pyt='pytest --capture=no --exitfirst -vv'
 
+alias c='claude'
+alias cu='claude update'
+alias cc='claude --continue'
+alias ccf='claude --continue --fork-session'
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -222,3 +227,4 @@ fshow() {
                 {}
 FZF-EOF"
 }
+export PATH="$HOME/.local/bin:$PATH"
