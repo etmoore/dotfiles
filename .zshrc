@@ -167,9 +167,9 @@ alias cu='claude update'
 alias cc='claude --continue'
 alias ccf='claude --continue --fork-session'
 
-source <(fzf --zsh)
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# Ensure ~/.fzf/bin comes before /usr/bin in PATH for latest fzf version
+export PATH="$HOME/.fzf/bin:$PATH"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # set neovim as default editor
 export VISUAL="nvim"
@@ -228,3 +228,4 @@ fshow() {
 FZF-EOF"
 }
 export PATH="$HOME/.local/bin:$PATH"
+
