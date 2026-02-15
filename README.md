@@ -1,115 +1,48 @@
 # How To Configure Remote Copy and Paste Over SSH
 
-source for most of these instructions: https://gist.github.com/burke/5960455
+Uses [OSC 52](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands) terminal escape sequences to copy text from a remote machine to the local clipboard. No listeners, port forwarding, or LaunchAgents needed — the terminal emulator handles it natively.
 
-Assumptions:  
-* Mac local, Linux remote
-
-Note:  
-* I'm using ports 2235 (copy) and 2236 (paste) to avoid potential conflicts on
-  shared dev boxes.
-
-## Local (OS X) Side
-
-#### `~/Library/LaunchAgents/pbcopy.plist`
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
-"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-<key>Label</key>
-<string>localhost.pbcopy</string>
-<key>ProgramArguments</key>
-<array>
-<string>/usr/bin/pbcopy</string>
-</array>
-<key>inetdCompatibility</key>
-<dict>
-<key>Wait</key>
-<false/>
-</dict>
-<key>Sockets</key>
-<dict>
-<key>Listeners</key>
-<dict>
-<key>SockServiceName</key>
-<string>2224</string>
-<key>SockNodeName</key>
-<string>127.0.0.1</string>
-</dict>
-</dict>
-</dict>
-</plist>
-```
-
-#### `~/Library/LaunchAgents/pbpaste.plist`
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
-"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-<key>Label</key>
-<string>localhost.pbpaste</string>
-<key>ProgramArguments</key>
-<array>
-<string>/usr/bin/pbpaste</string>
-</array>
-<key>inetdCompatibility</key>
-<dict>
-<key>Wait</key>
-<false/>
-</dict>
-<key>Sockets</key>
-<dict>
-<key>Listeners</key>
-<dict>
-<key>SockServiceName</key>
-<string>2225</string>
-<key>SockNodeName</key>
-<string>127.0.0.1</string>
-</dict>
-</dict>
-</dict>
-</plist>
-```
-
-#### `~/.ssh/config`
-```
-Host myhost
-HostName 192.168.1.123
-User myname
-RemoteForward 2224 127.0.0.1:2224
-RemoteForward 2225 127.0.0.1:2225
-```
-
-**After adding the PLists above, you'll have to run:**
-
-```bash
-launchctl load ~/Library/LaunchAgents/pbcopy.plist
-launchctl load ~/Library/LaunchAgents/pbpaste.plist
-```
+Assumptions:
+* Mac local running a terminal that supports OSC 52 (e.g. Ghostty, iTerm2, kitty)
+* Linux remote with tmux
 
 ## Remote (Linux) Side
-#### `~/bin/pbpaste`
-```bash
+
+### `~/bin/pbcopy`
+```sh
 #!/bin/sh
-nc localhost 2225
+# OSC 52 clipboard copy — sends text to the local clipboard via terminal
+# escape sequence. Works with terminals that support OSC 52 (e.g. Ghostty).
+# Requires tmux options: set-clipboard on, allow-passthrough on.
+
+# Base64-encode stdin (OSC 52 payload must be base64-encoded)
+data=$(base64 | tr -d '\n')
+
+# When called from a subprocess without a controlling terminal (e.g. neovim),
+# /dev/tty doesn't exist. Inside tmux, resolve the pane's actual PTY
+# (e.g. /dev/pts/5) so the escape sequence reaches the terminal emulator.
+tty=$(tmux display-message -p '#{pane_tty}' 2>/dev/null)
+
+if [ -n "$tty" ]; then
+    printf '\033]52;c;%s\a' "$data" > "$tty"
+else
+    # Fallback for non-tmux usage
+    printf '\033]52;c;%s\a' "$data" > /dev/tty
+fi
 ```
 
-#### `~/bin/pbcopy`
-```bash
-#!/bin/sh
-cat | nc -q1 localhost 2224
+### `~/.tmux.conf`
+```
+# OSC 52 clipboard support
+set -g set-clipboard on
+set -g allow-passthrough on
 ```
 
-#### `~/.vimrc`
-```
-" Clipboard Configuration
+### Neovim clipboard provider (`~/.vimrc` or equivalent)
+```vim
 if has('nvim')
     let g:clipboard = {
-        \   'name': 'SSH_from_macOS',
+        \   'name': 'OSC52',
         \   'copy': {
         \      '+': 'pbcopy',
         \      '*': 'pbcopy',
@@ -123,5 +56,6 @@ if has('nvim')
 endif
 ```
 
-## For TMUX (>2.4) and iTerm2 (>3.0)
-settings -> general -> "Applications in terminal may access keyboard"
+## Local (Mac) Side
+
+No configuration needed — OSC 52 support is built into Ghostty (and most modern terminals). Just make sure your terminal's OSC 52 clipboard access is enabled (it is by default in Ghostty).
