@@ -102,9 +102,6 @@ require("lazy").setup({
 
 	"christoomey/vim-tmux-navigator",
 
-	-- automatically generate tags
-	"ludovicchabant/vim-gutentags",
-
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
