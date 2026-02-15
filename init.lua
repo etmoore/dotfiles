@@ -582,7 +582,7 @@ local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 
 -- Function to copy the highlighted line content in the file preview
-local function copy_highlighted_line_content(prompt_bufnr)
+local function copy_highlighted_line_content()
 	local entry = require("telescope.actions.state").get_selected_entry()
 	local filename = entry.filename or entry[1]
 	local lnum = entry.lnum
