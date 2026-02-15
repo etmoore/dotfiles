@@ -1,2 +1,19 @@
 #!/bin/sh
-cat | nc -q1 localhost 2235
+# OSC 52 clipboard copy — sends text to the local clipboard via terminal
+# escape sequence. Works with terminals that support OSC 52 (e.g. Ghostty).
+# Requires tmux options: set-clipboard on, allow-passthrough on.
+
+# Base64-encode stdin (OSC 52 payload must be base64-encoded)
+data=$(base64 | tr -d '\n')
+
+# When called from a subprocess without a controlling terminal (e.g. neovim),
+# /dev/tty doesn't exist. Inside tmux, resolve the pane's actual PTY
+# (e.g. /dev/pts/5) so the escape sequence reaches the terminal emulator.
+tty=$(tmux display-message -p '#{pane_tty}' 2>/dev/null)
+
+if [ -n "$tty" ]; then
+    printf '\033]52;c;%s\a' "$data" > "$tty"
+else
+    # Fallback for non-tmux usage
+    printf '\033]52;c;%s\a' "$data" > /dev/tty
+fi
