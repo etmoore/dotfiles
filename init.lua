@@ -791,32 +791,25 @@ end, {
 -----------------------------------
 ---- CUSTOM FUNCTIONS
 -----------------------------------
--- TODO convert this to a lua function
-vim.cmd([[
-" Copy Sourcegraph link to file + line number to clipboard
-nnoremap <leader>sl :call SourcegraphLink()<cr>
-function! SourcegraphLink()
-    " build the sourcegraph search string
-    let repo=trim(system('basename `git rev-parse --show-toplevel`')) " trim() removes newline char
-    let fileName=expand("%") " current file name (relative to cwd)
-    let searchString="repo:" . repo . " file:" . fileName
+-- Copy Sourcegraph link to file + line number to clipboard
+local function sourcegraph_link()
+	local repo = vim.fn.trim(vim.fn.system("basename $(git rev-parse --show-toplevel)"))
+	local filename = vim.fn.expand("%")
+	local line_number = vim.fn.line(".")
+	local search_string = "repo:" .. repo .. " file:" .. filename
 
-    " build the jq 'filter' string that builds the url
-    " https://stedolan.github.io/jq/manual/#Stringinterpolation-\(foo)
-    let lineNumber=string(line("."))
-    let jqFilter='"\(.SourcegraphEndpoint)\(.Results[0].file.url)#L' . lineNumber . '"' " using string interpolation to build url
+	local jq_filter = string.format(
+		'"\\(.SourcegraphEndpoint)\\(.Results[0].file.url)#L%d"',
+		line_number
+	)
+	local cmd = string.format("src search -json '%s' | jq --raw-output '%s'", search_string, jq_filter)
+	local url = vim.fn.trim(vim.fn.system(cmd))
 
-    " get the sourcegraph url
-    " --raw-output prevents wrapping output in quotes
-    let url=trim(system("src search -json '" . searchString . "' | jq --raw-output '" . jqFilter . "'"))
+	vim.fn.setreg("*", url)
+	vim.notify(url)
+end
 
-    " print url for visual confirmation, as msg to avoid 'Hit enter' prompt
-    echomsg url
-
-    " copy url to the clipboard
-    let @*=url
-endfunction
-]])
+vim.keymap.set("n", "<leader>sl", sourcegraph_link, { desc = "Copy Sourcegraph link" })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
