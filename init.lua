@@ -123,12 +123,7 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
 		build = ":MasonUpdate",
-		config = function()
-			-- Use the public npm registry for Mason installs instead of the
-			-- corporate registry (which may not mirror all packages).
-			vim.env.NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
-			require("mason").setup()
-		end,
+		opts = {},
 	},
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
