@@ -119,6 +119,13 @@ require("lazy").setup({
 		end,
 	},
 
+	{
+		"williamboman/mason.nvim",
+		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+		build = ":MasonUpdate",
+		opts = {},
+	},
+
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
 	{
@@ -126,14 +133,8 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
-			{
-				"williamboman/mason.nvim",
-				build = ":MasonUpdate",
-			},
-			{
-				"williamboman/mason-lspconfig.nvim",
-			},
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -145,9 +146,6 @@ require("lazy").setup({
 		config = function()
 			-- Setup neovim lua configuration
 			require("lazydev").setup()
-
-			-- Setup mason first
-			require("mason").setup()
 
 			-- Then setup mason-lspconfig
 			local mason_lspconfig = require("mason-lspconfig")
