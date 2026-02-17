@@ -578,7 +578,7 @@ vim.keymap.set("n", "<Leader>ev", ":vsplit $MYVIMRC<CR>")
 vim.keymap.set("n", "<Leader>sv", ":source $MYVIMRC<CR>")
 
 -- fugitive diff split
-vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...origin/HEAD<CR>")
+vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit! @...origin/HEAD<CR>")
 
 -- diffview: PR-style file list with diffs against merge base
 vim.keymap.set("n", "<Leader>gD", ":DiffviewOpen origin/HEAD<CR>", { desc = "Diffview: PR diff" })
