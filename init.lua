@@ -545,7 +545,7 @@ vim.keymap.set("n", "<Leader>ev", ":vsplit $MYVIMRC<CR>")
 vim.keymap.set("n", "<Leader>sv", ":source $MYVIMRC<CR>")
 
 -- fugitive diff split
-vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...master<CR>")
+vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...origin/HEAD<CR>")
 
 -- Gitsigns
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<CR>")
