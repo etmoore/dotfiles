@@ -559,6 +559,19 @@ vim.keymap.set("n", "<C-y>", "4<C-y>")
 vim.keymap.set("n", "<Leader>yp", ':let @*=expand("%")<CR>')
 -- Copy current file to clipboard
 vim.keymap.set("n", "<Leader>yf", ':let @*=expand("%:t")<CR>')
+-- Copy path:line(s) to clipboard, relative to git root
+vim.keymap.set({ "n", "v" }, "<Leader>yl", function()
+	local git_root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
+	local rel_path = vim.fn.expand("%:p"):sub(#git_root + 2)
+	local mode = vim.fn.mode()
+	if mode == "n" then
+		vim.fn.setreg("*", rel_path .. ":" .. vim.fn.line("."))
+	else
+		local start_line, end_line = vim.fn.line("v"), vim.fn.line(".")
+		if start_line > end_line then start_line, end_line = end_line, start_line end
+		vim.fn.setreg("*", rel_path .. ":" .. start_line .. "-" .. end_line)
+	end
+end, { desc = "Copy path:line(s)" })
 
 -- edit and source $MYVIMRC
 vim.keymap.set("n", "<Leader>ev", ":vsplit $MYVIMRC<CR>")
@@ -568,7 +581,7 @@ vim.keymap.set("n", "<Leader>sv", ":source $MYVIMRC<CR>")
 vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...origin/HEAD<CR>")
 
 -- diffview: PR-style file list with diffs against merge base
-vim.keymap.set("n", "<Leader>gD", ":DiffviewOpen origin/HEAD...HEAD<CR>", { desc = "Diffview: PR diff" })
+vim.keymap.set("n", "<Leader>gD", ":DiffviewOpen origin/HEAD<CR>", { desc = "Diffview: PR diff" })
 vim.keymap.set("n", "<Leader>gf", ":DiffviewFileHistory %<CR>", { desc = "Diffview: file history" })
 vim.keymap.set("n", "<Leader>gF", ":DiffviewFileHistory<CR>", { desc = "Diffview: branch history" })
 vim.keymap.set("n", "<Leader>gc", ":DiffviewClose<CR>", { desc = "Diffview: close" })
