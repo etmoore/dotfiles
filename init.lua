@@ -461,7 +461,7 @@ vim.o.mouse = "a"
 
 vim.o.swapfile = false -- don't create swapfiles
 
-vim.o.wrap = false -- don't wrap text
+vim.o.wrap = true -- wrap text
 vim.o.cursorline = true -- highlight the current line
 vim.o.cmdheight = 2 -- more space in the neovim command line for displaying messages
 vim.o.hidden = true -- hide buffers instead of closing them http://nvie.com/posts/how-i-boosted-my-vim/#change-vim-behaviour
