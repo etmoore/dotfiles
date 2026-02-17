@@ -38,6 +38,26 @@ require("lazy").setup({
 	},
 	"tpope/vim-rhubarb",
 
+	-- PR review and GitHub integration
+	{
+		"pwntester/octo.nvim",
+		cmd = "Octo",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {},
+	},
+
+	-- Diff view for PRs and branches
+	{
+		"sindrets/diffview.nvim",
+		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 
@@ -547,11 +567,20 @@ vim.keymap.set("n", "<Leader>sv", ":source $MYVIMRC<CR>")
 -- fugitive diff split
 vim.keymap.set("n", "<Leader>gd", ":Gvdiffsplit @...origin/HEAD<CR>")
 
+-- diffview: PR-style file list with diffs against merge base
+vim.keymap.set("n", "<Leader>gD", ":DiffviewOpen origin/HEAD...HEAD<CR>", { desc = "Diffview: PR diff" })
+vim.keymap.set("n", "<Leader>gf", ":DiffviewFileHistory %<CR>", { desc = "Diffview: file history" })
+vim.keymap.set("n", "<Leader>gF", ":DiffviewFileHistory<CR>", { desc = "Diffview: branch history" })
+vim.keymap.set("n", "<Leader>gc", ":DiffviewClose<CR>", { desc = "Diffview: close" })
+
 -- Gitsigns
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<CR>")
 vim.keymap.set("n", "[c", ":Gitsigns prev_hunk<CR>")
 vim.keymap.set("n", "<Leader>hp", ":Gitsigns preview_hunk<CR>")
-vim.keymap.set("n", "<Leader>gm", ":Gitsigns change_base main true<CR>")
+vim.keymap.set("n", "<Leader>gm", function()
+	local base = vim.fn.trim(vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"))
+	vim.cmd("Gitsigns change_base " .. base .. " true")
+end, { desc = "Gitsigns: change base to default branch" })
 vim.keymap.set("n", "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
 
