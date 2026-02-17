@@ -127,7 +127,11 @@ alias vim='nvim'
 alias ynvim='NVIM_APPNAME="ynvim" nvim'
 
 # open all files in a branch that were modified and committed
-alias vmod='vim `git diff --name-only HEAD $(git merge-base HEAD master)`'
+vmod() {
+  local default_branch
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  nvim $(git diff --name-only --diff-filter=d HEAD $(git merge-base HEAD "$default_branch"))
+}
 # open files that are dirty
 alias vdirt="vim $(git status --porcelain | awk '{print $2}')"
 
@@ -229,3 +233,10 @@ FZF-EOF"
 }
 export PATH="$HOME/.local/bin:$PATH"
 
+
+# bun completions
+[ -s "/nail/home/evanm/.bun/_bun" ] && source "/nail/home/evanm/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
