@@ -5,7 +5,7 @@ format = "$python$hostname$directory$git_branch${custom.dirty}\n$character"
 
 [hostname]
 ssh_only = true
-style = "bright-white bold"
+style = "fg:77"
 format = "[$hostname]($style) "
 
 [character]
