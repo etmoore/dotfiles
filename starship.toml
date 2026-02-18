@@ -6,6 +6,7 @@ format = "$python$hostname$directory$git_branch${custom.dirty}\n$character"
 [hostname]
 ssh_only = true
 style = "bright-white bold"
+format = "[$hostname]($style) "
 
 [directory]
 truncation_length = 0      # show full path, not just current dir
