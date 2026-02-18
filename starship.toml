@@ -20,8 +20,9 @@ command = "printf '*'"
 when = "test -n \"$(git status --porcelain 2>/dev/null)\""
 format = " [$output](red)"
 
-# Only show for active virtualenvs
+# Only show virtualenv name (no icon, no version)
 [python]
+format = " [$virtualenv]($style)"
 detect_files = []
 detect_folders = []
 detect_extensions = []
