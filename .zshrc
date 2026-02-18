@@ -101,10 +101,6 @@ if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 
-# LS colors
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-alias ls='ls -G'
-
 # Editor
 export VISUAL="nvim"
 export EDITOR="nvim"
