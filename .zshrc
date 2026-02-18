@@ -1,150 +1,192 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# ===========================================================================
+# .zshrc — framework-free zsh config + starship prompt
+# ===========================================================================
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="muse"
+# ---------------------------------------------------------------------------
+# 1. Shell Options
+# ---------------------------------------------------------------------------
+unsetopt autocd             # prevent cd-by-directory-name (breaks `make`, etc.)
+setopt auto_pushd           # cd pushes old dir onto stack
+setopt pushd_ignore_dups    # no duplicates in dir stack
+setopt pushdminus           # swap +/- for pushd
+setopt multios              # allow multiple redirections
+setopt long_list_jobs       # show PID in job list
+setopt interactivecomments  # allow # comments in interactive shell
 
-# Configure colors for tmux
-# export TERM=xterm-256color
+# ---------------------------------------------------------------------------
+# 2. History
+# ---------------------------------------------------------------------------
+HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt extended_history          # save timestamp + duration
+setopt hist_expire_dups_first    # expire duplicates first when trimming
+setopt hist_ignore_dups          # ignore consecutive duplicates
+setopt hist_ignore_space         # ignore commands starting with space
+setopt hist_verify               # expand history before executing
+setopt share_history             # share history across sessions
+
+# ---------------------------------------------------------------------------
+# 3. Completion
+# ---------------------------------------------------------------------------
+autoload -Uz compinit
+
+# Only regenerate .zcompdump once per day
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# Case-insensitive (lowercase matches uppercase)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+# Menu selection
+zstyle ':completion:*:*:*:*:*' menu select
+
+# Colors in completion
+zstyle ':completion:*' list-colors ''
+
+# Use caching for expensive completions
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path "$HOME/.zcompcache"
+
+# Process completion
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
+
+# Directory completion
+zstyle ':completion:*' special-dirs true
+
+# Disable named-directories autocompletion
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+
+# Bash completion compatibility
+autoload -Uz bashcompinit && bashcompinit
+
+# ---------------------------------------------------------------------------
+# 4. Key Bindings (emacs mode)
+# ---------------------------------------------------------------------------
+bindkey -e
+
+# Prefix-based history search with arrows
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search    # Up
+bindkey "^[[B" down-line-or-beginning-search  # Down
+bindkey "^[OA" up-line-or-beginning-search    # Up (application mode)
+bindkey "^[OB" down-line-or-beginning-search  # Down (application mode)
+
+# Home / End / Delete
+bindkey "^[[H"  beginning-of-line   # Home
+bindkey "^[[F"  end-of-line         # End
+bindkey "^[[3~" delete-char         # Delete
+bindkey "^[[Z"  reverse-menu-complete  # Shift-Tab
+
+# Edit command line in $EDITOR
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^V" edit-command-line
+
+# ---------------------------------------------------------------------------
+# 5. Terminal & Environment
+# ---------------------------------------------------------------------------
+# TERM detection for tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-# Configure SSH passthrough so that tmux maintains access to keys
+# SSH auth socket passthrough for tmux
 if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
-    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# LS colors
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
+alias ls='ls -G'
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Editor
+export VISUAL="nvim"
+export EDITOR="nvim"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=~/dotfiles/oh-my-zsh/custom
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    zsh-autosuggestions
-    z
-)
-
-source $ZSH/oh-my-zsh.sh
-
-################## User configuration ##########################
-# if local helpers file is present, load
-[ -f ~/zsh-helpers ] && source ~/zsh-helpers
-
-# prevent auto-cd from breaking commands like `make` when there's a directory w/ the same name
-unsetopt autocd
-
-
-# Add ruby to path
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-# Add yarn to path
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-# Add npm bin to path
-[ -d "$HOME/.npm-prefix" ] && export PATH="$HOME/.npm-prefix/bin:$PATH"
-# Add home /bin to path
-export PATH=$HOME/bin:$PATH
-# Add homebrew to path
+# ---------------------------------------------------------------------------
+# 6. PATH
+# ---------------------------------------------------------------------------
 [ -d "/opt/homebrew" ] && export PATH="/opt/homebrew/bin:$PATH"
-
-# Let compilers find ruby. Brew install ruby told me to do this
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
-# Let pkg-config find ruby. Brew install ruby told me to do this
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[ -d "$HOME/.npm-prefix" ] && export PATH="$HOME/.npm-prefix/bin:$PATH"
+export PATH="$HOME/.fzf/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
+# ---------------------------------------------------------------------------
+# 7. Git
+# ---------------------------------------------------------------------------
+# Determine main branch name (needed by gcm)
+git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,master,develop,trunk,mainline,default,stable}; do
+    if command git show-ref -q --verify "$ref"; then
+      echo "${ref##*/}"
+      return 0
+    fi
+  done
+  echo master
+  return 1
+}
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# OMZ git aliases (used ones only)
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbl='git blame -w'
+alias gc='git commit --verbose'
+alias gcam='git commit --all --message'
+alias gcb='git checkout -b'
+alias gco='git checkout'
+alias gcm='git checkout $(git_main_branch)'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gf='git fetch'
+alias gl='git pull'
+alias gp='git push'
+alias gr='git remote'
+alias gst='git status'
+alias gss='git status --short'
+alias gstp='git stash pop'
+alias gsta='git stash push'
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias c="clear"
-
+# Custom git aliases
 alias glog='git log --oneline --decorate --color --graph'
-alias gdm='git diff `git merge-base master HEAD`'
-# git 'pull upstream' - ie, fetch, then set the local branch to the remote sha
+alias gdm='git diff $(git merge-base master HEAD)'
 alias glu='git fetch && git reset --hard @{u}'
-# git show default remote branch (eg master or main)
-alias gbd="git remote show origin | awk '/HEAD branch/ {print $NF}'"
+alias gbd='git remote show origin | awk "/HEAD branch/ {print \$NF}"'
 
+# ---------------------------------------------------------------------------
+# 8. General Aliases
+# ---------------------------------------------------------------------------
+# Editor
 alias v='nvim'
 alias vim='nvim'
 alias ynvim='NVIM_APPNAME="ynvim" nvim'
+alias vz='vim ~/.zshrc'
+alias sz='source ~/.zshrc'
+alias vt='vim ~/.tmux.conf'
+alias vv='vim ~/.config/nvim/init.lua'
 
-# open all files in a branch that were modified and committed
-vmod() {
-  local default_branch
-  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-  nvim $(git diff --name-only --diff-filter=d HEAD $(git merge-base HEAD "$default_branch"))
-}
-# open files that are dirty
-alias vdirt="vim $(git status --porcelain | awk '{print $2}')"
-
-# alias update="brew update && brew upgrade && npm update -g && gem update"
-# alias cleanup="brew cleanup && gem cleanup"
-# alias venv=". venv/bin/activate"
-
-# tmux aliases
-# if tmux2 exists (which is the case in devbox), use that
+# Tmux
 if command -v 'tmux2' > /dev/null; then
   alias tmux='tmux2 -S ~/tmux-socket'
 else
-  # otherwise, just alias to normal tmux
   alias tmux='tmux -S ~/tmux-socket'
 fi
 alias ta='tmux attach -t'
@@ -154,40 +196,31 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 
+# Tools
 alias tree='tree -I "node_modules"'
-
-alias vz='vim ~/.zshrc'
-alias sz='source ~/.zshrc'
-alias vt='vim ~/.tmux.conf'
-alias vv='vim ~/.config/nvim/init.lua'
-
 alias ss='src search'
-
-# exit on first failure and allow (i)pbd interaction
 alias pyt='pytest --capture=no --exitfirst -vv'
 
+# Claude
 alias c='claude'
 alias cu='claude update'
 alias cc='claude --continue'
 alias ccf='claude --continue --fork-session'
 
-# Ensure ~/.fzf/bin comes before /usr/bin in PATH for latest fzf version
-export PATH="$HOME/.fzf/bin:$PATH"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Files
+alias vdirt='vim $(git status --porcelain | awk "{print \$2}")'
 
-# set neovim as default editor
-export VISUAL="nvim"
-export EDITOR="nvim"
+# ---------------------------------------------------------------------------
+# 9. Functions
+# ---------------------------------------------------------------------------
+# Open all files modified on current branch vs default branch
+vmod() {
+  local default_branch
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  nvim $(git diff --name-only --diff-filter=d HEAD $(git merge-base HEAD "$default_branch"))
+}
 
-# edit command in EDITOR
-autoload edit-command-line; zle -N edit-command-line
-bindkey "^V" edit-command-line
-
-###############
-# FZF functions
-###############
-# source: https://github.com/junegunn/fzf/wiki/examples
-# fb - checkout git branch (including remote branches), sorted by committerdate
+# FZF: checkout git branch (including remote), sorted by committerdate
 fbr() {
   local branches branch
   branches=$(git branch --all --sort=-committerdate | grep -v HEAD) &&
@@ -196,7 +229,7 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-# checkout git branch
+# FZF: checkout git branch
 fb() {
   local branches branch
   branches=$(git --no-pager branch -vv) &&
@@ -204,7 +237,7 @@ fb() {
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-# fco_preview - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
+# FZF: checkout branch/tag with preview
 fco() {
   local tags branches target
   branches=$(
@@ -220,7 +253,7 @@ fco() {
   git checkout $(awk '{print $2}' <<<"$target" )
 }
 
-# fshow - git commit browser
+# FZF: git commit browser
 fshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -231,12 +264,18 @@ fshow() {
                 {}
 FZF-EOF"
 }
-export PATH="$HOME/.local/bin:$PATH"
 
+# ---------------------------------------------------------------------------
+# 10. External Integrations
+# ---------------------------------------------------------------------------
+# Sourcegraph credentials
+[ -f ~/zsh-helpers ] && source ~/zsh-helpers
 
-# bun completions
+# FZF (modern shell integration — keybindings + completion + Alt-C)
+source <(fzf --zsh)
+
+# Bun completions
 [ -s "/nail/home/evanm/.bun/_bun" ] && source "/nail/home/evanm/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# Starship prompt (must be last)
+eval "$(starship init zsh)"

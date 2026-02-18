@@ -1,0 +1,24 @@
+# Starship prompt config — mostly defaults, minimal overrides
+
+# Only include the modules we want; prompt char on its own line
+format = "$directory$git_branch${custom.dirty}$python\n$character"
+
+[directory]
+truncation_length = 0      # show full path, not just current dir
+truncate_to_repo = false    # don't shorten to repo root
+
+# Disable built-in git_status (can't collapse to single symbol)
+[git_status]
+disabled = true
+
+# Single * if repo has any uncommitted changes
+[custom.dirty]
+command = "printf '*'"
+when = "test -n \"$(git status --porcelain 2>/dev/null)\""
+format = " [$output](red)"
+
+# Only show for active virtualenvs
+[python]
+detect_files = []
+detect_folders = []
+detect_extensions = []
