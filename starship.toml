@@ -20,6 +20,7 @@ truncate_to_repo = false    # don't shorten to repo root
 # Disable built-in git_status (can't collapse to single symbol)
 [git_branch]
 style = "fg:12"
+format = "on [$branch]($style) "
 
 [git_status]
 disabled = true
