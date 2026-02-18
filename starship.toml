@@ -1,7 +1,7 @@
 # Starship prompt config — mostly defaults, minimal overrides
 
 # Only include the modules we want; prompt char on its own line
-format = "$hostname$directory$git_branch${custom.dirty}$python\n$character"
+format = "$python$hostname$directory$git_branch${custom.dirty}\n$character"
 
 [hostname]
 ssh_only = true
@@ -22,7 +22,7 @@ format = " [$output](red)"
 
 # Only show virtualenv name (no icon, no version)
 [python]
-format = " [$virtualenv]($style)"
+format = "[$virtualenv]($style)\n"
 detect_files = []
 detect_folders = []
 detect_extensions = []
