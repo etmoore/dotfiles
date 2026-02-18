@@ -8,11 +8,19 @@ ssh_only = true
 style = "bright-white bold"
 format = "[$hostname]($style) "
 
+[character]
+success_symbol = "[ᐅ](fg:77)"
+error_symbol = "[ᐅ](red)"
+
 [directory]
+style = "fg:117"
 truncation_length = 0      # show full path, not just current dir
 truncate_to_repo = false    # don't shorten to repo root
 
 # Disable built-in git_status (can't collapse to single symbol)
+[git_branch]
+style = "fg:12"
+
 [git_status]
 disabled = true
 
