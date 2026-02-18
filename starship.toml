@@ -1,7 +1,11 @@
 # Starship prompt config — mostly defaults, minimal overrides
 
 # Only include the modules we want; prompt char on its own line
-format = "$directory$git_branch${custom.dirty}$python\n$character"
+format = "$hostname$directory$git_branch${custom.dirty}$python\n$character"
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
 
 [directory]
 truncation_length = 0      # show full path, not just current dir
