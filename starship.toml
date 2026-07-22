@@ -3,17 +3,20 @@
 # Only include the modules we want; prompt char on its own line
 format = "$python$hostname$directory$git_branch${custom.dirty}\n$character"
 
+# Big monorepos can push git commands past the 500ms default; give headroom
+command_timeout = 2000
+
 [hostname]
 ssh_only = true
-style = "fg:77"
+style = "green"
 format = "[$hostname]($style) "
 
 [character]
-success_symbol = "[ᐅ](fg:77)"
+success_symbol = "[ᐅ](green)"
 error_symbol = "[ᐅ](red)"
 
 [directory]
-style = "fg:117"
+style = "blue"
 truncation_length = 0      # show full path, not just current dir
 truncate_to_repo = false    # don't shorten to repo root
 
