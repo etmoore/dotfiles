@@ -195,6 +195,7 @@ alias tkss='tmux kill-session -t'
 # Tools
 alias tree='tree -I "node_modules"'
 alias pyt='pytest --capture=no --exitfirst -vv'
+alias cpd='copy-to-devbox'
 
 # Claude
 alias c='claude'
@@ -202,6 +203,8 @@ alias ca='claude agents'
 alias cu='claude update'
 alias cc='claude --continue'
 alias ccf='claude --continue --fork-session'
+alias cr='claude --resume'
+alias crf='claude --resume --fork-session'
 
 # Files
 alias vdirt='vim $(git status --porcelain | awk "{print \$2}")'
