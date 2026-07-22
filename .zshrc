@@ -194,11 +194,11 @@ alias tkss='tmux kill-session -t'
 
 # Tools
 alias tree='tree -I "node_modules"'
-alias ss='src search'
 alias pyt='pytest --capture=no --exitfirst -vv'
 
 # Claude
 alias c='claude'
+alias ca='claude agents'
 alias cu='claude update'
 alias cc='claude --continue'
 alias ccf='claude --continue --fork-session'

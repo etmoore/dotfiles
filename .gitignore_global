@@ -64,3 +64,5 @@ notes*
 # PHP #
 #######
 www.pid
+
+**/.claude/settings.local.json

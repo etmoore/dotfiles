@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal dotfiles repository containing configuration files for various development tools including:
 - Neovim (init.lua and lua/ modules)
-- Zsh with Oh-My-Zsh
+- Zsh (framework-free) with the Starship prompt
 - Remote clipboard utilities (pbcopy/pbpaste)
 - Vimium browser extension settings
 - CoC (Conqueror of Completion) settings
@@ -15,8 +15,9 @@ This is a personal dotfiles repository containing configuration files for variou
 
 - `init.lua` - Main Neovim configuration using Lazy.nvim package manager
 - `lua/user/` - Modular Neovim configuration files (keymaps, plugins, colorscheme, etc.)
-- `.zshrc` - Zsh shell configuration with Oh-My-Zsh
-- `oh-my-zsh/custom/` - Custom themes and plugins for Oh-My-Zsh
+- `.zshrc` - Framework-free Zsh shell configuration
+- `starship.toml` - Starship prompt configuration
+- `oh-my-zsh/custom/` - Legacy Oh-My-Zsh themes/plugins (no longer loaded; kept for reference)
 - `pbcopy`, `pbpaste` - Remote clipboard utilities for SSH sessions
 - `Makefile` - Setup scripts for dotfiles (TODO: Fix syntax issues - mixing Make and shell syntax)
 
@@ -55,7 +56,7 @@ This repository includes configuration for clipboard sharing between macOS (loca
   - Copilot for AI assistance
 
 ### Shell Configuration
-- Zsh configured with Oh-My-Zsh framework
-- Custom theme "muse" located in `oh-my-zsh/custom/themes/`
-- Includes zsh-autosuggestions plugin for command completion
+- Framework-free Zsh (Oh-My-Zsh was removed; see the `oh-my-zsh/` dir for legacy leftovers)
+- Prompt rendered by Starship, configured via `starship.toml`
+- Native zsh completion (`compinit`) with a daily-cached `.zcompdump`
 - SSH auth socket management for tmux sessions
