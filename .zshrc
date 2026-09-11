@@ -278,3 +278,4 @@ source <(fzf --zsh)
 
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
+source ~/.bash_profile
