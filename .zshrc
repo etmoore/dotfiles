@@ -264,6 +264,13 @@ fshow() {
 FZF-EOF"
 }
 
+# Reset mouse-tracking escape codes after ssh exits (tmux mouse mode can be
+# left armed on the local terminal if the connection drops instead of a clean detach)
+ssh() {
+  command ssh "$@"
+  printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l'
+}
+
 # ---------------------------------------------------------------------------
 # 10. External Integrations
 # ---------------------------------------------------------------------------
@@ -278,4 +285,7 @@ source <(fzf --zsh)
 
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
+
+# opencode
+export PATH=/Users/evanm/.opencode/bin:$PATH
 source ~/.bash_profile
