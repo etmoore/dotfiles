@@ -659,6 +659,10 @@ require("telescope").setup({
 				i = { ["<c-f>"] = require("telescope.actions").to_fuzzy_refine }, -- refine results w/ fuzzy find
 			},
 		},
+		keymaps = {
+			layout_strategy = "vertical",
+			layout_config = { width = 0.9, preview_cutoff = 1 },
+		},
 	},
 })
 
