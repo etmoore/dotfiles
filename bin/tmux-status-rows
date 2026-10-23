@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+"""Pack tmux windows into as many status rows as the client width needs.
+
+Usage: tmux-status-rows [client_width]
+Run from tmux hooks (client-resized, window-linked/unlinked/renamed).
+"""
+import subprocess
+import sys
+
+MAX_ROWS = 2
+# status-left (prefix/zoom indicator) plus a little slack for the < > markers
+RESERVED = 6
+
+
+def tmux(*args):
+    return subprocess.run(["tmux", *args], capture_output=True, text=True).stdout
+
+
+width = int(sys.argv[1]) if len(sys.argv) > 1 else int(tmux("display", "-p", "#{client_width}") or 120)
+avail = width - RESERVED
+
+windows = []
+for line in tmux("list-windows", "-F", "#{window_index} #{window_active} #{window_name}").splitlines():
+    idx, active, name = line.split(" ", 2)
+    # " #I #W " plus the pill caps on the active window
+    windows.append((int(idx), len(idx) + len(name) + 3 + (2 if active == "1" else 0)))
+
+# Two rows, balanced by width. Each row scrolls natively (list=focus) to keep
+# the active window visible, so a row may be wider than the terminal.
+total = sum(w for _, w in windows)
+rows = [[]]
+used = 0
+for idx, w in windows:
+    if rows[-1] and len(rows) < MAX_ROWS and used + w / 2 > total / MAX_ROWS:
+        rows.append([])
+        used = 0
+    rows[-1].append(idx)
+    used += w
+
+COND = "#{&&:#{e|>=:#{window_index},%d},#{e|<=:#{window_index},%d}}"
+ROW = (
+    "%s#[list=on align=left]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:"
+    "#{?%s,#[range=window|#{window_index}]#{T:window-status-format}#[norange list=on],},"
+    "#{?%s,#[range=window|#{window_index} list=focus]#{T:window-status-current-format}#[norange list=on],}}"
+)
+LEFT = "#[push-default]#{T:status-left}#[pop-default]"
+
+tmux("set", "-g", "status", str(len(rows)))
+for i, row in enumerate(rows):
+    cond = COND % (row[0], row[-1])
+    tmux("set", "-g", f"status-format[{i}]", ROW % (LEFT if i == 0 else "", cond, cond))
