@@ -281,11 +281,11 @@ ssh() {
 source <(fzf --zsh)
 
 # Bun completions
-[ -s "/nail/home/evanm/.bun/_bun" ] && source "/nail/home/evanm/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
 
 # opencode
-export PATH=/Users/evanm/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
 source ~/.bash_profile
