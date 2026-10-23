@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# ftwind - fuzzy-switch tmux windows in a display-popup (needs tmux >= 3.3, fzf >= 0.53)
+# Usage in tmux.conf: bind-key f run -b ftwind
+# Adapted from https://github.com/pokey/dotfiles/blob/dade6c88/bin/ftwind
+
+target=$(
+  tmux list-windows -F '#{window_index}	#{?window_active,*, }	#{window_name}	#{b:pane_current_path}' |
+    column -s $'\t' -t |
+    fzf --tmux center,60%,40% --reverse --no-multi --ansi \
+      --header 'switch window' --bind 'start:pos(0)'
+) || exit 0
+
+tmux select-window -t "${target%% *}"
