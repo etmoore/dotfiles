@@ -214,7 +214,6 @@ require("lazy").setup({
 			--  the `settings` field of the server config. You must look up that documentation yourself.
 			local servers = {
 				pyright = {},
-				phpactor = {},
 				ts_ls = {},  -- TypeScript/JavaScript language server
 				yamlls = {},
 				eslint = {},
